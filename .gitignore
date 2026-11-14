@@ -1,0 +1,11 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+
+# Local agent state
+.claude/settings.local.json
+.impeccable/cache/
