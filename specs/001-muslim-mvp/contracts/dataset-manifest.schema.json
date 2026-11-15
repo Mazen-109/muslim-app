@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Mazen-109/muslim-app/specs/001-muslim-mvp/contracts/dataset-manifest.schema.json",
+  "title": "Quran dataset provenance manifest",
+  "description": "Written by tool/quran_import next to quran.db. The integrity test recomputes table_hashes and counts from the database and compares them with this file.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "dataset_version", "generated_at", "tool_version", "requests", "counts", "table_hashes"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "dataset_version": { "type": "integer", "minimum": 1 },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "tool_version": { "type": "string" },
+    "requests": {
+      "description": "Every HTTP request the import made, in order.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "sha256", "bytes"],
+        "properties": {
+          "url": { "type": "string", "pattern": "^https://" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "bytes": { "type": "integer", "minimum": 1 }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surahs", "ayahs", "words", "pages", "page_lines", "juzs", "tafsir_texts", "reciters"],
+      "properties": {
+        "surahs": { "const": 114 },
+        "ayahs": { "const": 6236 },
+        "words": { "type": "integer", "minimum": 77000 },
+        "pages": { "const": 604 },
+        "page_lines": { "const": 9046 },
+        "juzs": { "const": 30 },
+        "tafsir_texts": { "const": 6236 },
+        "reciters": { "type": "integer", "minimum": 5 }
+      }
+    },
+    "table_hashes": {
+      "description": "SHA-256 per table over rows in primary-key order, columns joined by U+001F and rows by U+001E, NULL written as the empty string.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["surahs", "ayahs", "words", "page_lines", "juzs", "tafsirs", "tafsir_texts", "reciters"],
+      "patternProperties": {
+        "^[a-z_]+$": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    }
+  }
+}
