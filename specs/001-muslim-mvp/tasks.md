@@ -34,7 +34,7 @@ or part of one where the "Pull request groups" table at the end says so.
 
 **Purpose**: a buildable, linted, tested, continuously checked Flutter project.
 
-- [ ] T001 Create the Flutter project at the repository root: `pubspec.yaml`,
+- [x] T001 Create the Flutter project at the repository root: `pubspec.yaml`,
   `analysis_options.yaml`, `l10n.yaml`, `lib/main.dart`, `lib/app.dart`, `android/`, `ios/`,
   `test/widget_test.dart`, and extend `.gitignore`
   - `flutter create --org com.mazen109 --project-name muslim --platforms android,ios .`, then
@@ -47,7 +47,7 @@ or part of one where the "Pull request groups" table at the end says so.
     `require_trailing_commas`, `unawaited_futures`, `avoid_print`.
   - `lib/app.dart` shows a minimal placeholder home in Arabic, RTL, from an ARB string.
   - Tests: one widget test that the app builds and is RTL.
-- [ ] T002 [P] Add continuous integration in `.github/workflows/ci.yml`
+- [x] T002 [P] Add continuous integration in `.github/workflows/ci.yml`
   - On pull requests and on pushes to `main`: checkout, install Flutter stable (pinned minor
     version, with caching), `flutter pub get`, `dart format --set-exit-if-changed .`,
     `flutter analyze`, `flutter test`; then the import tool's `dart test` when

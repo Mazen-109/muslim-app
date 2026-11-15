@@ -9,3 +9,38 @@ Thumbs.db
 # Local agent state
 .claude/settings.local.json
 .impeccable/cache/
+
+# Flutter / Dart / Pub
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+**/doc/api/
+**/ios/Flutter/.last_build_id
+migrate_working_dir/
+.widget_preview/
+
+# Misc build and tool output
+*.class
+*.log
+*.pyc
+*.swp
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+*.ipr
+*.iws
+
+# Symbolication and obfuscation
+app.*.symbols
+app.*.map.json
+
+# Android Studio build artifacts
+/android/app/debug
+/android/app/profile
+/android/app/release
