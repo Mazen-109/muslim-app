@@ -122,7 +122,7 @@ in the user stories can start before this phase is complete.
     that starts mid-page, an ayah spanning two pages, `AyahRef` validation and parsing, URL
     formatting; every `reciters.source_id` exists in the sources registry. Assertions use
     ids, keys, counts and hashes, never literal Quran text.
-- [ ] T007 [P] Implement user data and settings: `lib/data/user_database.dart`,
+- [x] T007 [P] Implement user data and settings: `lib/data/user_database.dart`,
   `lib/data/bookmark_repository.dart`, `lib/core/settings/settings_repository.dart`,
   `lib/core/settings/settings_providers.dart`, tests under `test/data/` and `test/core/`
   - `user.db` with the schema in data-model.md section 3, versioned by `PRAGMA user_version`
