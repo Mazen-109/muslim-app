@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Mazen-109/muslim-app/specs/001-muslim-mvp/contracts/catalog.schema.json",
+  "title": "Muslim story content catalog",
+  "description": "Videos for surah stories and prophet stories. Published by the content owner; read by the app. The app plays an item only when review.status is 'approved', no_prophet_depiction is true and media is present.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "updated_at", "surah_stories", "prophet_series"],
+  "properties": {
+    "schema_version": {
+      "description": "The app ignores a catalog whose schema_version is greater than the one it supports.",
+      "const": 1
+    },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "surah_stories": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/surahStory" }
+    },
+    "prophet_series": {
+      "description": "Prophet stories in chronological order.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/prophetStory" }
+    }
+  },
+  "$defs": {
+    "ayahKey": {
+      "description": "Surah number, colon, ayah number, for example 12:4.",
+      "type": "string",
+      "pattern": "^([1-9]|[1-9][0-9]|10[0-9]|11[0-4]):([1-9]|[1-9][0-9]|[12][0-9]{2})$"
+    },
+    "ayahRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "$ref": "#/$defs/ayahKey" },
+        "to": { "$ref": "#/$defs/ayahKey" }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["planned", "in_review", "approved"] },
+        "reviewer": { "description": "Name of the qualified specialist. Required when status is approved.", "type": "string", "minLength": 1 },
+        "approved_at": { "type": "string", "format": "date" }
+      },
+      "if": { "properties": { "status": { "const": "approved" } } },
+      "then": { "required": ["status", "reviewer", "approved_at"] }
+    },
+    "media": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "url"],
+          "properties": {
+            "type": { "const": "stream" },
+            "url": { "description": "HTTPS URL of an MP4 file or an HLS playlist.", "type": "string", "pattern": "^https://" },
+            "poster_url": { "type": "string", "pattern": "^https://" },
+            "duration_seconds": { "type": "integer", "minimum": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "video_id"],
+          "properties": {
+            "type": { "const": "youtube" },
+            "video_id": { "type": "string", "pattern": "^[A-Za-z0-9_-]{11}$" },
+            "channel_name": { "description": "The licensed channel, shown as attribution.", "type": "string" },
+            "duration_seconds": { "type": "integer", "minimum": 1 }
+          }
+        }
+      ]
+    },
+    "surahStory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "surah", "review", "no_prophet_depiction"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^surah-[0-9]{3}$" },
+        "surah": { "type": "integer", "minimum": 1, "maximum": 114 },
+        "review": { "$ref": "#/$defs/review" },
+        "no_prophet_depiction": { "description": "Attestation by the reviewer that the video depicts no prophet.", "type": "boolean" },
+        "media": { "$ref": "#/$defs/media" }
+      }
+    },
+    "prophetStory": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "order", "name_ar", "name_en", "episodes"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^prophet-[a-z0-9-]+$" },
+        "order": { "description": "Chronological position, starting at 1.", "type": "integer", "minimum": 1 },
+        "name_ar": { "type": "string", "minLength": 1 },
+        "name_en": { "type": "string", "minLength": 1 },
+        "episodes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/episode" }
+        }
+      }
+    },
+    "episode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "order", "review", "no_prophet_depiction", "related_ayahs"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^prophet-[a-z0-9-]+-ep[0-9]{2}$" },
+        "order": { "type": "integer", "minimum": 1 },
+        "title_ar": { "type": "string" },
+        "title_en": { "type": "string" },
+        "review": { "$ref": "#/$defs/review" },
+        "no_prophet_depiction": { "type": "boolean" },
+        "media": { "$ref": "#/$defs/media" },
+        "related_ayahs": {
+          "description": "Ayah ranges that tell this story, supplied with the reviewed episode.",
+          "type": "array",
+          "items": { "$ref": "#/$defs/ayahRange" }
+        }
+      }
+    }
+  }
+}

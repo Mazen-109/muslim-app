@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Mazen-109/muslim-app/specs/001-muslim-mvp/contracts/sources.schema.json",
+  "title": "Muslim sources registry",
+  "description": "Every third-party asset the app uses. Rendered as the Sources page. A public release requires verified = true on every entry.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "sources"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "name_ar", "name_en", "provider", "url", "license", "verified"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "kind": { "enum": ["quran_text", "tafsir", "audio", "font", "video", "icon"] },
+          "name_ar": { "type": "string", "minLength": 1 },
+          "name_en": { "type": "string", "minLength": 1 },
+          "provider": { "type": "string", "minLength": 1 },
+          "url": { "type": "string", "pattern": "^https://" },
+          "license": { "description": "Licence name or a one-line summary of the terms of use.", "type": "string", "minLength": 1 },
+          "terms_url": { "type": "string", "pattern": "^https://" },
+          "attribution_ar": { "type": "string" },
+          "attribution_en": { "type": "string" },
+          "sha256": { "description": "For bundled files such as fonts.", "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "asset_path": { "description": "Path of the bundled file, when there is one.", "type": "string" },
+          "runtime_hosts": { "description": "Hosts the app contacts for this source at runtime.", "type": "array", "items": { "type": "string" } },
+          "verified": { "description": "True once the project owner has confirmed the terms allow this use.", "type": "boolean" },
+          "verified_by": { "type": "string" },
+          "verified_at": { "type": "string", "format": "date" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
