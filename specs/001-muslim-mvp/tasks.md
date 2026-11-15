@@ -93,7 +93,7 @@ in the user stories can start before this phase is complete.
     114 surahs, 6236 ayahs, 604 pages, 9046 page lines, 30 juz, 60 hizb, 6236 tafsir entries,
     words joined per ayah equal `text_qpc_hafs`.
   - The PR description lists row counts, file sizes and the table hashes.
-- [ ] T005 [P] Add fonts and the sources registry: `assets/fonts/`, `assets/sources.json`,
+- [x] T005 [P] Add fonts and the sources registry: `assets/fonts/`, `assets/sources.json`,
   `pubspec.yaml` (fonts, assets), `test/data/sources_registry_test.dart`
   - `UthmanicHafs1Ver18.ttf` from `quran/quran.com-frontend-next`
     (`public/fonts/quran/hafs/uthmanic_hafs/`), unmodified, family name `UthmanicHafs`.
@@ -102,8 +102,7 @@ in the user stories can start before this phase is complete.
     Quran.com recitation files, EveryAyah, the KFGQPC font (with `sha256` and `asset_path`),
     and each UI font added later. All `verified: false` until the owner confirms.
   - Tests: registry validates against the schema's required fields and enums; every entry
-    with `asset_path` exists and matches its `sha256`; every `reciters.source_id` in the
-    database exists in the registry.
+    with `asset_path` exists and matches its `sha256`.
 - [ ] T006 Implement the content data layer: `lib/data/models/*.dart`,
   `lib/data/quran_database.dart`, `lib/data/quran_repository.dart`,
   `lib/data/tafsir_repository.dart`, `lib/data/reciter_repository.dart`, `test/data/*_test.dart`
@@ -121,7 +120,8 @@ in the user stories can start before this phase is complete.
   - Riverpod providers for the database and each repository.
   - Tests against the real bundled database: counts, boundary pages (1, 2, 3, 604), a surah
     that starts mid-page, an ayah spanning two pages, `AyahRef` validation and parsing, URL
-    formatting. Assertions use ids, keys, counts and hashes, never literal Quran text.
+    formatting; every `reciters.source_id` exists in the sources registry. Assertions use
+    ids, keys, counts and hashes, never literal Quran text.
 - [ ] T007 [P] Implement user data and settings: `lib/data/user_database.dart`,
   `lib/data/bookmark_repository.dart`, `lib/core/settings/settings_repository.dart`,
   `lib/core/settings/settings_providers.dart`, tests under `test/data/` and `test/core/`

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "quran-com-api",
+      "kind": "quran_text",
+      "name_ar": "نص المصحف وتخطيط الصفحات وبيانات السور من واجهة Quran.com البرمجية",
+      "name_en": "Quran text, page layout and metadata from the Quran.com API v4",
+      "provider": "Quran.com",
+      "url": "https://api.quran.com/api/v4",
+      "license": "Terms of use to be confirmed by the project owner.",
+      "runtime_hosts": [],
+      "verified": false,
+      "notes": "The API serves the King Fahd Complex Hafs text (text_qpc_hafs). Imported once by tool/quran_import into the bundled database; the app makes no API calls for this data at runtime. The terms of use must be confirmed by the project owner before a public release."
+    },
+    {
+      "id": "tafsir-muyassar",
+      "kind": "tafsir",
+      "name_ar": "التفسير الميسر",
+      "name_en": "Al-Tafsir Al-Muyassar",
+      "provider": "King Fahd Complex for the Printing of the Holy Quran",
+      "url": "https://qurancomplex.gov.sa",
+      "license": "Published by the King Fahd Complex; terms of use to be confirmed by the project owner.",
+      "runtime_hosts": [],
+      "verified": false,
+      "notes": "Obtained through the Quran.com API v4 (https://api.quran.com/api/v4), tafsir resource id 16, and bundled in the database. The terms of use must be confirmed by the project owner before a public release."
+    },
+    {
+      "id": "quran-com-audio",
+      "kind": "audio",
+      "name_ar": "ملفات التلاوة من Quran.com",
+      "name_en": "Quran.com recitation files",
+      "provider": "Quran.com",
+      "url": "https://verses.quran.com",
+      "license": "Terms of use to be confirmed by the project owner.",
+      "runtime_hosts": ["verses.quran.com"],
+      "verified": false,
+      "notes": "Per-ayah MP3 files streamed at runtime; the reciter list and URL templates come from the Quran.com API. The terms of use must be confirmed by the project owner before a public release."
+    },
+    {
+      "id": "everyayah",
+      "kind": "audio",
+      "name_ar": "ملفات التلاوة من موقع EveryAyah",
+      "name_en": "EveryAyah recitation files",
+      "provider": "EveryAyah",
+      "url": "https://everyayah.com",
+      "license": "Terms of use to be confirmed by the project owner.",
+      "runtime_hosts": ["everyayah.com"],
+      "verified": false,
+      "notes": "Per-ayah MP3 files streamed at runtime from https://everyayah.com/data/. The terms of use must be confirmed by the project owner before a public release."
+    },
+    {
+      "id": "kfgqpc-uthmanic-hafs",
+      "kind": "font",
+      "name_ar": "خط مجمع الملك فهد للمصحف الشريف برواية حفص (الخط العثماني)",
+      "name_en": "KFGQPC Uthmanic Script Hafs font",
+      "provider": "King Fahd Complex for the Printing of the Holy Quran",
+      "url": "https://qurancomplex.gov.sa",
+      "license": "Distributed free of charge by the King Fahd Complex, understood to allow use and redistribution without modification and not for sale; exact terms to be confirmed by the project owner.",
+      "asset_path": "assets/fonts/UthmanicHafs1Ver18.ttf",
+      "sha256": "a0636e68e375af9552470d67773936f54d536e6586ce2608311b2fe7f9cbec3a",
+      "runtime_hosts": [],
+      "verified": false,
+      "notes": "Bundled unmodified, family name UthmanicHafs. Taken from https://github.com/quran/quran.com-frontend-next, path public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf, commit aff1a035b09b66f28047b3216edcae4c5c949a49. The terms of use must be confirmed by the project owner before a public release."
+    }
+  ]
+}
