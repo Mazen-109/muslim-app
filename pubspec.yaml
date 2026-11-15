@@ -1,0 +1,42 @@
+name: muslim
+description: "Mushaf with recitation, tafsir and story videos."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.14.0
+
+dependencies:
+  audio_session: ^0.2.4
+  crypto: ^3.0.8
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_riverpod: ^3.5.0
+  go_router: ^18.1.4
+  http: ^1.6.0
+  intl: ^0.20.3
+  just_audio: ^0.10.6
+  material_ui: ^1.11.0
+  path: ^1.9.1
+  path_provider: ^2.1.6
+  share_plus: ^13.3.1
+  shared_preferences: ^2.5.6
+  sqlite3: ^3.9.1
+  url_launcher: ^6.3.3
+  video_player: ^2.14.1
+  wakelock_plus: ^1.8.2
+  youtube_player_iframe: ^6.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  mocktail: ^1.0.5
+
+flutter:
+  uses-material-design: true
+  generate: true

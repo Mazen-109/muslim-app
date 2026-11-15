@@ -1,0 +1,7 @@
+{
+  "@@locale": "ar",
+  "appTitle": "مسلم",
+  "@appTitle": {
+    "description": "The app name, shown in the title bar and the task switcher."
+  }
+}
