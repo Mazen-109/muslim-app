@@ -19,7 +19,10 @@ A Flutter app: Mushaf with audio, tafsir, and story videos linked to the Quran t
   religious content for a demo or a test.
 - Never depict a prophet in any asset.
 - Quran text is rendered only with the KFGQPC Uthmanic Hafs font, with no fallback.
-- User-facing strings go in `lib/core/l10n/*.arb`, Arabic first.
+- User-facing strings go in `lib/core/l10n/*.arb`, Arabic first. After editing an ARB file run
+  `flutter gen-l10n` and commit `lib/core/l10n/generated/`.
+- Import Material widgets from `package:material_ui/material_ui.dart`, not the deprecated
+  `package:flutter/material.dart`.
 - Colours, type and spacing come from the theme tokens, not literals in widgets.
 
 ## Workflow

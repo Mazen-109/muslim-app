@@ -20,7 +20,8 @@ without an app release, and the app plays only reviewer-approved items.
 
 **Language/Version**: Dart 3.14 on Flutter 3.50 (stable channel)
 
-**Primary Dependencies**: `flutter_riverpod` 3 (state), `go_router` 18 (navigation), `sqlite3`
+**Primary Dependencies**: `material_ui` (Material widgets; since Flutter 3.47 they live in this
+package and `package:flutter/material.dart` is deprecated), `flutter_riverpod` 3 (state), `go_router` 18 (navigation), `sqlite3`
 3 (databases), `shared_preferences` (settings), `just_audio` + `audio_session` (recitation),
 `video_player` and `youtube_player_iframe` (stories), `wakelock_plus`, `share_plus`,
 `url_launcher`, `path_provider`, `path`, `crypto`, `http`, `intl` with `flutter_localizations`.
