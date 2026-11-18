@@ -471,3 +471,29 @@ bool _bool(Map<String, Object?> m, String key, String ctx) {
   check(v is bool, () => '$ctx: "$key" must be a boolean, got $v');
   return v as bool;
 }
+
+/// A tafsir entry from `GET /tafsirs/{id}/by_ayah/{key}`: one text and the
+/// verse keys it covers (the `verses` map, in response order).
+class TafsirGroup {
+  TafsirGroup({
+    required this.resourceId,
+    required this.verseKeys,
+    required this.text,
+  });
+
+  final int resourceId;
+  final List<String> verseKeys;
+  final String text;
+}
+
+TafsirGroup parseTafsirByAyah(Object? json, String ctx) {
+  final root = _map(json, ctx);
+  final t = _map(root['tafsir'], '$ctx tafsir');
+  final verses = _map(t['verses'], '$ctx tafsir.verses');
+  check(verses.isNotEmpty, () => '$ctx: tafsir.verses is empty');
+  return TafsirGroup(
+    resourceId: _int(t, 'resource_id', '$ctx tafsir'),
+    verseKeys: verses.keys.toList(),
+    text: _str(t, 'text', '$ctx tafsir'),
+  );
+}

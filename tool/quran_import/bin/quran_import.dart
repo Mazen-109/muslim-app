@@ -94,15 +94,31 @@ Future<void> run(ApiClient client, Directory outDir) async {
     tafsirId,
   );
   final tafsirEntries = <TafsirEntry>[];
+  var tafsirListed = 0;
   for (final c in chapters) {
+    final listed = await _allPages(
+      client,
+      '$apiBase/tafsirs/$tafsirId/by_chapter/${c.id}?per_page=300',
+      (json, ctx) => parseTafsirPage(json, ctx),
+    );
+    tafsirListed += listed.length;
     tafsirEntries.addAll(
-      await _allPages(
-        client,
-        '$apiBase/tafsirs/$tafsirId/by_chapter/${c.id}?per_page=300',
-        (json, ctx) => parseTafsirPage(json, ctx),
+      await completeTafsirChapter(
+        surah: c.id,
+        ayahCount: c.versesCount,
+        resourceId: tafsirId,
+        listed: listed,
+        fetchGroup: (key) async {
+          final url = '$apiBase/tafsirs/$tafsirId/by_ayah/$key';
+          return parseTafsirByAyah(await client.getJson(url), url);
+        },
       ),
     );
   }
+  stdout.writeln(
+    '  ${tafsirEntries.length} ayahs; '
+    '${tafsirEntries.length - tafsirListed} share a grouped entry',
+  );
 
   stdout.writeln('recitations');
   final recitations = parseRecitations(

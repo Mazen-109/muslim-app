@@ -536,3 +536,102 @@ Dataset assembleDataset({
     ]..sort((a, b) => a.id.compareTo(b.id)),
   );
 }
+
+/// Completes one surah's tafsir entries, one per ayah.
+///
+/// `by_chapter` lists a tafsir entry once, under the first ayah of the
+/// group of ayahs it explains; the other ayahs of the group are absent. For
+/// each absent ayah this asks [fetchGroup] (`by_ayah`) for its entry, and
+/// requires that the group:
+/// - belongs to the same resource,
+/// - is a contiguous run of this surah's ayahs that contains the absent
+///   ayah and starts at the nearest listed ayah before it,
+/// - has exactly the text listed for that first ayah,
+/// - covers no ayah that is listed or covered by another group.
+///
+/// Each ayah of the group then gets that same text, unchanged. Anything
+/// else fails. Returns entries for ayahs 1..[ayahCount] in order.
+Future<List<TafsirEntry>> completeTafsirChapter({
+  required int surah,
+  required int ayahCount,
+  required int resourceId,
+  required List<TafsirEntry> listed,
+  required Future<TafsirGroup> Function(String verseKey) fetchGroup,
+}) async {
+  final byAyah = <int, TafsirEntry>{};
+  for (final e in listed) {
+    final (s, a) = parseVerseKey(e.verseKey);
+    check(
+      s == surah && a >= 1 && a <= ayahCount,
+      () => 'tafsir chapter $surah lists ${e.verseKey}',
+    );
+    check(
+      !byAyah.containsKey(a),
+      () => 'tafsir chapter $surah lists ${e.verseKey} twice',
+    );
+    check(
+      e.resourceId == resourceId,
+      () =>
+          'tafsir ${e.verseKey}: resource ${e.resourceId}, expected '
+          '$resourceId',
+    );
+    byAyah[a] = e;
+  }
+  check(
+    byAyah.containsKey(1),
+    () => 'tafsir chapter $surah does not list ayah 1',
+  );
+  final listedAyahs = byAyah.keys.toSet();
+  for (var a = 1; a <= ayahCount; a++) {
+    if (byAyah.containsKey(a)) continue;
+    final key = '$surah:$a';
+    var start = a - 1;
+    while (!listedAyahs.contains(start)) {
+      start--;
+    }
+    final head = byAyah[start]!;
+    final group = await fetchGroup(key);
+    final ctx = 'tafsir by_ayah $key';
+    check(
+      group.resourceId == resourceId,
+      () => '$ctx: resource ${group.resourceId}, expected $resourceId',
+    );
+    final expected = [
+      for (var i = 0; i < group.verseKeys.length; i++) '$surah:${start + i}',
+    ];
+    check(
+      _listEquals(group.verseKeys, expected) && group.verseKeys.contains(key),
+      () =>
+          '$ctx: group covers ${group.verseKeys}, expected a run starting '
+          'at the listed $surah:$start and containing $key',
+    );
+    check(
+      group.text == head.text,
+      () => '$ctx: group text differs from the text listed for $surah:$start',
+    );
+    for (final k in group.verseKeys.skip(1)) {
+      final (_, ga) = parseVerseKey(k);
+      check(
+        !byAyah.containsKey(ga),
+        () =>
+            '$ctx: group includes $k, which by_chapter lists separately '
+            'or another group already covers',
+      );
+      check(ga <= ayahCount, () => '$ctx: group includes $k');
+      byAyah[ga] = TafsirEntry(
+        resourceId: resourceId,
+        verseKey: k,
+        text: group.text,
+      );
+    }
+  }
+  return [for (var a = 1; a <= ayahCount; a++) byAyah[a]!];
+}
+
+bool _listEquals(List<String> a, List<String> b) {
+  if (a.length != b.length) return false;
+  for (var i = 0; i < a.length; i++) {
+    if (a[i] != b[i]) return false;
+  }
+  return true;
+}

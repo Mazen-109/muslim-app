@@ -107,7 +107,9 @@ Primary key `(page, line)`. Every `ayah` line has at least one row in `words`; `
 `author` TEXT NOT NULL, `language` TEXT NOT NULL, `slug` TEXT NOT NULL UNIQUE.
 
 `tafsir_texts`: `tafsir_id` INTEGER NOT NULL, `ayah_id` INTEGER NOT NULL, `text` TEXT NOT NULL,
-primary key `(tafsir_id, ayah_id)`. The MVP has 6236 rows for tafsir 16, none empty.
+primary key `(tafsir_id, ayah_id)`. The MVP has 6236 rows for tafsir 16, none empty. When the
+source explains a group of consecutive ayahs in one entry, every ayah of the group has a row
+with that same text (research R6).
 
 ### `reciters` (5 rows in the MVP)
 

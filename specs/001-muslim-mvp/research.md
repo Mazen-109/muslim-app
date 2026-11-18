@@ -116,8 +116,13 @@ Glyph-exact pages (per-page fonts) can be added later behind the same page-line 
 ## R6. Tafsir source
 
 **Decision**: Al-Tafsir Al-Muyassar, Quran.com resource id 16 (`ar-tafsir-muyassar`), imported
-with `GET /tafsirs/16/by_chapter/{1..114}?per_page=300` (verified: one entry per ayah, plain
-Arabic text). The schema allows more tafsir works later (ids 91 As-Sa'di, 14 Ibn Kathir).
+with `GET /tafsirs/16/by_chapter/{1..114}?per_page=300` (plain Arabic text). Verified
+2026-11-15: some entries explain a group of consecutive ayahs (for example `4:66` to `4:68`), and
+`by_chapter` lists such an entry once, under the group's first ayah (5278 entries for 6236
+ayahs, 494 gaps). For each unlisted ayah the import requests `GET /tafsirs/16/by_ayah/{key}`,
+whose `verses` map names the group, requires the group to be a contiguous run starting at the
+listed ayah with exactly the listed text, and stores that same text, unchanged, for every ayah
+of the group. Anything else fails the import. The schema allows more tafsir works later (ids 91 As-Sa'di, 14 Ibn Kathir).
 
 **Rationale**: the concept lists it first; it is concise, one entry per ayah, and published by
 the King Fahd Complex.
