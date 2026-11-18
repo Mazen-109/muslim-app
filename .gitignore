@@ -44,3 +44,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Quran import tool
+tool/quran_import/.cache/
+tool/quran_import/.dart_tool/

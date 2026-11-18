@@ -29,8 +29,19 @@ Verified endpoints:
 | Need | Endpoint | Notes |
 | --- | --- | --- |
 | Surah metadata | `GET /chapters?language=ar` | 114 items: `name_arabic`, `name_simple`, `revelation_place`, `revelation_order`, `verses_count`, `bismillah_pre`, `pages` |
-| Text and page layout | `GET /verses/by_page/{1..604}?words=true&per_page=300&word_fields=text_qpc_hafs,line_number,page_number&fields=text_qpc_hafs,text_uthmani,text_imlaei_simple` | Per verse: ids, `verse_key`, `juz_number`, `hizb_number`, `rub_el_hizb_number`, `sajdah_number`. Per word: `position`, `char_type_name` (`word` or `end`), `text_qpc_hafs`, `line_number`, `page_number` |
+| Text and page layout | `GET /verses/by_page/{1..604}?words=true&per_page=300&word_fields=text_qpc_hafs,line_number,page_number,v1_page,line_v1&fields=text_qpc_hafs,text_uthmani,text_imlaei_simple` | Per verse: ids, `verse_key`, `juz_number`, `hizb_number`, `rub_el_hizb_number`, `sajdah_number`. Per word: `position`, `char_type_name` (`word` or `end`), `text_qpc_hafs`, `v1_page`, `line_v1` (see the note below) |
 | Juz boundaries | `GET /juzs` | Returns each juz twice (60 rows); the import de-duplicates by `juz_number` and requires exactly 30 |
+
+**Page number quirk** (verified 2026-11-15): when `word_fields` contains `text_qpc_hafs`,
+`page_number` on a verse and on its words switches to the 1421H Madani layout for some ayahs
+(56 verses, 361 words), while the `by_page` selection and `line_number` stay on the 1405H
+layout; for example `by_page/121` returns `5:77` with `page_number` 120. The 1405H fields
+`v1_page` and `line_v1` are consistent with the selection, so the import stores `v1_page` as the
+word's page and `line_v1` as its line, fails if `line_number` differs from `line_v1`, fails
+unless every verse a page returns has its first word on that page, and does not use
+`page_number`. An ayah that spans two pages is returned by its first page with all its words.
+Word ids are source ids and do not follow reading order; reading order is (verse id, word
+position).
 
 Text fields used:
 
@@ -64,6 +75,9 @@ The import derives them and stores them explicitly:
   surah name.
 - If the count of empty lines before a surah start does not match that rule, the import fails
   rather than guessing.
+- Lines are walked in reading order (verse id, then word position), with each word on its
+  `v1_page` and `line_v1` (R2); word ids are not in reading order and are not used for
+  ordering.
 - The basmala line is rendered from the words of ayah 1:1 without its end marker, read from the
   database. It is never a string literal in code.
 
