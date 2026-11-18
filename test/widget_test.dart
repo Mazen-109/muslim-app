@@ -1,19 +1,21 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:muslim/app.dart';
+import 'package:muslim/core/l10n/generated/app_localizations.dart';
+
+import 'helpers/pump_app.dart';
 
 void main() {
   testWidgets('app builds in Arabic, right to left', (tester) async {
-    await tester.pumpWidget(const ProviderScope(child: MuslimApp()));
-    await tester.pumpAndSettle();
+    await pumpApp(tester);
 
-    final titleFinder = find.text('مسلم');
-    expect(titleFinder, findsOneWidget);
-    expect(Directionality.of(tester.element(titleFinder)), TextDirection.rtl);
+    final navigation = find.byType(AppBar);
+    expect(navigation, findsOneWidget);
+    final context = tester.element(navigation);
+    expect(Localizations.localeOf(context), const Locale('ar'));
+    expect(Directionality.of(context), TextDirection.rtl);
     expect(
-      Localizations.localeOf(tester.element(titleFinder)),
-      const Locale('ar'),
+      AppLocalizations.of(context).appTitle,
+      lookupAppLocalizations(const Locale('ar')).appTitle,
     );
   });
 }

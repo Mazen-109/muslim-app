@@ -6,6 +6,14 @@ import 'core/routing/app_router.dart';
 import 'core/settings/settings_providers.dart';
 import 'core/theme/app_theme.dart';
 
+/// The localization delegates of the app, for tests that build their own
+/// MaterialApp.
+const List<LocalizationsDelegate<Object?>> appLocalizationsDelegates =
+    <LocalizationsDelegate<Object?>>[
+      AppLocalizations.delegate,
+      ...GlobalMaterialLocalizations.delegates,
+    ];
+
 /// The root widget: Arabic first, right-to-left, English as the second
 /// locale. The theme and the locale come from the reader's settings and
 /// apply to every screen.
@@ -25,7 +33,10 @@ class MuslimApp extends ConsumerWidget {
       theme: theme,
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      // The Material localizations come from material_ui; the generated
+      // AppLocalizations.localizationsDelegates still name the deprecated
+      // flutter_localizations ones, which material_ui widgets do not read.
+      localizationsDelegates: appLocalizationsDelegates,
     );
   }
 }

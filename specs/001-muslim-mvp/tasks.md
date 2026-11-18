@@ -148,7 +148,7 @@ in the user stories can start before this phase is complete.
   - Tests: every theme's body text, secondary text and Quran text meet a contrast ratio of at
     least 7:1 against their backgrounds (computed in the test); the black and white themes
     contain no chromatic colour in any role.
-- [ ] T009 Build the app shell: `lib/core/routing/app_router.dart`, `lib/app.dart`,
+- [x] T009 Build the app shell: `lib/core/routing/app_router.dart`, `lib/app.dart`,
   `lib/core/widgets/app_scaffold.dart`, `lib/core/widgets/state_views.dart`,
   `lib/core/l10n/app_ar.arb`, `lib/core/l10n/app_en.arb`, `test/core/app_shell_test.dart`,
   `test/helpers/*.dart`
