@@ -40,6 +40,12 @@ Future<void> go(
 Finder surahRow(int id) => find.byKey(ValueKey<String>('surah-$id'));
 Finder juzRow(int id) => find.byKey(ValueKey<String>('juz-$id'));
 
+/// The vertical list of [tab] (not the horizontal tab view around it).
+Finder listOf(IndexTab tab) => find.descendant(
+  of: find.byKey(PageStorageKey<IndexTab>(tab)),
+  matching: find.byType(Scrollable),
+);
+
 Future<void> showJuzTab(WidgetTester tester) async {
   await tester.tap(find.text(ar.indexTabJuz));
   await tester.pumpAndSettle();
@@ -50,9 +56,10 @@ Future<void> showJuzTab(WidgetTester tester) async {
 /// so rows are collected while scrolling instead of all at once.
 Future<List<int>> collectRows<T extends Widget>(
   WidgetTester tester,
+  IndexTab tab,
   int Function(T row) idOf,
 ) async {
-  final list = find.byType(Scrollable).hitTestable().first;
+  final list = listOf(tab);
   final seen = <int>[];
   void collect() {
     for (final row in tester.widgetList<T>(find.byType(T))) {
@@ -62,14 +69,15 @@ Future<List<int>> collectRows<T extends Widget>(
   }
 
   collect();
-  while (true) {
+  // Bounded, so a list that stops scrolling fails instead of hanging.
+  for (var drags = 0; drags < 200; drags++) {
     final position = tester.state<ScrollableState>(list).position;
-    if (position.pixels >= position.maxScrollExtent) break;
+    if (position.pixels >= position.maxScrollExtent) return seen;
     await tester.drag(list, const Offset(0, -300));
     await tester.pumpAndSettle();
     collect();
   }
-  return seen;
+  fail('The list did not reach its end.');
 }
 
 void main() {
@@ -94,7 +102,11 @@ void main() {
       final container = await pumpApp(tester, size: phone);
       expect(location(container).path, AppRoutes.index);
 
-      final ids = await collectRows<SurahRow>(tester, (row) => row.surah.id);
+      final ids = await collectRows<SurahRow>(
+        tester,
+        IndexTab.surahs,
+        (row) => row.surah.id,
+      );
       expect(ids, <int>[for (final s in repository.surahs()) s.id]);
       expect(ids, hasLength(114));
     });
@@ -109,7 +121,7 @@ void main() {
         await tester.scrollUntilVisible(
           surahRow(id),
           300,
-          scrollable: find.byType(Scrollable).hitTestable().first,
+          scrollable: listOf(IndexTab.surahs),
         );
         final row = surahRow(id);
         Finder inRow(String text) =>
@@ -159,7 +171,11 @@ void main() {
       await pumpApp(tester, size: phone);
       await showJuzTab(tester);
 
-      final ids = await collectRows<JuzRow>(tester, (row) => row.juz.id);
+      final ids = await collectRows<JuzRow>(
+        tester,
+        IndexTab.juz,
+        (row) => row.juz.id,
+      );
       expect(ids, <int>[for (final j in repository.juzs()) j.id]);
       expect(ids, hasLength(30));
     });
@@ -236,7 +252,7 @@ void main() {
         tester,
         size: phone,
         overrides: [
-          quranDatabaseProvider.overrideWith(
+          quranRepositoryProvider.overrideWith(
             (ref) async => throw const QuranDatabaseException('unavailable'),
           ),
         ],
@@ -254,8 +270,8 @@ void main() {
         ProviderScope(
           overrides: [
             ...await appTestOverrides(),
-            quranDatabaseProvider.overrideWith(
-              (ref) => Completer<QuranDatabase>().future,
+            quranRepositoryProvider.overrideWith(
+              (ref) => Completer<QuranRepository>().future,
             ),
           ],
           child: const MuslimApp(),
