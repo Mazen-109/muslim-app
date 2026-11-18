@@ -168,8 +168,9 @@ Schema version stored in `PRAGMA user_version`, starting at 1.
 - `AyahRef(surah, ayah)` with parsing and formatting of `"S:A"` keys and range validation
   against surah ayah counts.
 - `AyahRange(from, to)` inclusive, `from <= to` in Mushaf order, with `contains(AyahRef)`.
-- `MushafPage(number, lines)`, `PageLine` as a sealed type: `AyahLine(words)`,
-  `SurahNameLine(surah)`, `BasmalaLine(surah)`.
+- `MushafPage(number, lines)`, `PageLine` as a sealed type, each carrying its line number:
+  `AyahLine(words)`, `SurahNameLine(surah)`, `BasmalaLine(surah, words)` where `words` are the
+  words of `1:1` without its end marker.
 - `PlaybackState`: `idle`, `loading`, `playing`, `paused`, `error`; with current `AyahRef`,
   reciter id, and remaining repeats.
 - `StoryItem` with `isPlayable` computed as: `review.status == approved` and
