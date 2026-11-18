@@ -85,13 +85,14 @@ in the user stories can start before this phase is complete.
     at the bottom of a page with basmala on the next, surahs 1 and 9, pages 1 and 2), juz
     de-duplication, folding, URL template resolution and table hashing. Fixtures are synthetic
     JSON in the API's shape with placeholder tokens such as `w1`; they contain no Quran text.
-- [ ] T004 Run the import and commit the dataset: `assets/data/quran.db`,
+- [x] T004 Run the import and commit the dataset: `assets/data/quran.db`,
   `assets/data/manifest.json`, `pubspec.yaml` (assets), `test/data/dataset_integrity_test.dart`
   - Run the tool against the live API; commit its two outputs unmodified.
   - The integrity test opens `assets/data/quran.db` with `sqlite3`, recomputes every table
     hash and count and compares with `manifest.json`, and checks the structural invariants:
     114 surahs, 6236 ayahs, 604 pages, 9046 page lines, 30 juz, 60 hizb, 6236 tafsir entries,
-    words joined per ayah equal `text_qpc_hafs`.
+    and words joined per ayah in position order, with every `U+0020` and `U+00A0` removed,
+    equal `text_qpc_hafs` with every `U+0020` and `U+00A0` removed (data-model.md section 1).
   - The PR description lists row counts, file sizes and the table hashes.
 - [x] T005 [P] Add fonts and the sources registry: `assets/fonts/`, `assets/sources.json`,
   `pubspec.yaml` (fonts, assets), `test/data/sources_registry_test.dart`
