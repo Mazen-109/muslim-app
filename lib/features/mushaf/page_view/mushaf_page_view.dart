@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:material_ui/material_ui.dart';
 
-import '../../../core/l10n/generated/app_localizations.dart';
 import '../../../core/theme/app_motion.dart';
 import '../../../data/models/mushaf_page.dart';
 import '../../../data/quran_repository.dart';
@@ -86,7 +85,6 @@ class _MushafPageViewState extends ConsumerState<MushafPageView> {
       readerControllerProvider.select((s) => s.page),
       (previous, next) => _follow(next),
     );
-    final l10n = AppLocalizations.of(context);
     return Directionality(
       textDirection: TextDirection.rtl,
       child: PageView.builder(
@@ -95,9 +93,11 @@ class _MushafPageViewState extends ConsumerState<MushafPageView> {
         allowImplicitScrolling: true,
         onPageChanged: (index) =>
             ref.read(readerControllerProvider.notifier).showPage(index + 1),
+        // Each page is its own semantics container; its page number is
+        // announced from the label below the text block.
         itemBuilder: (context, index) => Semantics(
           container: true,
-          label: l10n.mushafPageNumber(index + 1),
+          explicitChildNodes: true,
           child: Directionality(
             // The running head follows the interface language; the text
             // block sets its own right-to-left direction.
