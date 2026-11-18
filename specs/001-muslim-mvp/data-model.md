@@ -28,7 +28,7 @@ All text columns are stored exactly as received from the source unless marked *d
 | `revelation_order` | INTEGER NOT NULL | 1 to 114, unique |
 | `ayah_count` | INTEGER NOT NULL | sums to 6236 |
 | `bismillah_pre` | INTEGER NOT NULL | 0 or 1; 0 only for surahs 1 and 9 |
-| `page_start` | INTEGER NOT NULL | 1 to 604; the API's `pages[0]`, which is the page of the first word of ayah 1 (the surah name and basmala lines can sit at the bottom of the previous page, as for 20 surahs) |
+| `page_start` | INTEGER NOT NULL | 1 to 604; the API's `pages[0]`, which is the page of the first word of ayah 1 (the surah name and basmala lines can sit at the bottom of the previous page, as for 21 surahs) |
 | `page_end` | INTEGER NOT NULL | `page_start` to 604; the page of the surah's last word |
 
 ### `ayahs` (6236 rows)
