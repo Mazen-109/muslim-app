@@ -3,5 +3,73 @@
   "appTitle": "مسلم",
   "@appTitle": {
     "description": "The app name, shown in the title bar and the task switcher."
+  },
+  "navMushaf": "المصحف",
+  "@navMushaf": {
+    "description": "Bottom navigation label: the Mushaf reader."
+  },
+  "navStories": "القصص",
+  "@navStories": {
+    "description": "Bottom navigation label: the stories section."
+  },
+  "navBookmarks": "العلامات",
+  "@navBookmarks": {
+    "description": "Bottom navigation label: bookmarks and the memorised list."
+  },
+  "navSettings": "الإعدادات",
+  "@navSettings": {
+    "description": "Bottom navigation label and screen title: settings."
+  },
+  "screenIndex": "الفهرس",
+  "@screenIndex": {
+    "description": "Screen title of the surah and juz index, and the tooltip of the button that opens it."
+  },
+  "screenSearch": "البحث",
+  "@screenSearch": {
+    "description": "Screen title of search, and the tooltip of the button that opens it."
+  },
+  "screenSurahStory": "قصة السورة",
+  "@screenSurahStory": {
+    "description": "Screen title of the surah story player."
+  },
+  "screenEpisodes": "الحلقات",
+  "@screenEpisodes": {
+    "description": "Screen title of the episode list of a story."
+  },
+  "screenEpisode": "الحلقة",
+  "@screenEpisode": {
+    "description": "Screen title of the episode player."
+  },
+  "screenSources": "المصادر",
+  "@screenSources": {
+    "description": "Screen title of the sources page, and the settings row that opens it."
+  },
+  "placeholderMessage": "هذه الشاشة قيد الإعداد.",
+  "@placeholderMessage": {
+    "description": "Shown on a screen that a later version fills in."
+  },
+  "stateLoading": "جارٍ التحميل",
+  "@stateLoading": {
+    "description": "Screen reader label of the loading indicator."
+  },
+  "stateErrorTitle": "حدث خطأ",
+  "@stateErrorTitle": {
+    "description": "Heading of the generic error state."
+  },
+  "stateOfflineTitle": "لا يوجد اتصال",
+  "@stateOfflineTitle": {
+    "description": "Heading of the offline state."
+  },
+  "stateOfflineMessage": "تحقّق من اتصالك بالإنترنت ثم أعد المحاولة.",
+  "@stateOfflineMessage": {
+    "description": "Body of the offline state."
+  },
+  "retry": "إعادة المحاولة",
+  "@retry": {
+    "description": "Button that retries a failed action."
+  },
+  "invalidLink": "تعذّر فتح هذا الموضع، فعُرض الفهرس.",
+  "@invalidLink": {
+    "description": "Snackbar shown when a link into the Mushaf names an ayah or page that does not exist, and the index opens instead."
   }
 }

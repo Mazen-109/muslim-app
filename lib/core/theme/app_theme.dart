@@ -122,6 +122,28 @@ abstract final class AppTheme {
           ),
         ),
       ),
+      // The rail replaces the bar on medium and expanded widths, with the
+      // same tones, so switching layouts never changes the look.
+      navigationRailTheme: NavigationRailThemeData(
+        backgroundColor: p.surfaceContainerLow,
+        elevation: AppElevation.level0,
+        indicatorColor: p.accentContainer,
+        indicatorShape: const StadiumBorder(),
+        labelType: NavigationRailLabelType.all,
+        useIndicator: true,
+        selectedLabelTextStyle: textTheme.labelMedium!.copyWith(color: p.text),
+        unselectedLabelTextStyle: textTheme.labelMedium!.copyWith(
+          color: p.textSecondary,
+        ),
+        selectedIconTheme: IconThemeData(
+          size: AppSizes.icon,
+          color: p.onAccentContainer,
+        ),
+        unselectedIconTheme: IconThemeData(
+          size: AppSizes.icon,
+          color: p.textSecondary,
+        ),
+      ),
       // The legacy button theme still defaults to a Material blue.
       buttonTheme: ButtonThemeData(
         colorScheme: scheme,

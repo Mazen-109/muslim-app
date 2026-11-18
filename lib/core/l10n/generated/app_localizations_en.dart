@@ -11,4 +11,57 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appTitle => 'Muslim';
+
+  @override
+  String get navMushaf => 'Mushaf';
+
+  @override
+  String get navStories => 'Stories';
+
+  @override
+  String get navBookmarks => 'Bookmarks';
+
+  @override
+  String get navSettings => 'Settings';
+
+  @override
+  String get screenIndex => 'Index';
+
+  @override
+  String get screenSearch => 'Search';
+
+  @override
+  String get screenSurahStory => 'Surah story';
+
+  @override
+  String get screenEpisodes => 'Episodes';
+
+  @override
+  String get screenEpisode => 'Episode';
+
+  @override
+  String get screenSources => 'Sources';
+
+  @override
+  String get placeholderMessage => 'This screen is not ready yet.';
+
+  @override
+  String get stateLoading => 'Loading';
+
+  @override
+  String get stateErrorTitle => 'Something went wrong';
+
+  @override
+  String get stateOfflineTitle => 'No connection';
+
+  @override
+  String get stateOfflineMessage =>
+      'Check your internet connection and try again.';
+
+  @override
+  String get retry => 'Try again';
+
+  @override
+  String get invalidLink =>
+      'That place in the Mushaf could not be opened, so the index is shown.';
 }

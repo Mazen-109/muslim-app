@@ -34,6 +34,13 @@ abstract final class AppSizes {
 
   /// The minimum height of a list row.
   static const double listRowMinHeight = 56;
+
+  /// The icon of a full-area empty, error or offline state.
+  static const double stateIcon = 48;
+
+  /// The window width from which the navigation bar becomes a rail
+  /// (Material's medium window class).
+  static const double railBreakpoint = 600;
 }
 
 /// Corner radii (DESIGN.md, Shapes).
