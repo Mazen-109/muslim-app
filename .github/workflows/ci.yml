@@ -30,7 +30,11 @@ jobs:
           cache: true
 
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          if [ -f tool/quran_import/pubspec.yaml ]; then
+            (cd tool/quran_import && dart pub get)
+          fi
 
       - name: Check formatting
         run: dart format --set-exit-if-changed .
@@ -44,7 +48,7 @@ jobs:
       - name: Test Quran import tool
         if: ${{ hashFiles('tool/quran_import/**') != '' }}
         working-directory: tool/quran_import
-        run: dart pub get && dart test
+        run: dart analyze && dart test
 
   android:
     name: Build debug APK
