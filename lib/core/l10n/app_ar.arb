@@ -71,5 +71,72 @@
   "invalidLink": "تعذّر فتح هذا الموضع، فعُرض الفهرس.",
   "@invalidLink": {
     "description": "Snackbar shown when a link into the Mushaf names an ayah or page that does not exist, and the index opens instead."
+  },
+  "indexTabSurahs": "السور",
+  "@indexTabSurahs": {
+    "description": "Index tab that lists the 114 surahs."
+  },
+  "indexTabJuz": "الأجزاء",
+  "@indexTabJuz": {
+    "description": "Index tab that lists the 30 juz."
+  },
+  "surahMakki": "مكية",
+  "@surahMakki": {
+    "description": "Index row label: the surah was revealed in Makkah."
+  },
+  "surahMadani": "مدنية",
+  "@surahMadani": {
+    "description": "Index row label: the surah was revealed in Madinah."
+  },
+  "ayahCount": "{count, plural, =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}",
+  "@ayahCount": {
+    "description": "The number of ayahs in a surah, on its index row.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "surahDetails": "{place} · {ayahs}",
+  "@surahDetails": {
+    "description": "Second line of a surah row in the index: the Makki or Madani label, then the ayah count.",
+    "placeholders": {
+      "place": {
+        "type": "String"
+      },
+      "ayahs": {
+        "type": "String"
+      }
+    }
+  },
+  "pageNumber": "صفحة {page}",
+  "@pageNumber": {
+    "description": "The Mushaf page where a surah or juz starts, at the end of its index row.",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "juzTitle": "الجزء {number}",
+  "@juzTitle": {
+    "description": "Title of a juz row in the index.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "juzStart": "من {surah}، الآية {ayah}",
+  "@juzStart": {
+    "description": "Second line of a juz row: the surah name (from the content database) and the ayah number where the juz starts.",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "int"
+      }
+    }
   }
 }

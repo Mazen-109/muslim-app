@@ -17,5 +17,14 @@
   "stateOfflineTitle": "No connection",
   "stateOfflineMessage": "Check your internet connection and try again.",
   "retry": "Try again",
-  "invalidLink": "That place in the Mushaf could not be opened, so the index is shown."
+  "invalidLink": "That place in the Mushaf could not be opened, so the index is shown.",
+  "indexTabSurahs": "Surahs",
+  "indexTabJuz": "Juz",
+  "surahMakki": "Makki",
+  "surahMadani": "Madani",
+  "ayahCount": "{count, plural, =1{1 ayah} other{{count} ayahs}}",
+  "surahDetails": "{place} · {ayahs}",
+  "pageNumber": "Page {page}",
+  "juzTitle": "Juz {number}",
+  "juzStart": "From {surah}, ayah {ayah}"
 }
