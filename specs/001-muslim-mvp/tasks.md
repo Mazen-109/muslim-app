@@ -62,7 +62,7 @@ or part of one where the "Pull request groups" table at the end says so.
 **Purpose**: the Quran dataset, the data layer, the design system and the app shell. Nothing
 in the user stories can start before this phase is complete.
 
-- [ ] T003 Build the Quran import tool in `tool/quran_import/` (`pubspec.yaml`,
+- [x] T003 Build the Quran import tool in `tool/quran_import/` (`pubspec.yaml`,
   `bin/quran_import.dart`, `lib/*.dart`, `test/*.dart`)
   - A Dart CLI: `dart run bin/quran_import.dart --out <dir> [--cache <dir>]`.
   - Fetches exactly the endpoints in research R2, R6 and R7 with retry and backoff, caches raw

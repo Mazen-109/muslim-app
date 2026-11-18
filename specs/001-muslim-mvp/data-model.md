@@ -28,8 +28,8 @@ All text columns are stored exactly as received from the source unless marked *d
 | `revelation_order` | INTEGER NOT NULL | 1 to 114, unique |
 | `ayah_count` | INTEGER NOT NULL | sums to 6236 |
 | `bismillah_pre` | INTEGER NOT NULL | 0 or 1; 0 only for surahs 1 and 9 |
-| `page_start` | INTEGER NOT NULL | 1 to 604 |
-| `page_end` | INTEGER NOT NULL | `page_start` to 604 |
+| `page_start` | INTEGER NOT NULL | 1 to 604; the API's `pages[0]`, which is the page of the first word of ayah 1 (the surah name and basmala lines can sit at the bottom of the previous page, as for 21 surahs) |
+| `page_end` | INTEGER NOT NULL | `page_start` to 604; the page of the surah's last word |
 
 ### `ayahs` (6236 rows)
 
@@ -43,7 +43,7 @@ All text columns are stored exactly as received from the source unless marked *d
 | `text_uthmani` | TEXT NOT NULL | share text |
 | `text_search` | TEXT NOT NULL | `text_imlaei_simple` |
 | `text_search_folded` | TEXT NOT NULL | *derived* from `text_search` by the folding rule in research R9; never displayed |
-| `page` | INTEGER NOT NULL | page of the ayah's first word, 1 to 604 |
+| `page` | INTEGER NOT NULL | page of the ayah's first word (its `v1_page`), 1 to 604 |
 | `juz` | INTEGER NOT NULL | 1 to 30 |
 | `hizb` | INTEGER NOT NULL | 1 to 60 |
 | `rub_el_hizb` | INTEGER NOT NULL | 1 to 240 |
@@ -55,20 +55,30 @@ Indexes: `(surah_id, ayah_number)` unique, `(page)`, `(juz)`.
 
 | Column | Type | Rule |
 | --- | --- | --- |
-| `id` | INTEGER PK | source word id |
+| `id` | INTEGER PK | source word id; ids do **not** follow reading order |
 | `ayah_id` | INTEGER NOT NULL | FK `ayahs.id` |
 | `position` | INTEGER NOT NULL | 1-based within the ayah; unique with `ayah_id` |
 | `char_type` | TEXT NOT NULL | exactly `word` or `end` |
 | `text_qpc_hafs` | TEXT NOT NULL | the word, or the ayah end marker |
-| `page` | INTEGER NOT NULL | 1 to 604 |
-| `line` | INTEGER NOT NULL | 1 to 15 |
+| `page` | INTEGER NOT NULL | 1 to 604; the API's `v1_page` (research R2) |
+| `line` | INTEGER NOT NULL | 1 to 15; the API's `line_v1`, equal to its `line_number` |
 
-Indexes: `(page, line, id)`, `(ayah_id, position)` unique.
+Indexes: `(page, line, ayah_id, position)`, `(ayah_id, position)` unique.
+
+Reading order is `(ayah_id, position)`, not `id`: the source's word ids are not sequential in
+the Mushaf (for example, the words of `2:1` have higher ids than those of `112:1`). Queries that
+lay out a page order its words by `(line, ayah_id, position)`. Along reading order, `(page,
+line)` never decreases.
 
 Invariants asserted by the import for every ayah: it has exactly one `end` row and that row is
-last; and joining its `word` rows' text with single spaces, then `U+00A0`, then the `end` row's
-text, equals `ayahs.text_qpc_hafs`. This ties the page layout to the canonical text, so a page
-can never show different words from the ayah record.
+last; and the concatenation of its rows' text in position order, with every `U+0020` and
+`U+00A0` removed, equals `ayahs.text_qpc_hafs` with every `U+0020` and `U+00A0` removed.
+Spaces are left out of the comparison because the source places them inconsistently (an ayah
+that opens with the rub el hizb mark `U+06DE` has `U+0020` inside that word but `U+00A0` in the
+ayah text; `2:72` has `U+0020` before its end marker; a few ayahs have no space in the ayah text
+between two separate words, for example before the sajdah sign `U+06E9`). Both texts are stored
+exactly as received; a word's text may contain an internal `U+0020`. This ties the page layout
+to the canonical text, so a page can never show different letters from the ayah record.
 
 ### `page_lines` (604 pages; 8 lines on pages 1 and 2, 15 elsewhere)
 
@@ -97,7 +107,9 @@ Primary key `(page, line)`. Every `ayah` line has at least one row in `words`; `
 `author` TEXT NOT NULL, `language` TEXT NOT NULL, `slug` TEXT NOT NULL UNIQUE.
 
 `tafsir_texts`: `tafsir_id` INTEGER NOT NULL, `ayah_id` INTEGER NOT NULL, `text` TEXT NOT NULL,
-primary key `(tafsir_id, ayah_id)`. The MVP has 6236 rows for tafsir 16, none empty.
+primary key `(tafsir_id, ayah_id)`. The MVP has 6236 rows for tafsir 16, none empty. When the
+source explains a group of consecutive ayahs in one entry, every ayah of the group has a row
+with that same text (research R6).
 
 ### `reciters` (5 rows in the MVP)
 
