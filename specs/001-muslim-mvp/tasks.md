@@ -406,7 +406,7 @@ stays awake (quickstart scenario 12).
 **Independent Test**: with a test catalog holding one approved video, open it from the stories
 section and from the Mushaf, play it, and return to the surah (quickstart scenarios 13, 14).
 
-- [ ] T022 [US9] Implement the content catalog in `lib/features/stories/catalog/`
+- [x] T022 [US9] Implement the content catalog in `lib/features/stories/catalog/`
   (`catalog_models.dart`, `catalog_parser.dart`, `catalog_repository.dart`),
   `assets/content/catalog.json`, with `test/features/stories/catalog_test.dart`
   - Models and a strict parser for `contracts/catalog.schema.json`: unknown

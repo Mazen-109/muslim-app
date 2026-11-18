@@ -43,6 +43,7 @@ flutter:
 
   assets:
     - assets/sources.json
+    - assets/content/catalog.json
 
   fonts:
     - family: UthmanicHafs
