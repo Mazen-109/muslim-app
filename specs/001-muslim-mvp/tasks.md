@@ -257,7 +257,7 @@ reopen the app, and land on the same ayah (quickstart scenarios 1 to 4).
 **Independent Test**: online, start playback mid-surah, watch the highlight cross a page
 boundary, change reciter, pause and resume (quickstart scenarios 6 and 7).
 
-- [ ] T015 [US3] Implement the recitation engine in `lib/features/audio/` (`audio_player_port.dart`,
+- [x] T015 [US3] Implement the recitation engine in `lib/features/audio/` (`audio_player_port.dart`,
   `just_audio_player.dart`, `recitation_controller.dart`, `playback_state.dart`) with
   `test/features/audio/recitation_controller_test.dart`
   - `AudioPlayerPort`: a small interface over the player (set playlist, play, pause, seek to
