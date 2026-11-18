@@ -104,7 +104,7 @@ in the user stories can start before this phase is complete.
     and each UI font added later. All `verified: false` until the owner confirms.
   - Tests: registry validates against the schema's required fields and enums; every entry
     with `asset_path` exists and matches its `sha256`.
-- [ ] T006 Implement the content data layer: `lib/data/models/*.dart`,
+- [x] T006 Implement the content data layer: `lib/data/models/*.dart`,
   `lib/data/quran_database.dart`, `lib/data/quran_repository.dart`,
   `lib/data/tafsir_repository.dart`, `lib/data/reciter_repository.dart`, `test/data/*_test.dart`
   - `QuranDatabase`: copies the asset to app storage on first run and when
