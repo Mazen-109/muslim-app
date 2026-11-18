@@ -48,3 +48,6 @@ app.*.map.json
 # Quran import tool
 tool/quran_import/.cache/
 tool/quran_import/.dart_tool/
+
+# Golden test failure output
+**/failures/
