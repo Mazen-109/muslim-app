@@ -42,6 +42,8 @@ flutter:
   generate: true
 
   assets:
+    - assets/data/manifest.json
+    - assets/data/quran.db
     - assets/sources.json
     - assets/content/catalog.json
 
