@@ -119,13 +119,16 @@ Glyph-exact pages (per-page fonts) can be added later behind the same page-line 
 with `GET /tafsirs/16/by_chapter/{1..114}?per_page=300` (plain Arabic text). Verified
 2026-11-15: some entries explain a group of consecutive ayahs (for example `4:66` to `4:68`), and
 `by_chapter` lists such an entry once, under the group's first ayah (5278 entries for 6236
-ayahs, 494 gaps). For each unlisted ayah the import requests `GET /tafsirs/16/by_ayah/{key}`,
-whose `verses` map names the group, requires the group to be a contiguous run starting at the
-listed ayah with exactly the listed text, and stores that same text, unchanged, for every ayah
-of the group. Anything else fails the import. The schema allows more tafsir works later (ids 91 As-Sa'di, 14 Ibn Kathir).
+ayahs, 494 gaps). For each unlisted ayah the import requests `GET /tafsirs/16/by_ayah/{key}`
+and requires its entry to be the one listed under the nearest listed ayah before it: the same
+resource, exactly the same text, and a `verses` map that is a contiguous run starting at that
+listed ayah and contains the requested ayah. The API cuts the `verses` map at 10 keys (the entry
+for `70:19` to `70:30` lists only `70:19` to `70:28`), so a map of exactly 10 keys is accepted
+without containing the ayah. The listed text is then stored, unchanged, for that ayah. Anything
+else fails the import. The schema allows more tafsir works later (ids 91 As-Sa'di, 14 Ibn Kathir).
 
-**Rationale**: the concept lists it first; it is concise, one entry per ayah, and published by
-the King Fahd Complex.
+**Rationale**: the concept lists it first; it is concise, mostly one entry per ayah, and
+published by the King Fahd Complex.
 
 ## R7. Audio source
 

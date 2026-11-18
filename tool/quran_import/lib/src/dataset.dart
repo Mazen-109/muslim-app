@@ -537,93 +537,111 @@ Dataset assembleDataset({
   );
 }
 
-/// Completes one surah's tafsir entries, one per ayah.
-///
-/// `by_chapter` lists a tafsir entry once, under the first ayah of the
-/// group of ayahs it explains; the other ayahs of the group are absent. For
-/// each absent ayah this asks [fetchGroup] (`by_ayah`) for its entry, and
-/// requires that the group:
-/// - belongs to the same resource,
-/// - is a contiguous run of this surah's ayahs that contains the absent
-///   ayah and starts at the nearest listed ayah before it,
-/// - has exactly the text listed for that first ayah,
-/// - covers no ayah that is listed or covered by another group.
-///
-/// Each ayah of the group then gets that same text, unchanged. Anything
-/// else fails. Returns entries for ayahs 1..[ayahCount] in order.
-Future<List<TafsirEntry>> completeTafsirChapter({
+/// The verse keys of a surah that `by_chapter` did not list, after checking
+/// the listed entries (this surah, in range, once each, [resourceId], ayah 1
+/// present).
+List<String> unlistedTafsirKeys({
   required int surah,
   required int ayahCount,
   required int resourceId,
   required List<TafsirEntry> listed,
-  required Future<TafsirGroup> Function(String verseKey) fetchGroup,
-}) async {
-  final byAyah = <int, TafsirEntry>{};
+}) {
+  final seen = <int>{};
   for (final e in listed) {
     final (s, a) = parseVerseKey(e.verseKey);
     check(
       s == surah && a >= 1 && a <= ayahCount,
       () => 'tafsir chapter $surah lists ${e.verseKey}',
     );
-    check(
-      !byAyah.containsKey(a),
-      () => 'tafsir chapter $surah lists ${e.verseKey} twice',
-    );
+    check(seen.add(a), () => 'tafsir chapter $surah lists ${e.verseKey} twice');
     check(
       e.resourceId == resourceId,
       () =>
           'tafsir ${e.verseKey}: resource ${e.resourceId}, expected '
           '$resourceId',
     );
-    byAyah[a] = e;
   }
-  check(
-    byAyah.containsKey(1),
-    () => 'tafsir chapter $surah does not list ayah 1',
+  check(seen.contains(1), () => 'tafsir chapter $surah does not list ayah 1');
+  return [
+    for (var a = 1; a <= ayahCount; a++)
+      if (!seen.contains(a)) '$surah:$a',
+  ];
+}
+
+/// The most keys the API returns in a `by_ayah` response's `verses` map.
+/// Observed 2026-11-15: an entry explaining 70:19 to 70:30 lists only
+/// 70:19 to 70:28.
+const tafsirVersesMapCap = 10;
+
+/// Completes one surah's tafsir entries, one per ayah (research R6).
+///
+/// `by_chapter` lists an entry once, under the first ayah of the group of
+/// consecutive ayahs it explains. For every unlisted ayah, [groups] holds
+/// that ayah's own `by_ayah` response, which must:
+/// - belong to [resourceId];
+/// - name, as the first key of its `verses` map, the nearest listed ayah
+///   before it (the group's head), with the map a contiguous run of keys
+///   from the head;
+/// - contain the ayah in that map, unless the map is cut at
+///   [tafsirVersesMapCap] keys;
+/// - have exactly the text listed for the head.
+///
+/// The ayah then gets that text, unchanged. Anything else fails. Returns
+/// entries for ayahs 1..[ayahCount] in order.
+List<TafsirEntry> completeTafsirChapter({
+  required int surah,
+  required int ayahCount,
+  required int resourceId,
+  required List<TafsirEntry> listed,
+  required Map<String, TafsirGroup> groups,
+}) {
+  final unlisted = unlistedTafsirKeys(
+    surah: surah,
+    ayahCount: ayahCount,
+    resourceId: resourceId,
+    listed: listed,
   );
-  final listedAyahs = byAyah.keys.toSet();
+  final byAyah = <int, TafsirEntry>{
+    for (final e in listed) parseVerseKey(e.verseKey).$2: e,
+  };
+  var head = 0;
   for (var a = 1; a <= ayahCount; a++) {
-    if (byAyah.containsKey(a)) continue;
     final key = '$surah:$a';
-    var start = a - 1;
-    while (!listedAyahs.contains(start)) {
-      start--;
+    if (!unlisted.contains(key)) {
+      head = a;
+      continue;
     }
-    final head = byAyah[start]!;
-    final group = await fetchGroup(key);
+    final group = groups[key];
     final ctx = 'tafsir by_ayah $key';
+    check(group != null, () => '$ctx: no response');
+    final listedHead = byAyah[head]!;
     check(
-      group.resourceId == resourceId,
+      group!.resourceId == resourceId,
       () => '$ctx: resource ${group.resourceId}, expected $resourceId',
     );
-    final expected = [
-      for (var i = 0; i < group.verseKeys.length; i++) '$surah:${start + i}',
+    final run = [
+      for (var i = 0; i < group.verseKeys.length; i++) '$surah:${head + i}',
     ];
+    final contiguousFromHead = _listEquals(group.verseKeys, run);
+    final coversKey =
+        group.verseKeys.contains(key) ||
+        group.verseKeys.length == tafsirVersesMapCap;
     check(
-      _listEquals(group.verseKeys, expected) && group.verseKeys.contains(key),
+      contiguousFromHead && coversKey,
       () =>
-          '$ctx: group covers ${group.verseKeys}, expected a run starting '
-          'at the listed $surah:$start and containing $key',
+          '$ctx: group lists ${group.verseKeys}, expected a contiguous run '
+          'from the listed $surah:$head that contains $key (or is cut at '
+          '$tafsirVersesMapCap keys)',
     );
     check(
-      group.text == head.text,
-      () => '$ctx: group text differs from the text listed for $surah:$start',
+      group.text == listedHead.text,
+      () => '$ctx: text differs from the text listed for $surah:$head',
     );
-    for (final k in group.verseKeys.skip(1)) {
-      final (_, ga) = parseVerseKey(k);
-      check(
-        !byAyah.containsKey(ga),
-        () =>
-            '$ctx: group includes $k, which by_chapter lists separately '
-            'or another group already covers',
-      );
-      check(ga <= ayahCount, () => '$ctx: group includes $k');
-      byAyah[ga] = TafsirEntry(
-        resourceId: resourceId,
-        verseKey: k,
-        text: group.text,
-      );
-    }
+    byAyah[a] = TafsirEntry(
+      resourceId: resourceId,
+      verseKey: key,
+      text: group.text,
+    );
   }
   return [for (var a = 1; a <= ayahCount; a++) byAyah[a]!];
 }

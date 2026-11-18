@@ -102,15 +102,25 @@ Future<void> run(ApiClient client, Directory outDir) async {
       (json, ctx) => parseTafsirPage(json, ctx),
     );
     tafsirListed += listed.length;
+    final unlisted = unlistedTafsirKeys(
+      surah: c.id,
+      ayahCount: c.versesCount,
+      resourceId: tafsirId,
+      listed: listed,
+    );
+    final urls = [
+      for (final key in unlisted) '$apiBase/tafsirs/$tafsirId/by_ayah/$key',
+    ];
+    final responses = await client.getJsonAll(urls);
     tafsirEntries.addAll(
-      await completeTafsirChapter(
+      completeTafsirChapter(
         surah: c.id,
         ayahCount: c.versesCount,
         resourceId: tafsirId,
         listed: listed,
-        fetchGroup: (key) async {
-          final url = '$apiBase/tafsirs/$tafsirId/by_ayah/$key';
-          return parseTafsirByAyah(await client.getJson(url), url);
+        groups: {
+          for (final (i, key) in unlisted.indexed)
+            key: parseTafsirByAyah(responses[i], urls[i]),
         },
       ),
     );
