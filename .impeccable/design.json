@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-18T00:00:00Z",
+  "title": "Design System: Muslim (مسلم)",
+  "extensions": {
+    "colorMeta": {
+      "light-accent": {
+        "role": "primary",
+        "displayName": "Lapis Ink",
+        "canonical": "#22457D",
+        "tonalRamp": [
+          "#0E2547",
+          "#1A3666",
+          "#22457D",
+          "#3A5D96",
+          "#5E7DB0",
+          "#8FA6CC",
+          "#D9E2F1",
+          "#EEF2F9"
+        ]
+      },
+      "light-surface": {
+        "role": "neutral",
+        "displayName": "Paper Ground",
+        "canonical": "#F4F5F6",
+        "tonalRamp": [
+          "#15171A",
+          "#2B2E32",
+          "#40454B",
+          "#70767E",
+          "#C3C8CE",
+          "#DDE1E4",
+          "#EEF0F2",
+          "#F4F5F6"
+        ]
+      },
+      "light-page": {
+        "role": "neutral",
+        "displayName": "The Page",
+        "canonical": "#FFFFFF"
+      },
+      "light-ayah-highlight": {
+        "role": "neutral",
+        "displayName": "Ayah Wash",
+        "canonical": "#E1E8F4"
+      },
+      "light-rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "#D3D7DB"
+      },
+      "night-text": {
+        "role": "neutral",
+        "displayName": "Night Ink",
+        "canonical": "#E3DFD7"
+      }
+    },
+    "typographyMeta": {
+      "body": {
+        "displayName": "Body",
+        "purpose": "Interface running text, list rows, tafsir body; 600 dp measure."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, navigation labels, chips, metadata."
+      },
+      "quran": {
+        "displayName": "Quran",
+        "purpose": "Quran text only, UthmanicHafs with an empty fallback list."
+      }
+    },
+    "shadows": [
+      {
+        "name": "level2",
+        "value": "3dp Material elevation, scrim-coloured shadow",
+        "purpose": "Menus."
+      },
+      {
+        "name": "level3",
+        "value": "6dp Material elevation, scrim-coloured shadow",
+        "purpose": "Bottom sheets and dialogs."
+      }
+    ],
+    "motion": [
+      {
+        "name": "short",
+        "value": "150ms ease-out cubic",
+        "purpose": "Control state changes."
+      },
+      {
+        "name": "medium",
+        "value": "250ms ease-out cubic",
+        "purpose": "Small layout changes."
+      },
+      {
+        "name": "long",
+        "value": "350ms ease-out cubic",
+        "purpose": "Surfaces entering."
+      },
+      {
+        "name": "page-turn",
+        "value": "300ms ease-out cubic",
+        "purpose": "Animated Mushaf page turn."
+      },
+      {
+        "name": "exit",
+        "value": "ease-in cubic",
+        "purpose": "Surfaces leaving."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "expanded",
+        "value": "600dp (navigation rail, capped reading measure)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Filled Button",
+      "kind": "button",
+      "refersTo": "button-filled",
+      "description": "The one forward action on a screen.",
+      "html": "<button class=\"ds-btn-filled\">متابعة</button>",
+      "css": ".ds-btn-filled{background:#22457D;color:#fff;font:500 15px/1.4 'Noto Sans Arabic',sans-serif;min-height:48px;padding:0 24px;border:0;border-radius:8px}.ds-btn-filled:hover{background:#2C5290}.ds-btn-filled:focus-visible{outline:2px solid #22457D;outline-offset:2px}"
+    },
+    {
+      "name": "Outlined Button",
+      "kind": "button",
+      "refersTo": "button-outlined",
+      "description": "The neutral choice beside a filled button.",
+      "html": "<button class=\"ds-btn-outlined\">إلغاء</button>",
+      "css": ".ds-btn-outlined{background:transparent;color:#15171A;font:500 15px/1.4 'Noto Sans Arabic',sans-serif;min-height:48px;padding:0 24px;border:1px solid #70767E;border-radius:8px}.ds-btn-outlined:hover{background:rgba(21,23,26,.08)}.ds-btn-outlined:focus-visible{outline:2px solid #22457D;outline-offset:2px}"
+    },
+    {
+      "name": "Text Button",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Secondary actions and links.",
+      "html": "<button class=\"ds-btn-text\">المصادر</button>",
+      "css": ".ds-btn-text{background:transparent;color:#22457D;font:500 15px/1.4 'Noto Sans Arabic',sans-serif;min-height:48px;min-width:48px;padding:0 12px;border:0;border-radius:8px}.ds-btn-text:hover{background:rgba(21,23,26,.08)}"
+    },
+    {
+      "name": "List Row",
+      "kind": "custom",
+      "refersTo": "list-row",
+      "description": "A settings or index row separated by hairline rules.",
+      "html": "<div class=\"ds-row\" dir=\"rtl\"><span>حجم الخط</span><span class=\"ds-row-meta\">100%</span></div>",
+      "css": ".ds-row{display:flex;justify-content:space-between;align-items:center;min-height:56px;padding:0 16px;background:#F4F5F6;color:#15171A;font:400 17px/1.7 'Noto Sans Arabic',sans-serif;border-bottom:1px solid #D3D7DB}.ds-row-meta{color:#40454B;font-size:13px}"
+    },
+    {
+      "name": "Navigation Bar",
+      "kind": "nav",
+      "refersTo": "navigation-bar",
+      "description": "Four destinations, labels always shown.",
+      "html": "<nav class=\"ds-nav\" dir=\"rtl\"><span class=\"ds-nav-on\">الفهرس</span><span>الإعدادات</span></nav>",
+      "css": ".ds-nav{display:flex;justify-content:space-around;align-items:center;height:72px;background:#EEF0F2;font:500 13px/1.4 'Noto Sans Arabic',sans-serif;color:#40454B}.ds-nav-on{color:#15171A;background:#D9E2F1;border-radius:999px;padding:4px 16px}"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Filter or choice chip.",
+      "html": "<span class=\"ds-chip\">الكل</span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;min-height:32px;padding:0 8px;border:1px solid #C3C8CE;border-radius:4px;background:#F4F5F6;color:#15171A;font:500 15px/1.4 'Noto Sans Arabic',sans-serif}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Scholar's Edition",
+    "overview": "The world comes from the critical editions of classical Arabic scholarship: a clean text block on a quiet page, set with wide margins, running heads, hairline rules and marginal numerals, and a single coloured ink kept for wayfinding. The Mushaf page is the text block. Everything else (bars, sheets, lists, settings) is apparatus: it is set smaller, quieter and in one sans-serif voice, so that the only calligraphic hand on screen is the Quran's own. The system is restrained. Neutral grounds carry a faint cool tint in light and a faint warm tint at night; one lapis ink marks where the reader is (the selected tab, the current ayah, a link, the slider's progress). Depth comes from tone and hairlines rather than shadows. Motion confirms a change and stops. Density is moderate: lists breathe, the page breathes more. It deliberately avoids the category's habits: no green-and-gold gradients, no mosque or dome silhouettes, no arabesque borders or ornamental frames around the chrome, no gilded headers, and no template card grids. Ornament belongs to the printed Mushaf page itself when the page view reproduces it, never to the interface around it.",
+    "keyCharacteristics": [
+      "One reading hand (Uthmanic Hafs) for the Quran, one interface voice (Noto Sans Arabic) for everything else.",
+      "Restrained colour: tinted neutrals plus one lapis ink; the black and white themes have no hue at all.",
+      "Flat and tonal: hairline rules and surface tones instead of shadows.",
+      "Contrast of at least 7:1 for body, secondary and Quran text in every theme.",
+      "Right to left first; 48 dp touch targets everywhere."
+    ],
+    "rules": [
+      {
+        "name": "The One Ink Rule",
+        "body": "Lapis is the only hue in the interface. A new colour needs a new role in `AppPalette` and a reason; it is never a literal in a widget.",
+        "section": "colors"
+      },
+      {
+        "name": "The Seven to One Rule",
+        "body": "Body text, secondary text and Quran text stay at or above 7:1 against every surface they can sit on, in every theme. The check is a test, not a review step.",
+        "section": "colors"
+      },
+      {
+        "name": "The Grey Means Grey Rule",
+        "body": "In the black and white themes, no role carries a hue: not the accent, not error, not a splash or a focus ring. Videos are the only exception, and that is the reader's setting, not the theme's.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Hand Rule",
+        "body": "The Uthmanic font is used for Quran text and nothing else, and Quran text is set in nothing else. Its fallback list is empty: a missing glyph is an error state, never a substitute font.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Tracking Rule",
+        "body": "Letter spacing is zero in every style. Tracking pulls joined Arabic letters apart.",
+        "section": "typography"
+      },
+      {
+        "name": "The Variable Weight Rule",
+        "body": "Every interface style sets both `fontWeight` and the matching `wght` font variation, so weights render from the variable font instead of being synthesised.",
+        "section": "typography"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "Where two regions meet, a 1 dp rule or a tone step separates them, not a shadow and not a thick border. No coloured side borders on rows or cards.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** read every colour from `Theme.of(context).colorScheme` or `AppColors.of(context)`, every size from `AppSpacing`, `AppSizes`, `AppRadii` and `AppElevation`, and every duration through `AppMotion.resolve`.",
+      "**Do** set Quran text with `AppTheme.quranTextStyle(theme)` (UthmanicHafs, empty fallback list) and nothing else.",
+      "**Do** keep body, secondary and Quran text at 7:1 or more; add a surface only after adding it to the contrast test.",
+      "**Do** separate regions with a 1 dp Rule or a tone step.",
+      "**Do** check every new screen in all four themes and in right-to-left before review, with a golden image.",
+      "**Do** use neutral interface labels in specimens, goldens and mock-ups."
+    ],
+    "donts": [
+      "**Don't** use green-and-gold gradients, mosque or dome silhouettes, arabesque frames, gilded headers or ornamental borders anywhere in the interface.",
+      "**Don't** add a second accent hue, or any hue at all in the black and white themes.",
+      "**Don't** use the Uthmanic font for interface text, or any other font for Quran text.",
+      "**Don't** set letter spacing on Arabic text.",
+      "**Don't** use drop shadows on rows, cards or bars, or coloured side borders thicker than 1 dp.",
+      "**Don't** put Quran text, tafsir, hadith or story content into specimens, placeholders or sample copy, and never depict a prophet in any image.",
+      "**Don't** put anything on the Mushaf page that is not the page: no banners, promotions or badges."
+    ]
+  }
+}

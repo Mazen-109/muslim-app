@@ -133,7 +133,7 @@ in the user stories can start before this phase is complete.
     data-model.md section 4; out-of-range stored values fall back to the default.
   - Tests with an in-memory database and mock preferences, including the migration from an
     empty database and range clamping.
-- [ ] T008 Establish the design system: `PRODUCT.md`, `DESIGN.md`, `lib/core/theme/*.dart`,
+- [x] T008 Establish the design system: `PRODUCT.md`, `DESIGN.md`, `lib/core/theme/*.dart`,
   `assets/fonts/` (UI fonts), `test/core/theme_test.dart`
   - Use the `impeccable` skill (`init`, then new-work for a native app) to write `PRODUCT.md`
     and `DESIGN.md` for an Arabic-first, calm, reading-centred Quran app. The Mushaf page is
