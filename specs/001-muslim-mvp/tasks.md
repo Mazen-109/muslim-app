@@ -437,8 +437,13 @@ section and from the Mushaf, play it, and return to the surah (quickstart scenar
   - The reader shows a "Watch the story" button for a surah with a playable story, placed so
     it never covers the text, and the ayah menu's Surah story action becomes live.
   - A non-playable item never reaches a video view: enforced in the route and the screen.
+  - Runtime hosts (constitution, Technology and Platform Constraints): a media URL whose host
+    is not in a sources-registry entry's `runtime_hosts` is treated as not playable, and the
+    catalog refresh from T022 is skipped when the `CATALOG_URL` host is not listed. Whoever
+    supplies approved media or a catalog URL adds its host to `assets/sources.json`.
   - Tests with a fake catalog and a fake video view: list states; route guard for
-    non-playable items; reader button visibility; back-link navigation; offline state.
+    non-playable items; unlisted media and catalog hosts; reader button visibility;
+    back-link navigation; offline state.
 
 ---
 
