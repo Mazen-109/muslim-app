@@ -103,6 +103,108 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'مسلم'**
   String get appTitle;
+
+  /// Bottom navigation label: the Mushaf reader.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصحف'**
+  String get navMushaf;
+
+  /// Bottom navigation label: the stories section.
+  ///
+  /// In ar, this message translates to:
+  /// **'القصص'**
+  String get navStories;
+
+  /// Bottom navigation label: bookmarks and the memorised list.
+  ///
+  /// In ar, this message translates to:
+  /// **'العلامات'**
+  String get navBookmarks;
+
+  /// Bottom navigation label and screen title: settings.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات'**
+  String get navSettings;
+
+  /// Screen title of the surah and juz index, and the tooltip of the button that opens it.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفهرس'**
+  String get screenIndex;
+
+  /// Screen title of search, and the tooltip of the button that opens it.
+  ///
+  /// In ar, this message translates to:
+  /// **'البحث'**
+  String get screenSearch;
+
+  /// Screen title of the surah story player.
+  ///
+  /// In ar, this message translates to:
+  /// **'قصة السورة'**
+  String get screenSurahStory;
+
+  /// Screen title of the episode list of a story.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحلقات'**
+  String get screenEpisodes;
+
+  /// Screen title of the episode player.
+  ///
+  /// In ar, this message translates to:
+  /// **'الحلقة'**
+  String get screenEpisode;
+
+  /// Screen title of the sources page, and the settings row that opens it.
+  ///
+  /// In ar, this message translates to:
+  /// **'المصادر'**
+  String get screenSources;
+
+  /// Shown on a screen that a later version fills in.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه الشاشة قيد الإعداد.'**
+  String get placeholderMessage;
+
+  /// Screen reader label of the loading indicator.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ التحميل'**
+  String get stateLoading;
+
+  /// Heading of the generic error state.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ'**
+  String get stateErrorTitle;
+
+  /// Heading of the offline state.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يوجد اتصال'**
+  String get stateOfflineTitle;
+
+  /// Body of the offline state.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقّق من اتصالك بالإنترنت ثم أعد المحاولة.'**
+  String get stateOfflineMessage;
+
+  /// Button that retries a failed action.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة المحاولة'**
+  String get retry;
+
+  /// Snackbar shown when a link into the Mushaf names an ayah or page that does not exist, and the index opens instead.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح هذا الموضع، فعُرض الفهرس.'**
+  String get invalidLink;
 }
 
 class _AppLocalizationsDelegate
