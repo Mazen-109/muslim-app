@@ -7,6 +7,8 @@ import 'package:material_ui/material_ui.dart';
 import '../../data/models/ayah_ref.dart';
 import '../../data/models/mushaf_page.dart';
 import '../../data/quran_repository.dart';
+import '../../features/mushaf/reader_controller.dart';
+import '../../features/mushaf/reader_screen.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../settings/settings_providers.dart';
 import '../widgets/app_scaffold.dart';
@@ -158,7 +160,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                   showInvalidLink();
                   return AppRoutes.index;
                 },
-                builder: (context, state) => const MushafPlaceholder(),
+                builder: (context, state) => ReaderScreen(
+                  target: ReaderTarget.fromQuery(state.uri.queryParameters),
+                ),
               ),
               GoRoute(
                 path: AppRoutes.search,

@@ -68,6 +68,48 @@
   "@retry": {
     "description": "Button that retries a failed action."
   },
+  "mushafHeadSurah": "سورة {name}",
+  "@mushafHeadSurah": {
+    "description": "Screen reader label of the surah name in the Mushaf page's running head. The name comes from the database.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Name"
+      }
+    }
+  },
+  "mushafHeadJuz": "الجزء {juz}",
+  "@mushafHeadJuz": {
+    "description": "The juz number in the Mushaf page's running head.",
+    "placeholders": {
+      "juz": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "mushafPageNumber": "الصفحة {page}",
+  "@mushafPageNumber": {
+    "description": "Screen reader label of the page number below a Mushaf page.",
+    "placeholders": {
+      "page": {
+        "type": "int",
+        "example": "1"
+      }
+    }
+  },
+  "mushafFontErrorTitle": "تعذّر تحميل خط المصحف",
+  "@mushafFontErrorTitle": {
+    "description": "Heading of the blocking error shown instead of the Mushaf when its font is missing or altered."
+  },
+  "mushafFontErrorMessage": "لا يُعرض المصحف بخط بديل. أعد تثبيت التطبيق لإصلاح ذلك.",
+  "@mushafFontErrorMessage": {
+    "description": "Body of the font error: the Mushaf is never shown in another font; reinstalling fixes it."
+  },
+  "mushafDataErrorMessage": "تعذّر فتح بيانات المصحف.",
+  "@mushafDataErrorMessage": {
+    "description": "Body of the blocking error shown when the Mushaf data cannot be opened."
+  },
   "invalidLink": "تعذّر فتح هذا الموضع، فعُرض الفهرس.",
   "@invalidLink": {
     "description": "Snackbar shown when a link into the Mushaf names an ayah or page that does not exist, and the index opens instead."

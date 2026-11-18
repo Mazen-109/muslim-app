@@ -62,5 +62,30 @@ class AppLocalizationsAr extends AppLocalizations {
   String get retry => 'إعادة المحاولة';
 
   @override
+  String mushafHeadSurah(String name) {
+    return 'سورة $name';
+  }
+
+  @override
+  String mushafHeadJuz(int juz) {
+    return 'الجزء $juz';
+  }
+
+  @override
+  String mushafPageNumber(int page) {
+    return 'الصفحة $page';
+  }
+
+  @override
+  String get mushafFontErrorTitle => 'تعذّر تحميل خط المصحف';
+
+  @override
+  String get mushafFontErrorMessage =>
+      'لا يُعرض المصحف بخط بديل. أعد تثبيت التطبيق لإصلاح ذلك.';
+
+  @override
+  String get mushafDataErrorMessage => 'تعذّر فتح بيانات المصحف.';
+
+  @override
   String get invalidLink => 'تعذّر فتح هذا الموضع، فعُرض الفهرس.';
 }

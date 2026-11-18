@@ -200,6 +200,42 @@ abstract class AppLocalizations {
   /// **'إعادة المحاولة'**
   String get retry;
 
+  /// Screen reader label of the surah name in the Mushaf page's running head. The name comes from the database.
+  ///
+  /// In ar, this message translates to:
+  /// **'سورة {name}'**
+  String mushafHeadSurah(String name);
+
+  /// The juz number in the Mushaf page's running head.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجزء {juz}'**
+  String mushafHeadJuz(int juz);
+
+  /// Screen reader label of the page number below a Mushaf page.
+  ///
+  /// In ar, this message translates to:
+  /// **'الصفحة {page}'**
+  String mushafPageNumber(int page);
+
+  /// Heading of the blocking error shown instead of the Mushaf when its font is missing or altered.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل خط المصحف'**
+  String get mushafFontErrorTitle;
+
+  /// Body of the font error: the Mushaf is never shown in another font; reinstalling fixes it.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يُعرض المصحف بخط بديل. أعد تثبيت التطبيق لإصلاح ذلك.'**
+  String get mushafFontErrorMessage;
+
+  /// Body of the blocking error shown when the Mushaf data cannot be opened.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر فتح بيانات المصحف.'**
+  String get mushafDataErrorMessage;
+
   /// Snackbar shown when a link into the Mushaf names an ayah or page that does not exist, and the index opens instead.
   ///
   /// In ar, this message translates to:
