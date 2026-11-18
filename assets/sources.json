@@ -62,6 +62,23 @@
       "runtime_hosts": [],
       "verified": false,
       "notes": "Bundled unmodified, family name UthmanicHafs. Taken from https://github.com/quran/quran.com-frontend-next, path public/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf, commit aff1a035b09b66f28047b3216edcae4c5c949a49. The terms of use must be confirmed by the project owner before a public release."
+    },
+    {
+      "id": "noto-sans-arabic",
+      "kind": "font",
+      "name_ar": "خط نوتو سانس العربي (خط واجهة التطبيق)",
+      "name_en": "Noto Sans Arabic (interface font)",
+      "provider": "The Noto Project Authors (Google Fonts)",
+      "url": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/notosansarabic/NotoSansArabic%5Bwdth,wght%5D.ttf",
+      "license": "SIL Open Font License, Version 1.1. The full licence text is bundled at assets/fonts/NotoSansArabic-OFL.txt.",
+      "terms_url": "https://scripts.sil.org/OFL",
+      "attribution_ar": "حقوق النشر 2022 لمؤلفي مشروع نوتو (https://github.com/notofonts/arabic)، مرخص بموجب رخصة SIL للخطوط المفتوحة، الإصدار 1.1.",
+      "attribution_en": "Copyright 2022 The Noto Project Authors (https://github.com/notofonts/arabic). Licensed under the SIL Open Font License, Version 1.1.",
+      "asset_path": "assets/fonts/NotoSansArabic-Variable.ttf",
+      "sha256": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+      "runtime_hosts": [],
+      "verified": false,
+      "notes": "Variable font (axes wght 100 to 900 and wdth 62.5 to 100) covering Arabic and Latin, used for all interface text and never for Quran text. Bundled unmodified under the family name NotoSansArabic; renamed from NotoSansArabic[wdth,wght].ttf. Taken from https://github.com/google/fonts, path ofl/notosansarabic/, commit cc39c4c2c304bc368c9b7c311ea2bcc6013299fe; upstream source https://github.com/notofonts/arabic, commit 6c8320740db19efbb3127c3697b0ee5d0fa62319 (NotoSansArabic v2.012). The OFL permits bundling and redistribution with the licence included; verified stays false until the project owner confirms the entry."
     }
   ]
 }
