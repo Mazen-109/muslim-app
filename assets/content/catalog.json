@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-11-18T00:00:00Z",
+  "surah_stories": [
+    {
+      "id": "surah-078",
+      "surah": 78,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-079",
+      "surah": 79,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-080",
+      "surah": 80,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-081",
+      "surah": 81,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-082",
+      "surah": 82,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-083",
+      "surah": 83,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-084",
+      "surah": 84,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-085",
+      "surah": 85,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-086",
+      "surah": 86,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-087",
+      "surah": 87,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-088",
+      "surah": 88,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-089",
+      "surah": 89,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-090",
+      "surah": 90,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-091",
+      "surah": 91,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-092",
+      "surah": 92,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-093",
+      "surah": 93,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-094",
+      "surah": 94,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-095",
+      "surah": 95,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-096",
+      "surah": 96,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-097",
+      "surah": 97,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-098",
+      "surah": 98,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-099",
+      "surah": 99,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-100",
+      "surah": 100,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-101",
+      "surah": 101,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-102",
+      "surah": 102,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-103",
+      "surah": 103,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-104",
+      "surah": 104,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-105",
+      "surah": 105,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-106",
+      "surah": 106,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-107",
+      "surah": 107,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-108",
+      "surah": 108,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-109",
+      "surah": 109,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-110",
+      "surah": 110,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-111",
+      "surah": 111,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-112",
+      "surah": 112,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-113",
+      "surah": 113,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    },
+    {
+      "id": "surah-114",
+      "surah": 114,
+      "review": {
+        "status": "planned"
+      },
+      "no_prophet_depiction": false
+    }
+  ],
+  "prophet_series": [
+    {
+      "id": "prophet-adam",
+      "order": 1,
+      "name_ar": "آدم",
+      "name_en": "Adam",
+      "episodes": []
+    },
+    {
+      "id": "prophet-nuh",
+      "order": 2,
+      "name_ar": "نوح",
+      "name_en": "Nuh",
+      "episodes": []
+    },
+    {
+      "id": "prophet-ibrahim",
+      "order": 3,
+      "name_ar": "إبراهيم",
+      "name_en": "Ibrahim",
+      "episodes": []
+    },
+    {
+      "id": "prophet-yusuf",
+      "order": 4,
+      "name_ar": "يوسف",
+      "name_en": "Yusuf",
+      "episodes": []
+    },
+    {
+      "id": "prophet-musa",
+      "order": 5,
+      "name_ar": "موسى",
+      "name_en": "Musa",
+      "episodes": []
+    }
+  ]
+}
