@@ -164,6 +164,114 @@ abstract class AppLocalizations {
   /// **'المصادر'**
   String get screenSources;
 
+  /// Settings section head: theme and interface language.
+  ///
+  /// In ar, this message translates to:
+  /// **'المظهر'**
+  String get settingsSectionAppearance;
+
+  /// Settings: label of the theme picker.
+  ///
+  /// In ar, this message translates to:
+  /// **'السمة'**
+  String get settingsTheme;
+
+  /// Theme name: the light theme.
+  ///
+  /// In ar, this message translates to:
+  /// **'فاتح'**
+  String get themeLight;
+
+  /// Theme name: the night theme, for reading in the dark.
+  ///
+  /// In ar, this message translates to:
+  /// **'ليلي'**
+  String get themeNight;
+
+  /// Theme name: black text on white, with no colour.
+  ///
+  /// In ar, this message translates to:
+  /// **'أسود على أبيض'**
+  String get themeBlackOnWhite;
+
+  /// Theme name: white text on true black, with no colour.
+  ///
+  /// In ar, this message translates to:
+  /// **'أبيض على أسود'**
+  String get themeWhiteOnBlack;
+
+  /// Settings: label of the interface language choice.
+  ///
+  /// In ar, this message translates to:
+  /// **'لغة الواجهة'**
+  String get settingsLanguage;
+
+  /// The Arabic language, written in Arabic in every locale.
+  ///
+  /// In ar, this message translates to:
+  /// **'العربية'**
+  String get languageArabic;
+
+  /// The English language, written in English in every locale.
+  ///
+  /// In ar, this message translates to:
+  /// **'English'**
+  String get languageEnglish;
+
+  /// Settings section head: text size and the default reciter.
+  ///
+  /// In ar, this message translates to:
+  /// **'القراءة والاستماع'**
+  String get settingsSectionReading;
+
+  /// Settings: title of the continuous view text size control.
+  ///
+  /// In ar, this message translates to:
+  /// **'حجم الخط في العرض المتصل'**
+  String get settingsTextSize;
+
+  /// Settings: the default reciter row, and the title of the sheet that chooses it.
+  ///
+  /// In ar, this message translates to:
+  /// **'القارئ الافتراضي'**
+  String get settingsReciter;
+
+  /// A reciter's name followed by the recitation style.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} · {style}'**
+  String reciterWithStyle(String name, String style);
+
+  /// Settings section head: story video options.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفيديو'**
+  String get settingsSectionVideo;
+
+  /// Settings switch: show story videos in greys.
+  ///
+  /// In ar, this message translates to:
+  /// **'فيديو بالأبيض والأسود'**
+  String get settingsVideoGrayscale;
+
+  /// Explains the black and white video switch.
+  ///
+  /// In ar, this message translates to:
+  /// **'عند إيقافه تبقى ألوان الفيديو كما هي في كل السمات.'**
+  String get settingsVideoGrayscaleHint;
+
+  /// Settings section head: the sources page.
+  ///
+  /// In ar, this message translates to:
+  /// **'عن التطبيق'**
+  String get settingsSectionAbout;
+
+  /// Subtitle of the settings row that opens the sources page.
+  ///
+  /// In ar, this message translates to:
+  /// **'مصادر النص والتفسير والتلاوات وتراخيصها'**
+  String get settingsSourcesHint;
+
   /// Shown on a screen that a later version fills in.
   ///
   /// In ar, this message translates to:

@@ -15,6 +15,7 @@ import '../settings/settings_providers.dart';
 import '../widgets/app_scaffold.dart';
 import 'placeholder_screens.dart';
 import '../../features/index/index_screen.dart';
+import '../../features/settings/settings_screen.dart';
 
 /// Paths and builders of the routes in `contracts/routes.md`.
 abstract final class AppRoutes {
@@ -219,7 +220,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: <RouteBase>[
               GoRoute(
                 path: AppRoutes.settings,
-                builder: (context, state) => const SettingsPlaceholder(),
+                builder: (context, state) => const SettingsScreen(),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'sources',

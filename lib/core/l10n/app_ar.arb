@@ -44,6 +44,86 @@
   "@screenSources": {
     "description": "Screen title of the sources page, and the settings row that opens it."
   },
+  "settingsSectionAppearance": "المظهر",
+  "@settingsSectionAppearance": {
+    "description": "Settings section head: theme and interface language."
+  },
+  "settingsTheme": "السمة",
+  "@settingsTheme": {
+    "description": "Settings: label of the theme picker."
+  },
+  "themeLight": "فاتح",
+  "@themeLight": {
+    "description": "Theme name: the light theme."
+  },
+  "themeNight": "ليلي",
+  "@themeNight": {
+    "description": "Theme name: the night theme, for reading in the dark."
+  },
+  "themeBlackOnWhite": "أسود على أبيض",
+  "@themeBlackOnWhite": {
+    "description": "Theme name: black text on white, with no colour."
+  },
+  "themeWhiteOnBlack": "أبيض على أسود",
+  "@themeWhiteOnBlack": {
+    "description": "Theme name: white text on true black, with no colour."
+  },
+  "settingsLanguage": "لغة الواجهة",
+  "@settingsLanguage": {
+    "description": "Settings: label of the interface language choice."
+  },
+  "languageArabic": "العربية",
+  "@languageArabic": {
+    "description": "The Arabic language, written in Arabic in every locale."
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "The English language, written in English in every locale."
+  },
+  "settingsSectionReading": "القراءة والاستماع",
+  "@settingsSectionReading": {
+    "description": "Settings section head: text size and the default reciter."
+  },
+  "settingsTextSize": "حجم الخط في العرض المتصل",
+  "@settingsTextSize": {
+    "description": "Settings: title of the continuous view text size control."
+  },
+  "settingsReciter": "القارئ الافتراضي",
+  "@settingsReciter": {
+    "description": "Settings: the default reciter row, and the title of the sheet that chooses it."
+  },
+  "reciterWithStyle": "{name} · {style}",
+  "@reciterWithStyle": {
+    "description": "A reciter's name followed by the recitation style.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "style": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSectionVideo": "الفيديو",
+  "@settingsSectionVideo": {
+    "description": "Settings section head: story video options."
+  },
+  "settingsVideoGrayscale": "فيديو بالأبيض والأسود",
+  "@settingsVideoGrayscale": {
+    "description": "Settings switch: show story videos in greys."
+  },
+  "settingsVideoGrayscaleHint": "عند إيقافه تبقى ألوان الفيديو كما هي في كل السمات.",
+  "@settingsVideoGrayscaleHint": {
+    "description": "Explains the black and white video switch."
+  },
+  "settingsSectionAbout": "عن التطبيق",
+  "@settingsSectionAbout": {
+    "description": "Settings section head: the sources page."
+  },
+  "settingsSourcesHint": "مصادر النص والتفسير والتلاوات وتراخيصها",
+  "@settingsSourcesHint": {
+    "description": "Subtitle of the settings row that opens the sources page."
+  },
   "placeholderMessage": "هذه الشاشة قيد الإعداد.",
   "@placeholderMessage": {
     "description": "Shown on a screen that a later version fills in."

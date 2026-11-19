@@ -43,6 +43,64 @@ class AppLocalizationsEn extends AppLocalizations {
   String get screenSources => 'Sources';
 
   @override
+  String get settingsSectionAppearance => 'Appearance';
+
+  @override
+  String get settingsTheme => 'Theme';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeNight => 'Night';
+
+  @override
+  String get themeBlackOnWhite => 'Black on white';
+
+  @override
+  String get themeWhiteOnBlack => 'White on black';
+
+  @override
+  String get settingsLanguage => 'Interface language';
+
+  @override
+  String get languageArabic => 'العربية';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get settingsSectionReading => 'Reading and listening';
+
+  @override
+  String get settingsTextSize => 'Continuous view text size';
+
+  @override
+  String get settingsReciter => 'Default reciter';
+
+  @override
+  String reciterWithStyle(String name, String style) {
+    return '$name · $style';
+  }
+
+  @override
+  String get settingsSectionVideo => 'Video';
+
+  @override
+  String get settingsVideoGrayscale => 'Black and white videos';
+
+  @override
+  String get settingsVideoGrayscaleHint =>
+      'When this is off, videos keep their colours in every theme.';
+
+  @override
+  String get settingsSectionAbout => 'About';
+
+  @override
+  String get settingsSourcesHint =>
+      'Where the text, tafsir and recitations come from, and their licences';
+
+  @override
   String get placeholderMessage => 'This screen is not ready yet.';
 
   @override

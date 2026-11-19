@@ -365,7 +365,7 @@ three (quickstart scenario 9).
 **Independent Test**: switch through all four themes and check each main screen (quickstart
 scenario 11).
 
-- [ ] T020 [US7] Build the settings screen and theme picker in `lib/features/settings/`
+- [x] T020 [US7] Build the settings screen and theme picker in `lib/features/settings/`
   (`settings_screen.dart`, `theme_picker.dart`) with `test/features/settings/settings_test.dart`
   and goldens under `test/goldens/themes/`
   - Settings: theme (four options with a live preview swatch), interface language (Arabic or
