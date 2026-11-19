@@ -95,7 +95,12 @@ Future<void> _run(
         surah: quran.surah(ref.surah),
         l10n: AppLocalizations.of(context),
       );
-      await container.read(sharePortProvider).shareText(text);
+      // The reader's area anchors the share popover on iPad.
+      final box = context.findRenderObject() as RenderBox?;
+      final origin = box != null && box.hasSize
+          ? box.localToGlobal(Offset.zero) & box.size
+          : null;
+      await container.read(sharePortProvider).shareText(text, origin: origin);
     case AyahAction.report:
       await container.read(ayahErrorReporterProvider)?.call(context, ayahId);
     case AyahAction.bookmark:

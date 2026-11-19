@@ -47,9 +47,13 @@ const Size phone = Size(400, 800);
 /// Records the text handed to the share sheet.
 class _FakeSharePort implements SharePort {
   final List<String> shared = <String>[];
+  final List<Rect?> origins = <Rect?>[];
 
   @override
-  Future<void> shareText(String text) async => shared.add(text);
+  Future<void> shareText(String text, {Rect? origin}) async {
+    shared.add(text);
+    origins.add(origin);
+  }
 }
 
 /// A catalog with a playable story for [surah] only; structure, no content.
@@ -457,6 +461,9 @@ void main() {
           l10n: ar,
         ),
       ]);
+      // A non-empty anchor for the iPad share popover.
+      expect(share.origins.single, isNotNull);
+      expect(share.origins.single!.isEmpty, isFalse);
     });
 
     testWidgets('Report an error is listed last when a reporter is provided, '

@@ -29,7 +29,9 @@ String formatAyahShareText({
 /// Hands text to the system share sheet. Tests override [sharePortProvider]
 /// with a fake that records what was shared.
 abstract interface class SharePort {
-  Future<void> shareText(String text);
+  /// Shares [text]. [origin] is the area, in global coordinates, that the
+  /// share sheet points at where it is a popover (iPad).
+  Future<void> shareText(String text, {Rect? origin});
 }
 
 /// The system share sheet through `share_plus`.
@@ -37,8 +39,10 @@ class SystemSharePort implements SharePort {
   const SystemSharePort();
 
   @override
-  Future<void> shareText(String text) async {
-    await SharePlus.instance.share(ShareParams(text: text));
+  Future<void> shareText(String text, {Rect? origin}) async {
+    await SharePlus.instance.share(
+      ShareParams(text: text, sharePositionOrigin: origin),
+    );
   }
 }
 
