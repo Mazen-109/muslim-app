@@ -180,7 +180,7 @@ reopen the app, and land on the same ayah (quickstart scenarios 1 to 4).
   - Tapping a row navigates to `/mushaf` at that surah's or juz's first ayah.
   - Tests: 114 and 30 rows from the real database; row content for the first and last surah
     by id; navigation target; a golden.
-- [ ] T011 [US1] Build the Mushaf page view in `lib/features/mushaf/` (`reader_screen.dart`,
+- [x] T011 [US1] Build the Mushaf page view in `lib/features/mushaf/` (`reader_screen.dart`,
   `reader_controller.dart`, `page_view/mushaf_page_view.dart`,
   `page_view/mushaf_page_widget.dart`, `page_view/page_line_widgets.dart`) with tests under
   `test/features/mushaf/` and goldens under `test/goldens/mushaf/`

@@ -62,6 +62,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retry => 'Try again';
 
   @override
+  String mushafHeadSurah(String name) {
+    return 'Surah $name';
+  }
+
+  @override
+  String mushafHeadJuz(int juz) {
+    return 'Juz $juz';
+  }
+
+  @override
+  String mushafPageNumber(int page) {
+    return 'Page $page';
+  }
+
+  @override
+  String get mushafFontErrorTitle => 'The Mushaf font could not be loaded';
+
+  @override
+  String get mushafFontErrorMessage =>
+      'The Mushaf is never shown in a substitute font. Reinstall the app to fix this.';
+
+  @override
+  String get mushafDataErrorMessage => 'The Mushaf data could not be opened.';
+
+  @override
   String get invalidLink =>
       'That place in the Mushaf could not be opened, so the index is shown.';
 
