@@ -15,6 +15,7 @@ class AppScaffold extends StatelessWidget {
     required this.title,
     required this.body,
     this.actions = const <Widget>[],
+    this.bottom,
   });
 
   final String title;
@@ -23,10 +24,13 @@ class AppScaffold extends StatelessWidget {
   /// App bar actions. Each needs a tooltip, which is its screen reader label.
   final List<Widget> actions;
 
+  /// An optional widget under the app bar's title row, such as a [TabBar].
+  final PreferredSizeWidget? bottom;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title), actions: actions),
+      appBar: AppBar(title: Text(title), actions: actions, bottom: bottom),
       body: SafeArea(top: false, bottom: false, child: body),
     );
   }
