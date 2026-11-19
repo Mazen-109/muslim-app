@@ -342,7 +342,7 @@ three (quickstart scenario 9).
 **Independent Test**: offline, search a common word without diacritics and open a result
 (quickstart scenario 10).
 
-- [ ] T019 [US6] Build search in `lib/features/search/` (`search_screen.dart`,
+- [x] T019 [US6] Build search in `lib/features/search/` (`search_screen.dart`,
   `search_controller.dart`, `query_folding.dart`) and `lib/data/quran_repository.dart` with
   `test/features/search/search_test.dart`
   - `foldQuery` applies the same folding rule as the import tool (research R9); the rule
