@@ -192,6 +192,42 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get searchFieldHint => 'Type a word or phrase';
+
+  @override
+  String get searchClear => 'Clear search';
+
+  @override
+  String get searchStartTitle => 'Search the Quran';
+
+  @override
+  String get searchStartMessage =>
+      'Type at least two letters. Diacritics are optional, and the forms of hamza, alef maqsura and taa marbuta do not change the results.';
+
+  @override
+  String get searchNoResultsTitle => 'Nothing found';
+
+  @override
+  String get searchNoResultsMessage =>
+      'Check the spelling or try another word.';
+
+  @override
+  String searchResultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results',
+      one: '1 result',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchResultPlace(String surah, int ayah) {
+    return '$surah, ayah $ayah';
+  }
+
+  @override
   String tafsirSheetTitle(String surah, int ayah) {
     return '$surah, ayah $ayah';
   }

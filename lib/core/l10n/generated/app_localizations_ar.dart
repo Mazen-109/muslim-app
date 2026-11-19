@@ -193,6 +193,44 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get searchFieldHint => 'اكتب كلمة أو عبارة';
+
+  @override
+  String get searchClear => 'مسح البحث';
+
+  @override
+  String get searchStartTitle => 'ابحث في القرآن الكريم';
+
+  @override
+  String get searchStartMessage =>
+      'اكتب حرفين على الأقل. لا يلزم التشكيل، ولا يؤثر شكل الهمزة أو الألف المقصورة أو التاء المربوطة في النتائج.';
+
+  @override
+  String get searchNoResultsTitle => 'لم يُعثر على نتائج';
+
+  @override
+  String get searchNoResultsMessage => 'تحقّق من الكتابة أو جرّب كلمة أخرى.';
+
+  @override
+  String searchResultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نتيجة',
+      many: '$count نتيجة',
+      few: '$count نتائج',
+      two: 'نتيجتان',
+      one: 'نتيجة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchResultPlace(String surah, int ayah) {
+    return '$surah، الآية $ayah';
+  }
+
+  @override
   String tafsirSheetTitle(String surah, int ayah) {
     return '$surah، الآية $ayah';
   }

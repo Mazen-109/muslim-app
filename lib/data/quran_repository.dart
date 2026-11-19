@@ -53,6 +53,7 @@ class QuranRepository {
       throw const QuranDatabaseException('Ayah 1:1 has no words');
     }
     _pageWords = _db.prepare(pageWordsSql);
+    _searchAyahs = _db.prepare(searchAyahsSql);
   }
 
   final Database _db;
@@ -61,6 +62,7 @@ class QuranRepository {
   late final List<int> _firstAyahIds;
   late final List<Word> _basmalaWords;
   late final PreparedStatement _pageWords;
+  late final PreparedStatement _searchAyahs;
 
   /// `ayahCounts[s - 1]` is the ayah count of surah `s`, from the database.
   late final List<int> ayahCounts;
@@ -222,6 +224,48 @@ class QuranRepository {
     return MushafPage(number, lines);
   }
 
+  /// The fewest letters a search query needs; shorter queries match nothing
+  /// (tasks.md, T019).
+  static const int minSearchLetters = 2;
+
+  /// Whether [foldedQuery] has at least [minSearchLetters] letters, counting
+  /// every code point that is not white space.
+  static bool isSearchable(String foldedQuery) =>
+      foldedQuery.replaceAll(_whitespace, '').runes.length >= minSearchLetters;
+
+  static final RegExp _whitespace = RegExp(r'\s+');
+
+  /// The ayahs whose `text_search_folded` contains [foldedQuery], in Mushaf
+  /// order (research R9).
+  ///
+  /// [foldedQuery] must already be folded with `foldQuery`; this method does
+  /// not fold it again. It is matched as a substring with `LIKE`, with `%`,
+  /// `_` and the escape character itself escaped, so they match only
+  /// themselves. A query that is not [isSearchable] matches nothing.
+  AyahSearchResult searchAyahs(String foldedQuery) {
+    if (!isSearchable(foldedQuery)) {
+      return AyahSearchResult(foldedQuery, const <int>[]);
+    }
+    final ids = _searchAyahs
+        .select(<Object?>['%${escapeLike(foldedQuery)}%'])
+        .map((r) => r['id'] as int);
+    return AyahSearchResult(foldedQuery, List<int>.unmodifiable(ids));
+  }
+
+  /// The search query. The folded column is never selected for display.
+  @visibleForTesting
+  static const String searchAyahsSql =
+      r"SELECT id FROM ayahs WHERE text_search_folded LIKE ? ESCAPE '\' "
+      'ORDER BY id';
+
+  /// [text] with the `LIKE` wildcards `%` and `_` and the escape character
+  /// `\` escaped, for use with `ESCAPE '\'`.
+  @visibleForTesting
+  static String escapeLike(String text) =>
+      text.replaceAllMapped(_likeSpecial, (m) => '\\${m[0]}');
+
+  static final RegExp _likeSpecial = RegExp(r'[\\%_]');
+
   void _checkAyahId(int id) =>
       RangeError.checkValueInInterval(id, 1, ayahTotal, 'ayahId');
 
@@ -266,8 +310,39 @@ class QuranRepository {
     line: r['line'] as int,
   );
 
-  /// Releases the prepared statement. The database stays open.
-  void dispose() => _pageWords.close();
+  /// Releases the prepared statements. The database stays open.
+  void dispose() {
+    _pageWords.close();
+    _searchAyahs.close();
+  }
+}
+
+/// The result of [QuranRepository.searchAyahs]: the ids of the matching
+/// ayahs in Mushaf order. Rows are loaded by id when they are shown.
+@immutable
+class AyahSearchResult {
+  const AyahSearchResult(this.foldedQuery, this.ayahIds);
+
+  /// The folded query that was matched.
+  final String foldedQuery;
+
+  /// The matching ayah ids (1 to 6236), ascending.
+  final List<int> ayahIds;
+
+  /// The number of matching ayahs.
+  int get total => ayahIds.length;
+
+  @override
+  bool operator ==(Object other) =>
+      other is AyahSearchResult &&
+      other.foldedQuery == foldedQuery &&
+      listEquals(other.ayahIds, ayahIds);
+
+  @override
+  int get hashCode => Object.hash(foldedQuery, Object.hashAll(ayahIds));
+
+  @override
+  String toString() => 'AyahSearchResult("$foldedQuery", $total ayahs)';
 }
 
 /// The Quran repository over the installed content database.

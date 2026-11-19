@@ -27,15 +27,6 @@ class _Placeholder extends StatelessWidget {
   }
 }
 
-/// `/search`.
-class SearchPlaceholder extends StatelessWidget {
-  const SearchPlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context) =>
-      _Placeholder(title: (l10n) => l10n.screenSearch);
-}
-
 /// `/bookmarks`.
 class BookmarksPlaceholder extends StatelessWidget {
   const BookmarksPlaceholder({super.key});

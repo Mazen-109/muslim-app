@@ -404,6 +404,54 @@ abstract class AppLocalizations {
   /// **'من {surah}، الآية {ayah}'**
   String juzStart(String surah, int ayah);
 
+  /// Hint inside the empty search field.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب كلمة أو عبارة'**
+  String get searchFieldHint;
+
+  /// Tooltip and screen reader label of the button that empties the search field.
+  ///
+  /// In ar, this message translates to:
+  /// **'مسح البحث'**
+  String get searchClear;
+
+  /// Heading of the search screen before the reader has typed at least two letters.
+  ///
+  /// In ar, this message translates to:
+  /// **'ابحث في القرآن الكريم'**
+  String get searchStartTitle;
+
+  /// Body of the search screen's starting state: at least two letters are needed, and diacritics and the forms of hamza, alef maqsura and taa marbuta do not change the results.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتب حرفين على الأقل. لا يلزم التشكيل، ولا يؤثر شكل الهمزة أو الألف المقصورة أو التاء المربوطة في النتائج.'**
+  String get searchStartMessage;
+
+  /// Heading shown when no ayah matches the query.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يُعثر على نتائج'**
+  String get searchNoResultsTitle;
+
+  /// Body shown when no ayah matches the query.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحقّق من الكتابة أو جرّب كلمة أخرى.'**
+  String get searchNoResultsMessage;
+
+  /// The number of ayahs that match the query, above the results.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}'**
+  String searchResultCount(int count);
+
+  /// Heading of one search result: the surah name (from the content database) and the ayah number.
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، الآية {ayah}'**
+  String searchResultPlace(String surah, int ayah);
+
   /// Heading of the tafsir sheet: the surah name (from the content database) and the number of the ayah shown.
   ///
   /// In ar, this message translates to:

@@ -1,8 +1,9 @@
 /// Table rows of `quran.db` and their assembly from parsed API records.
 library;
 
+import 'package:search_folding/search_folding.dart';
+
 import 'errors.dart';
-import 'folding.dart';
 import 'layout.dart';
 import 'parsers.dart';
 import 'reciters.dart';
