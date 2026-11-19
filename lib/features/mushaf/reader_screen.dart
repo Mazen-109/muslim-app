@@ -8,6 +8,7 @@ import '../../core/settings/settings_repository.dart';
 import '../../core/widgets/app_scaffold.dart';
 import '../../core/widgets/state_views.dart';
 import '../../data/quran_repository.dart';
+import '../audio/player_bar.dart';
 import '../tafsir/tafsir_sheet.dart';
 import 'continuous/continuous_view.dart';
 import 'continuous/text_size_sheet.dart';
@@ -135,8 +136,9 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
               .read(readerControllerProvider.notifier)
               .setMode(continuous ? ReadingMode.pages : ReadingMode.continuous),
         ),
+        const PlayFromHereButton(),
       ],
-      body: body,
+      body: ReaderPlayback(child: body),
     );
   }
 }

@@ -158,6 +158,52 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tafsirMissing => 'No tafsir is available for this ayah.';
 
   @override
+  String get playerPlayFromHere => 'Listen from this ayah';
+
+  @override
+  String get playerPlay => 'Play';
+
+  @override
+  String get playerPause => 'Pause';
+
+  @override
+  String get playerPreviousAyah => 'Previous ayah';
+
+  @override
+  String get playerNextAyah => 'Next ayah';
+
+  @override
+  String get playerStop => 'Stop recitation';
+
+  @override
+  String playerPosition(String surah, int ayah) {
+    return '$surah, ayah $ayah';
+  }
+
+  @override
+  String playerRepeatsLeft(int count) {
+    return '$count left';
+  }
+
+  @override
+  String get playerOfflineMessage => 'Recitation needs a connection.';
+
+  @override
+  String get playerChooseReciter => 'Choose reciter';
+
+  @override
+  String get reciterPickerTitle => 'Reciter';
+
+  @override
+  String get reciterStyleMurattal => 'Murattal';
+
+  @override
+  String get reciterStyleMujawwad => 'Mujawwad';
+
+  @override
+  String get reciterStyleMuallim => 'Teaching (Mu\'allim)';
+
+  @override
   String get readerShowContinuous => 'Continuous view';
 
   @override
