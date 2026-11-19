@@ -43,6 +43,72 @@ class AppLocalizationsAr extends AppLocalizations {
   String get screenSources => 'المصادر';
 
   @override
+  String get settingsSectionAppearance => 'المظهر';
+
+  @override
+  String get settingsTheme => 'السمة';
+
+  @override
+  String get themeLight => 'فاتح';
+
+  @override
+  String get themeNight => 'ليلي';
+
+  @override
+  String get themeBlackOnWhite => 'أسود على أبيض';
+
+  @override
+  String get themeWhiteOnBlack => 'أبيض على أسود';
+
+  @override
+  String get settingsLanguage => 'لغة الواجهة';
+
+  @override
+  String get languageArabic => 'العربية';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get settingsSectionReading => 'القراءة والاستماع';
+
+  @override
+  String get settingsTextSize => 'حجم الخط في العرض المتصل';
+
+  @override
+  String get settingsReciter => 'القارئ الافتراضي';
+
+  @override
+  String get reciterStyleMurattal => 'مرتل';
+
+  @override
+  String get reciterStyleMujawwad => 'مجود';
+
+  @override
+  String get reciterStyleMuallim => 'معلم';
+
+  @override
+  String reciterWithStyle(String name, String style) {
+    return '$name · $style';
+  }
+
+  @override
+  String get settingsSectionVideo => 'الفيديو';
+
+  @override
+  String get settingsVideoGrayscale => 'فيديو بالأبيض والأسود';
+
+  @override
+  String get settingsVideoGrayscaleHint =>
+      'عند إيقافه تبقى ألوان الفيديو كما هي في كل السمات.';
+
+  @override
+  String get settingsSectionAbout => 'عن التطبيق';
+
+  @override
+  String get settingsSourcesHint => 'مصادر النص والتفسير والتلاوات وتراخيصها';
+
+  @override
   String get placeholderMessage => 'هذه الشاشة قيد الإعداد.';
 
   @override
