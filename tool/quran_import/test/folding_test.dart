@@ -1,9 +1,17 @@
 import 'package:quran_import/quran_import.dart';
 import 'package:test/test.dart';
 
-// Vectors are synthetic sequences of code points written as escapes. They
-// are not words: the letter U+0628 stands in for "any base letter".
+// The folding rule (research R9) as the import applies it. The rule itself
+// lives in packages/search_folding, shared with the app's query folding.
 void main() {
+  // BEGIN shared folding vectors
+  //
+  // These vectors are identical in tool/quran_import/test/folding_test.dart
+  // and test/features/search/search_test.dart, which checks that the two
+  // copies match. The first group are synthetic code point sequences: the
+  // letter U+0628 stands in for "any base letter". The second group are
+  // ordinary modern Arabic words chosen for their letters; none is Quran
+  // text.
   const b = '\u0628';
 
   final vectors = <String, (String, String)>{
@@ -25,7 +33,22 @@ void main() {
     ),
     'spaces and latin kept': ('a  b 12', 'a  b 12'),
     'empty': ('', ''),
+    'diacritics on a word removed': ('مُهَنْدِسٌ', 'مهندس'),
+    'shadda removed and taa marbuta to heh in a word': ('مُدَرِّسَة', 'مدرسه'),
+    'alef with hamza above to alef in a word': ('أستاذ', 'استاذ'),
+    'alef with hamza below to alef in a word': ('إنترنت', 'انترنت'),
+    'alef with madda to alef in a word': ('آلة', 'اله'),
+    'alef wasla to alef in a word': ('ٱلحاسوب', 'الحاسوب'),
+    'alef maqsura to yeh in a word': ('مستشفى', 'مستشفي'),
+    'tatweel removed in a word': ('حاســوب', 'حاسوب'),
+    'superscript alef removed in a word': ('هٰكذا', 'هكذا'),
+    'hamza on waw and on yeh kept in words': ('مسؤول رئيس', 'مسؤول رئيس'),
+    'a phrase with diacritics and taa marbuta': (
+      'مَكْتَبَةُ الجامِعَةِ',
+      'مكتبه الجامعه',
+    ),
   };
+  // END shared folding vectors
 
   for (final MapEntry(key: name, value: (input, expected)) in vectors.entries) {
     test(name, () => expect(foldArabic(input), expected));

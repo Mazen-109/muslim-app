@@ -186,6 +186,9 @@ columns, recorded in `assets/data/manifest.json` and re-computed in tests.
 the *query*: strip diacritics and tatweel, fold alef forms to bare alef, alef maqsura to yaa,
 taa marbuta to haa, and apply the same folding to `text_search` at import time into a
 `text_search_folded` column so both sides match. Results display the canonical text.
+The rule is one function, `foldArabic` in the local package `packages/search_folding/`, which
+both `tool/quran_import` and the app's `foldQuery` depend on by path, so the two sides cannot
+drift; both sides' tests run the same vectors.
 
 **Rationale**: 6236 short rows scan in a few milliseconds; FTS tokenisation handles Arabic
 prefixes poorly and would miss matches inside words. The folded column is derived from a
