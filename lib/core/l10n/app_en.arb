@@ -32,5 +32,11 @@
   "surahDetails": "{place} · {ayahs}",
   "pageNumber": "Page {page}",
   "juzTitle": "Juz {number}",
-  "juzStart": "From {surah}, ayah {ayah}"
+  "juzStart": "From {surah}, ayah {ayah}",
+  "tafsirSheetTitle": "{surah}, ayah {ayah}",
+  "tafsirPreviousAyah": "Previous ayah",
+  "tafsirNextAyah": "Next ayah",
+  "tafsirSource": "{name} · {author}",
+  "tafsirCoversRange": "This passage explains ayahs {from} to {to} together",
+  "tafsirMissing": "No tafsir is available for this ayah."
 }

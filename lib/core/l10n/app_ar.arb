@@ -180,5 +180,55 @@
         "type": "int"
       }
     }
+  },
+  "tafsirSheetTitle": "{surah}، الآية {ayah}",
+  "@tafsirSheetTitle": {
+    "description": "Heading of the tafsir sheet: the surah name (from the content database) and the number of the ayah shown.",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "tafsirPreviousAyah": "الآية السابقة",
+  "@tafsirPreviousAyah": {
+    "description": "Tooltip and screen reader label of the tafsir sheet button that shows the previous ayah's tafsir."
+  },
+  "tafsirNextAyah": "الآية التالية",
+  "@tafsirNextAyah": {
+    "description": "Tooltip and screen reader label of the tafsir sheet button that shows the next ayah's tafsir."
+  },
+  "tafsirSource": "{name} · {author}",
+  "@tafsirSource": {
+    "description": "Attribution line of the tafsir sheet: the tafsir's name and its author, both from the content database.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "author": {
+        "type": "String"
+      }
+    }
+  },
+  "tafsirCoversRange": "يشرح هذا الموضع الآيات من {from} إلى {to} معًا",
+  "@tafsirCoversRange": {
+    "description": "Shown when one tafsir entry explains several consecutive ayahs together. from and to are ayah keys such as 4:66 and 4:68.",
+    "placeholders": {
+      "from": {
+        "type": "String",
+        "example": "4:66"
+      },
+      "to": {
+        "type": "String",
+        "example": "4:68"
+      }
+    }
+  },
+  "tafsirMissing": "لا يتوفر تفسير لهذه الآية.",
+  "@tafsirMissing": {
+    "description": "Shown in the tafsir sheet when the content database has no tafsir text for the ayah."
   }
 }
