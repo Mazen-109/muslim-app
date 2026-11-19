@@ -46,5 +46,17 @@
   "readerTextLarger": "Larger text",
   "readerTextSizeValue": "{percent}%",
   "continuousPreviousSurah": "Previous surah",
-  "continuousNextSurah": "Next surah"
+  "continuousNextSurah": "Next surah",
+  "readerGoTo": "Go to",
+  "goToByPage": "Page",
+  "goToBySurah": "Surah and ayah",
+  "goToPageLabel": "Page number",
+  "goToSurahLabel": "Surah",
+  "goToAyahLabel": "Ayah number",
+  "goToRange": "1 to {max}",
+  "goToPageOutOfRange": "Enter a page number from 1 to {max}.",
+  "goToAyahOutOfRange": "Enter an ayah number from 1 to {max}, the number of ayahs in this surah.",
+  "goToSurahMissing": "Choose a surah from the list.",
+  "goToSurahOption": "{number}. {name}",
+  "goToSubmit": "Go"
 }

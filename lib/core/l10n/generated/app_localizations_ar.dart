@@ -184,4 +184,48 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get continuousNextSurah => 'السورة التالية';
+
+  @override
+  String get readerGoTo => 'انتقال إلى';
+
+  @override
+  String get goToByPage => 'صفحة';
+
+  @override
+  String get goToBySurah => 'سورة وآية';
+
+  @override
+  String get goToPageLabel => 'رقم الصفحة';
+
+  @override
+  String get goToSurahLabel => 'السورة';
+
+  @override
+  String get goToAyahLabel => 'رقم الآية';
+
+  @override
+  String goToRange(int max) {
+    return 'من 1 إلى $max';
+  }
+
+  @override
+  String goToPageOutOfRange(int max) {
+    return 'أدخل رقم صفحة من 1 إلى $max.';
+  }
+
+  @override
+  String goToAyahOutOfRange(int max) {
+    return 'أدخل رقم آية من 1 إلى $max، فهذا عدد آيات السورة.';
+  }
+
+  @override
+  String get goToSurahMissing => 'اختر سورة من القائمة.';
+
+  @override
+  String goToSurahOption(int number, String name) {
+    return '$number. $name';
+  }
+
+  @override
+  String get goToSubmit => 'انتقال';
 }

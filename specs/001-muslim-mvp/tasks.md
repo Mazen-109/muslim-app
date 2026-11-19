@@ -211,7 +211,7 @@ reopen the app, and land on the same ayah (quickstart scenarios 1 to 4).
   - Scrolling updates the controller's current ayah.
   - Tests: mode switch keeps the ayah (both directions); font scale changes the text size and
     persists; current ayah updates on scroll; a golden.
-- [ ] T013 [US1] Add resume and go-to in `lib/features/mushaf/resume.dart`,
+- [x] T013 [US1] Add resume and go-to in `lib/features/mushaf/resume.dart`,
   `lib/features/mushaf/go_to_sheet.dart`, `lib/core/routing/app_router.dart` with
   `test/features/mushaf/resume_go_to_test.dart`
   - Save `last_ayah_id` as the reader's current ayah changes (debounced) and when the app is

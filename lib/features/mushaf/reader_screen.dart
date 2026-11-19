@@ -11,10 +11,12 @@ import '../../data/quran_repository.dart';
 import '../tafsir/tafsir_sheet.dart';
 import 'continuous/continuous_view.dart';
 import 'continuous/text_size_sheet.dart';
+import 'go_to_sheet.dart';
 import 'page_view/mushaf_page_view.dart';
 import 'page_view/page_line_widgets.dart';
 import 'quran_font_check.dart';
 import 'reader_controller.dart';
+import 'resume.dart';
 
 /// The Mushaf reader at `/mushaf` (contracts/routes.md).
 ///
@@ -57,6 +59,30 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
 
   void _openTafsir(int ayahId) => showTafsirSheet(context, ayahId);
 
+  /// Opens the go-to sheet and moves the reader to the place chosen there,
+  /// through the `/mushaf` route like any other link.
+  Future<void> _goTo() async {
+    final target = await showGoToSheet(
+      context,
+      initialAyahId: ref.read(readerControllerProvider).currentAyahId,
+    );
+    if (target == null || !mounted) return;
+    final location = switch (target) {
+      AyahTarget(:final ref, :final highlight) => AppRoutes.mushafAyah(
+        ref,
+        highlight: highlight,
+      ),
+      PageTarget(:final page) => AppRoutes.mushafPage(page),
+    };
+    if (target == widget.target) {
+      // The route does not change, so the screen is not rebuilt with a new
+      // target: apply it here.
+      ref.read(readerControllerProvider.notifier).open(target);
+    } else {
+      context.go(location);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -94,6 +120,7 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
               onAyahLongPress: widget.onAyahLongPress,
             );
     }
+    final opened = body is MushafPageView;
 
     // The continuous view takes the page view's place, with its callbacks.
     final mode = ref.watch(readerControllerProvider.select((s) => s.mode));
@@ -118,6 +145,12 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
           icon: const Icon(Icons.search),
           onPressed: () => context.go(AppRoutes.search),
         ),
+        IconButton(
+          key: readerGoToKey,
+          tooltip: l10n.readerGoTo,
+          icon: const Icon(Icons.find_in_page_outlined),
+          onPressed: opened ? _goTo : null,
+        ),
         if (continuous)
           IconButton(
             key: readerTextSizeKey,
@@ -136,7 +169,9 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
               .setMode(continuous ? ReadingMode.pages : ReadingMode.continuous),
         ),
       ],
-      body: body,
+      // The last ayah is recorded only once the reader has opened its
+      // target, so the controller's starting position is never saved.
+      body: opened ? ResumeRecorderScope(child: body) : body,
     );
   }
 }
@@ -146,6 +181,9 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
 const ValueKey<String> readerModeToggleKey = ValueKey<String>(
   'reader-mode-toggle',
 );
+
+/// The key of the reader's go-to button.
+const ValueKey<String> readerGoToKey = ValueKey<String>('reader-go-to');
 
 /// The key of the reader's text size button (continuous view only).
 const ValueKey<String> readerTextSizeKey = ValueKey<String>('reader-text-size');
