@@ -331,6 +331,54 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'لا يتوفر تفسير لهذه الآية.'**
   String get tafsirMissing;
+
+  /// Tooltip and screen reader label of the reader button that switches from the page view to the continuous view, where the ayahs of a surah flow as text.
+  ///
+  /// In ar, this message translates to:
+  /// **'العرض المتصل'**
+  String get readerShowContinuous;
+
+  /// Tooltip and screen reader label of the reader button that switches from the continuous view back to the printed-page view.
+  ///
+  /// In ar, this message translates to:
+  /// **'عرض الصفحات'**
+  String get readerShowPages;
+
+  /// Tooltip of the reader button that opens the text size control of the continuous view, and the title of that control's sheet.
+  ///
+  /// In ar, this message translates to:
+  /// **'حجم الخط'**
+  String get readerTextSize;
+
+  /// Screen reader label and tooltip of the button that makes the continuous view's text one step smaller.
+  ///
+  /// In ar, this message translates to:
+  /// **'تصغير الخط'**
+  String get readerTextSmaller;
+
+  /// Screen reader label and tooltip of the button that makes the continuous view's text one step larger.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكبير الخط'**
+  String get readerTextLarger;
+
+  /// The continuous view's text size as a percentage of the default size, shown in the text size sheet.
+  ///
+  /// In ar, this message translates to:
+  /// **'{percent}٪'**
+  String readerTextSizeValue(int percent);
+
+  /// Button at the top of the continuous view that opens the previous surah.
+  ///
+  /// In ar, this message translates to:
+  /// **'السورة السابقة'**
+  String get continuousPreviousSurah;
+
+  /// Button at the end of the continuous view that opens the next surah.
+  ///
+  /// In ar, this message translates to:
+  /// **'السورة التالية'**
+  String get continuousNextSurah;
 }
 
 class _AppLocalizationsDelegate

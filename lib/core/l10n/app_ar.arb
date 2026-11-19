@@ -230,5 +230,42 @@
   "tafsirMissing": "لا يتوفر تفسير لهذه الآية.",
   "@tafsirMissing": {
     "description": "Shown in the tafsir sheet when the content database has no tafsir text for the ayah."
+  },
+  "readerShowContinuous": "العرض المتصل",
+  "@readerShowContinuous": {
+    "description": "Tooltip and screen reader label of the reader button that switches from the page view to the continuous view, where the ayahs of a surah flow as text."
+  },
+  "readerShowPages": "عرض الصفحات",
+  "@readerShowPages": {
+    "description": "Tooltip and screen reader label of the reader button that switches from the continuous view back to the printed-page view."
+  },
+  "readerTextSize": "حجم الخط",
+  "@readerTextSize": {
+    "description": "Tooltip of the reader button that opens the text size control of the continuous view, and the title of that control's sheet."
+  },
+  "readerTextSmaller": "تصغير الخط",
+  "@readerTextSmaller": {
+    "description": "Screen reader label and tooltip of the button that makes the continuous view's text one step smaller."
+  },
+  "readerTextLarger": "تكبير الخط",
+  "@readerTextLarger": {
+    "description": "Screen reader label and tooltip of the button that makes the continuous view's text one step larger."
+  },
+  "readerTextSizeValue": "{percent}٪",
+  "@readerTextSizeValue": {
+    "description": "The continuous view's text size as a percentage of the default size, shown in the text size sheet.",
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "continuousPreviousSurah": "السورة السابقة",
+  "@continuousPreviousSurah": {
+    "description": "Button at the top of the continuous view that opens the previous surah."
+  },
+  "continuousNextSurah": "السورة التالية",
+  "@continuousNextSurah": {
+    "description": "Button at the end of the continuous view that opens the next surah."
   }
 }

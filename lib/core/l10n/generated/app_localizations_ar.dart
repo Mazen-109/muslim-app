@@ -158,4 +158,30 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get tafsirMissing => 'لا يتوفر تفسير لهذه الآية.';
+
+  @override
+  String get readerShowContinuous => 'العرض المتصل';
+
+  @override
+  String get readerShowPages => 'عرض الصفحات';
+
+  @override
+  String get readerTextSize => 'حجم الخط';
+
+  @override
+  String get readerTextSmaller => 'تصغير الخط';
+
+  @override
+  String get readerTextLarger => 'تكبير الخط';
+
+  @override
+  String readerTextSizeValue(int percent) {
+    return '$percent٪';
+  }
+
+  @override
+  String get continuousPreviousSurah => 'السورة السابقة';
+
+  @override
+  String get continuousNextSurah => 'السورة التالية';
 }

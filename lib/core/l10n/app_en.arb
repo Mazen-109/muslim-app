@@ -38,5 +38,13 @@
   "tafsirNextAyah": "Next ayah",
   "tafsirSource": "{name} · {author}",
   "tafsirCoversRange": "This passage explains ayahs {from} to {to} together",
-  "tafsirMissing": "No tafsir is available for this ayah."
+  "tafsirMissing": "No tafsir is available for this ayah.",
+  "readerShowContinuous": "Continuous view",
+  "readerShowPages": "Page view",
+  "readerTextSize": "Text size",
+  "readerTextSmaller": "Smaller text",
+  "readerTextLarger": "Larger text",
+  "readerTextSizeValue": "{percent}%",
+  "continuousPreviousSurah": "Previous surah",
+  "continuousNextSurah": "Next surah"
 }

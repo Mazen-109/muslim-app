@@ -156,4 +156,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tafsirMissing => 'No tafsir is available for this ayah.';
+
+  @override
+  String get readerShowContinuous => 'Continuous view';
+
+  @override
+  String get readerShowPages => 'Page view';
+
+  @override
+  String get readerTextSize => 'Text size';
+
+  @override
+  String get readerTextSmaller => 'Smaller text';
+
+  @override
+  String get readerTextLarger => 'Larger text';
+
+  @override
+  String readerTextSizeValue(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get continuousPreviousSurah => 'Previous surah';
+
+  @override
+  String get continuousNextSurah => 'Next surah';
 }
