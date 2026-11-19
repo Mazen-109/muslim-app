@@ -458,6 +458,90 @@ abstract class AppLocalizations {
   /// **'لا يتوفر تفسير لهذه الآية.'**
   String get tafsirMissing;
 
+  /// Tooltip and screen reader label of the reader's app bar button that starts a recitation from the current ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستماع من هذه الآية'**
+  String get playerPlayFromHere;
+
+  /// Tooltip of the player bar button that resumes a paused recitation.
+  ///
+  /// In ar, this message translates to:
+  /// **'تشغيل'**
+  String get playerPlay;
+
+  /// Tooltip of the player bar button that pauses the recitation.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get playerPause;
+
+  /// Tooltip of the player bar button that moves the recitation to the previous ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية السابقة'**
+  String get playerPreviousAyah;
+
+  /// Tooltip of the player bar button that moves the recitation to the next ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية التالية'**
+  String get playerNextAyah;
+
+  /// Tooltip of the player bar button that ends the recitation and closes the bar.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف التلاوة'**
+  String get playerStop;
+
+  /// The player bar's position line: the surah name (from the content database) and the number of the ayah being recited.
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، الآية {ayah}'**
+  String playerPosition(String surah, int ayah);
+
+  /// In the player bar while one ayah is repeated: how many recitations of it are left, counting the current one.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي {count}'**
+  String playerRepeatsLeft(int count);
+
+  /// Shown in the player bar when the recitation could not be loaded or played, beside the retry button. Reading is not affected.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحتاج التلاوة إلى اتصال بالإنترنت.'**
+  String get playerOfflineMessage;
+
+  /// Screen reader hint of the player bar's reciter name, which opens the reciter list.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار القارئ'**
+  String get playerChooseReciter;
+
+  /// Title of the sheet that lists the reciters.
+  ///
+  /// In ar, this message translates to:
+  /// **'القارئ'**
+  String get reciterPickerTitle;
+
+  /// Recitation style of a reciter: murattal (measured recitation).
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتّل'**
+  String get reciterStyleMurattal;
+
+  /// Recitation style of a reciter: mujawwad (melodic recitation).
+  ///
+  /// In ar, this message translates to:
+  /// **'مجوّد'**
+  String get reciterStyleMujawwad;
+
+  /// Recitation style of a reciter: mu'allim, a teaching recitation for learning pronunciation.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلّم'**
+  String get reciterStyleMuallim;
+
   /// Tooltip and screen reader label of the reader button that switches from the page view to the continuous view, where the ayahs of a surah flow as text.
   ///
   /// In ar, this message translates to:

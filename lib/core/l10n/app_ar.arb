@@ -323,6 +323,75 @@
   "@tafsirMissing": {
     "description": "Shown in the tafsir sheet when the content database has no tafsir text for the ayah."
   },
+  "playerPlayFromHere": "الاستماع من هذه الآية",
+  "@playerPlayFromHere": {
+    "description": "Tooltip and screen reader label of the reader's app bar button that starts a recitation from the current ayah."
+  },
+  "playerPlay": "تشغيل",
+  "@playerPlay": {
+    "description": "Tooltip of the player bar button that resumes a paused recitation."
+  },
+  "playerPause": "إيقاف مؤقت",
+  "@playerPause": {
+    "description": "Tooltip of the player bar button that pauses the recitation."
+  },
+  "playerPreviousAyah": "الآية السابقة",
+  "@playerPreviousAyah": {
+    "description": "Tooltip of the player bar button that moves the recitation to the previous ayah."
+  },
+  "playerNextAyah": "الآية التالية",
+  "@playerNextAyah": {
+    "description": "Tooltip of the player bar button that moves the recitation to the next ayah."
+  },
+  "playerStop": "إيقاف التلاوة",
+  "@playerStop": {
+    "description": "Tooltip of the player bar button that ends the recitation and closes the bar."
+  },
+  "playerPosition": "{surah}، الآية {ayah}",
+  "@playerPosition": {
+    "description": "The player bar's position line: the surah name (from the content database) and the number of the ayah being recited.",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "playerRepeatsLeft": "المتبقي {count}",
+  "@playerRepeatsLeft": {
+    "description": "In the player bar while one ayah is repeated: how many recitations of it are left, counting the current one.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "playerOfflineMessage": "تحتاج التلاوة إلى اتصال بالإنترنت.",
+  "@playerOfflineMessage": {
+    "description": "Shown in the player bar when the recitation could not be loaded or played, beside the retry button. Reading is not affected."
+  },
+  "playerChooseReciter": "اختيار القارئ",
+  "@playerChooseReciter": {
+    "description": "Screen reader hint of the player bar's reciter name, which opens the reciter list."
+  },
+  "reciterPickerTitle": "القارئ",
+  "@reciterPickerTitle": {
+    "description": "Title of the sheet that lists the reciters."
+  },
+  "reciterStyleMurattal": "مرتّل",
+  "@reciterStyleMurattal": {
+    "description": "Recitation style of a reciter: murattal (measured recitation)."
+  },
+  "reciterStyleMujawwad": "مجوّد",
+  "@reciterStyleMujawwad": {
+    "description": "Recitation style of a reciter: mujawwad (melodic recitation)."
+  },
+  "reciterStyleMuallim": "معلّم",
+  "@reciterStyleMuallim": {
+    "description": "Recitation style of a reciter: mu'allim, a teaching recitation for learning pronunciation."
+  },
   "readerShowContinuous": "العرض المتصل",
   "@readerShowContinuous": {
     "description": "Tooltip and screen reader label of the reader button that switches from the page view to the continuous view, where the ayahs of a surah flow as text."

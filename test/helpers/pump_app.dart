@@ -6,15 +6,22 @@ import 'package:muslim/app.dart';
 import 'package:muslim/core/settings/settings_providers.dart';
 import 'package:muslim/data/quran_database.dart';
 import 'package:muslim/data/user_database.dart';
+import 'package:muslim/features/audio/audio_player_port.dart';
+import 'package:muslim/features/audio/recitation_controller.dart';
+import 'package:muslim/features/audio/wake_lock.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'fake_audio.dart';
 import 'quran_database.dart';
 
 /// The overrides every app test needs: mock preferences holding
 /// [preferences] (keys as in `SettingsRepository`), the bundled content
-/// database and an in-memory user database.
+/// database, an in-memory user database, and a silent audio player and wake
+/// lock ([audioPlayer] and [wakeLock] when given, fresh fakes otherwise).
 Future<List<Override>> appTestOverrides({
   Map<String, Object> preferences = const <String, Object>{},
+  AudioPlayerPort? audioPlayer,
+  WakeLock? wakeLock,
 }) async {
   SharedPreferences.setMockInitialValues(preferences);
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -30,15 +37,19 @@ Future<List<Override>> appTestOverrides({
       ref.onDispose(database.close);
       return database;
     }),
+    audioPlayerPortProvider.overrideWithValue(audioPlayer ?? FakeAudioPlayer()),
+    wakeLockProvider.overrideWithValue(wakeLock ?? FakeWakeLock()),
   ];
 }
 
 /// Pumps [MuslimApp] (or [child]) under a [ProviderScope] with
-/// [appTestOverrides] plus [overrides], at [size] logical pixels when given,
-/// and settles. Returns the scope's container.
+/// [appTestOverrides] (with [audioPlayer] and [wakeLock]) plus [overrides],
+/// at [size] logical pixels when given, and settles. Returns the scope's container.
 Future<ProviderContainer> pumpApp(
   WidgetTester tester, {
   Map<String, Object> preferences = const <String, Object>{},
+  AudioPlayerPort? audioPlayer,
+  WakeLock? wakeLock,
   List<Override> overrides = const <Override>[],
   Size? size,
   double devicePixelRatio = 2,
@@ -52,7 +63,11 @@ Future<ProviderContainer> pumpApp(
   await tester.pumpWidget(
     ProviderScope(
       overrides: <Override>[
-        ...await appTestOverrides(preferences: preferences),
+        ...await appTestOverrides(
+          preferences: preferences,
+          audioPlayer: audioPlayer,
+          wakeLock: wakeLock,
+        ),
         ...overrides,
       ],
       child: child,

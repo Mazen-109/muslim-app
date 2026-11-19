@@ -8,6 +8,7 @@ import '../../core/settings/settings_repository.dart';
 import '../../core/widgets/app_scaffold.dart';
 import '../../core/widgets/state_views.dart';
 import '../../data/quran_repository.dart';
+import '../audio/player_bar.dart';
 import '../tafsir/tafsir_sheet.dart';
 import 'continuous/continuous_view.dart';
 import 'continuous/text_size_sheet.dart';
@@ -146,19 +147,6 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
           onPressed: () => context.go(AppRoutes.search),
         ),
         IconButton(
-          key: readerGoToKey,
-          tooltip: l10n.readerGoTo,
-          icon: const Icon(Icons.find_in_page_outlined),
-          onPressed: opened ? _goTo : null,
-        ),
-        if (continuous)
-          IconButton(
-            key: readerTextSizeKey,
-            tooltip: l10n.readerTextSize,
-            icon: const Icon(Icons.format_size),
-            onPressed: () => showTextSizeSheet(context),
-          ),
-        IconButton(
           key: readerModeToggleKey,
           tooltip: continuous
               ? l10n.readerShowPages
@@ -168,10 +156,43 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
               .read(readerControllerProvider.notifier)
               .setMode(continuous ? ReadingMode.pages : ReadingMode.continuous),
         ),
+        const PlayFromHereButton(),
+        // Less frequent actions wait in a menu, so the title keeps its
+        // room on a phone.
+        PopupMenuButton<_ReaderMenuAction>(
+          key: readerMoreKey,
+          tooltip: MaterialLocalizations.of(context).moreButtonTooltip,
+          onSelected: (action) => switch (action) {
+            _ReaderMenuAction.goTo => _goTo(),
+            _ReaderMenuAction.textSize => showTextSizeSheet(context),
+          },
+          itemBuilder: (context) => <PopupMenuEntry<_ReaderMenuAction>>[
+            PopupMenuItem<_ReaderMenuAction>(
+              key: readerGoToKey,
+              value: _ReaderMenuAction.goTo,
+              enabled: opened,
+              child: ListTile(
+                leading: const Icon(Icons.find_in_page_outlined),
+                title: Text(l10n.readerGoTo),
+              ),
+            ),
+            if (continuous)
+              PopupMenuItem<_ReaderMenuAction>(
+                key: readerTextSizeKey,
+                value: _ReaderMenuAction.textSize,
+                child: ListTile(
+                  leading: const Icon(Icons.format_size),
+                  title: Text(l10n.readerTextSize),
+                ),
+              ),
+          ],
+        ),
       ],
       // The last ayah is recorded only once the reader has opened its
       // target, so the controller's starting position is never saved.
-      body: opened ? ResumeRecorderScope(child: body) : body,
+      body: ReaderPlayback(
+        child: opened ? ResumeRecorderScope(child: body) : body,
+      ),
     );
   }
 }
@@ -182,8 +203,15 @@ const ValueKey<String> readerModeToggleKey = ValueKey<String>(
   'reader-mode-toggle',
 );
 
-/// The key of the reader's go-to button.
+/// The actions in the reader's overflow menu.
+enum _ReaderMenuAction { goTo, textSize }
+
+/// The key of the reader's overflow menu button.
+const ValueKey<String> readerMoreKey = ValueKey<String>('reader-more');
+
+/// The key of the go-to item in the reader's overflow menu.
 const ValueKey<String> readerGoToKey = ValueKey<String>('reader-go-to');
 
-/// The key of the reader's text size button (continuous view only).
+/// The key of the text size item in the reader's overflow menu
+/// (continuous view only).
 const ValueKey<String> readerTextSizeKey = ValueKey<String>('reader-text-size');
