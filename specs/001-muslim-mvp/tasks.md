@@ -384,7 +384,7 @@ scenario 11).
 **Independent Test**: turn it on, change the speed, tap to pause and resume, confirm the screen
 stays awake (quickstart scenario 12).
 
-- [ ] T021 [US8] Build auto-scroll in `lib/features/autoscroll/` (`autoscroll_controller.dart`,
+- [x] T021 [US8] Build auto-scroll in `lib/features/autoscroll/` (`autoscroll_controller.dart`,
   `autoscroll_controls.dart`) and the continuous view with
   `test/features/autoscroll/autoscroll_test.dart`
   - A toggle in the reader; in page view it offers to switch to continuous view.

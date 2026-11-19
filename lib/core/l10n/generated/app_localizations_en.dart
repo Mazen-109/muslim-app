@@ -324,6 +324,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get continuousNextSurah => 'Next surah';
 
   @override
+  String get readerAutoscroll => 'Auto-scroll';
+
+  @override
+  String get autoscrollStop => 'Stop auto-scroll';
+
+  @override
+  String get autoscrollSwitchMessage =>
+      'Auto-scroll works in continuous view. Switch to continuous view?';
+
+  @override
+  String get autoscrollSwitchConfirm => 'Switch to continuous view';
+
+  @override
+  String get autoscrollPause => 'Pause auto-scroll';
+
+  @override
+  String get autoscrollResume => 'Resume auto-scroll';
+
+  @override
+  String get autoscrollFollowing => 'Following the recitation';
+
+  @override
+  String get autoscrollSpeed => 'Scroll speed';
+
+  @override
+  String autoscrollSpeedValue(int speed) {
+    return '$speed';
+  }
+
+  @override
   String get readerGoTo => 'Go to';
 
   @override

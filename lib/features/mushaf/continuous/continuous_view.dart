@@ -11,6 +11,7 @@ import '../../../data/models/ayah_ref.dart';
 import '../../../data/models/surah.dart';
 import '../../../data/models/word.dart';
 import '../../../data/quran_repository.dart';
+import '../../autoscroll/autoscroll_controller.dart';
 import '../page_view/page_line_widgets.dart';
 import '../reader_controller.dart';
 import 'ayah_paragraph.dart';
@@ -54,6 +55,12 @@ const ValueKey<String> continuousNextSurahKey = ValueKey<String>(
 /// It shows one surah: buttons at the start and the end open the previous
 /// and the next surah, and auto-scroll (data-model.md section 6) stops at
 /// the end of the surah.
+///
+/// While auto-scroll is `running` the view moves at `autoscroll_speed`,
+/// except while the reader drags it. While auto-scroll is running or
+/// paused, a tap on the text pauses or resumes it instead of reaching
+/// [onAyahTap]. Leaving the view (another view, another screen or tab)
+/// turns auto-scroll off.
 class ContinuousView extends ConsumerStatefulWidget {
   const ContinuousView({super.key, this.onAyahTap, this.onAyahLongPress});
 
@@ -64,7 +71,8 @@ class ContinuousView extends ConsumerStatefulWidget {
   ConsumerState<ContinuousView> createState() => _ContinuousViewState();
 }
 
-class _ContinuousViewState extends ConsumerState<ContinuousView> {
+class _ContinuousViewState extends ConsumerState<ContinuousView>
+    with SingleTickerProviderStateMixin {
   final GlobalKey _viewportKey = GlobalKey();
 
   /// The ayah the list was last anchored at, and its surah.
@@ -85,6 +93,9 @@ class _ContinuousViewState extends ConsumerState<ContinuousView> {
 
   bool _userScrolling = false;
 
+  late final AutoscrollController _autoscroll;
+  late final AutoscrollDriver _driver;
+
   QuranRepository get _repository =>
       ref.read(quranRepositoryProvider).requireValue;
 
@@ -93,13 +104,46 @@ class _ContinuousViewState extends ConsumerState<ContinuousView> {
     super.initState();
     _scroll = ScrollController();
     _setAnchor(ref.read(readerControllerProvider).currentAyahId);
+    _autoscroll = ref.read(autoscrollControllerProvider.notifier);
+    _driver = AutoscrollDriver(
+      vsync: this,
+      position: () => _scroll.hasClients ? _scroll.position : null,
+      speed: () => ref.read(autoscrollSpeedProvider),
+      isSuspended: () => _userScrolling,
+      onMoved: _report,
+      onEnd: _autoscroll.reachedEnd,
+    );
+    _syncDriver(ref.read(autoscrollControllerProvider));
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // An inactive tab keeps this view alive but off screen, with its
+    // tickers muted: that is leaving the view, so auto-scroll stops.
+    if (!TickerMode.valuesOf(context).enabled) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _autoscroll.stop());
+    }
   }
 
   @override
   void dispose() {
+    _driver.dispose();
     _scroll.dispose();
+    // Providers cannot change while the tree is being finalised.
+    Future<void>.microtask(_autoscroll.stop);
     super.dispose();
   }
+
+  void _syncDriver(AutoscrollStatus status) {
+    if (status == AutoscrollStatus.running) {
+      _driver.start();
+    } else {
+      _driver.stop();
+    }
+  }
+
+  void _togglePause() => _autoscroll.togglePause();
 
   void _setAnchor(int ayahId) {
     _anchorAyahId = ayahId;
@@ -248,6 +292,10 @@ class _ContinuousViewState extends ConsumerState<ContinuousView> {
       readerControllerProvider.select((s) => s.currentAyahId),
       (previous, next) => _follow(next),
     );
+    ref.listen<AutoscrollStatus>(
+      autoscrollControllerProvider,
+      (previous, next) => _syncDriver(next),
+    );
     ref.listen<double>(fontScaleProvider, (previous, next) {
       _reanchor(ref.read(readerControllerProvider).currentAyahId);
     });
@@ -260,6 +308,11 @@ class _ContinuousViewState extends ConsumerState<ContinuousView> {
     );
     final data = ref.watch(continuousSurahProvider(_surahId));
     final surah = data.surah;
+    final autoscroll = ref.watch(autoscrollControllerProvider);
+    final tapPauses =
+        autoscroll == AutoscrollStatus.running ||
+        autoscroll == AutoscrollStatus.paused;
+    final onAyahTap = tapPauses ? (int _) => _togglePause() : widget.onAyahTap;
 
     // The list's items: the previous-surah button, the header, the basmala,
     // the paragraphs, then the next-surah button and the end space.
@@ -293,7 +346,7 @@ class _ContinuousViewState extends ConsumerState<ContinuousView> {
             ayahs: data.paragraphs[i],
             style: style,
             highlightedAyahId: highlighted,
-            onAyahTap: widget.onAyahTap,
+            onAyahTap: onAyahTap,
             onAyahLongPress: widget.onAyahLongPress,
           ),
         );
@@ -336,27 +389,32 @@ class _ContinuousViewState extends ConsumerState<ContinuousView> {
       child: NotificationListener<ScrollNotification>(
         key: continuousScrollKey,
         onNotification: _onScroll,
-        child: KeyedSubtree(
-          key: _viewportKey,
-          child: CustomScrollView(
-            key: ValueKey<int>(_generation),
-            controller: _scroll,
-            center: center,
-            slivers: <Widget>[
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, i) => item(anchorItem - 1 - i),
-                  childCount: anchorItem,
+        child: GestureDetector(
+          // A tap between paragraphs pauses or resumes too.
+          behavior: HitTestBehavior.translucent,
+          onTap: tapPauses ? _togglePause : null,
+          child: KeyedSubtree(
+            key: _viewportKey,
+            child: CustomScrollView(
+              key: ValueKey<int>(_generation),
+              controller: _scroll,
+              center: center,
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, i) => item(anchorItem - 1 - i),
+                    childCount: anchorItem,
+                  ),
                 ),
-              ),
-              SliverList(
-                key: center,
-                delegate: SliverChildBuilderDelegate(
-                  (context, i) => item(anchorItem + i),
-                  childCount: items.length - anchorItem,
+                SliverList(
+                  key: center,
+                  delegate: SliverChildBuilderDelegate(
+                    (context, i) => item(anchorItem + i),
+                    childCount: items.length - anchorItem,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

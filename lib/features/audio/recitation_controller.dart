@@ -67,10 +67,13 @@ class _Playlist {
 /// when playing or loading, on [resume] when paused, on [retry] after an
 /// error.
 ///
-/// The screen wake lock is held exactly while the status is `playing`.
+/// A hold on the shared screen wake lock is taken exactly while the status
+/// is `playing`.
 class RecitationController extends Notifier<PlaybackState> {
   late AudioPlayerPort _player;
-  late WakeLock _wakeLock;
+  late WakeLockService _wakeLock;
+
+  /// Whether this controller holds the shared wake lock.
   bool _wakeLockHeld = false;
 
   /// Incremented whenever a pending load must be abandoned.
@@ -94,7 +97,7 @@ class RecitationController extends Notifier<PlaybackState> {
   @override
   PlaybackState build() {
     _player = ref.watch(audioPlayerPortProvider);
-    _wakeLock = ref.watch(wakeLockProvider);
+    _wakeLock = ref.watch(wakeLockServiceProvider);
     final subscriptions = <StreamSubscription<Object?>>[
       _player.currentIndexStream.listen(_onIndex),
       _player.stateStream.listen(_onPlayerState),
@@ -108,7 +111,7 @@ class RecitationController extends Notifier<PlaybackState> {
       }
       if (_wakeLockHeld) {
         _wakeLockHeld = false;
-        unawaited(_quietly(_wakeLock.disable()));
+        _wakeLock.release();
       }
       unawaited(_quietly(_player.stop()));
     });
@@ -383,7 +386,11 @@ class RecitationController extends Notifier<PlaybackState> {
     final wanted = next.status == PlaybackStatus.playing;
     if (wanted == _wakeLockHeld) return;
     _wakeLockHeld = wanted;
-    unawaited(_quietly(wanted ? _wakeLock.enable() : _wakeLock.disable()));
+    if (wanted) {
+      _wakeLock.acquire();
+    } else {
+      _wakeLock.release();
+    }
   }
 
   static Future<void> _quietly(Future<void> future) =>
