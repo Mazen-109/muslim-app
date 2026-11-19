@@ -199,7 +199,7 @@ reopen the app, and land on the same ayah (quickstart scenarios 1 to 4).
     swiping changes the page in RTL order; tap reports the correct ayah id for a word on a
     line shared by two ayahs; the font-missing state; goldens for pages 1, 2, 3 and 604 in
     the light theme at phone size.
-- [ ] T012 [US1] Build the continuous view and the mode switch in
+- [x] T012 [US1] Build the continuous view and the mode switch in
   `lib/features/mushaf/continuous/` and `lib/features/mushaf/reader_screen.dart` with
   `test/features/mushaf/continuous_view_test.dart`
   - A surah as flowing, justified ayah text with end markers, a surah header and basmala
