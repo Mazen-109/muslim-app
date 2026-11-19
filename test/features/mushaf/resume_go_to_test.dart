@@ -316,8 +316,8 @@ void main() {
     test('numbers in Western and Arabic-Indic digits', () {
       expect(parseGoToNumber('604'), 604);
       expect(parseGoToNumber(' 12 '), 12);
-      expect(parseGoToNumber('٣٠٠'), 300);
-      expect(parseGoToNumber('۲۵'), 25);
+      expect(parseGoToNumber('\u0663\u0660\u0660'), 300);
+      expect(parseGoToNumber('\u06F2\u06F5'), 25);
       expect(parseGoToNumber(''), isNull);
       expect(parseGoToNumber('1a'), isNull);
       expect(parseGoToNumber('-1'), isNull);
@@ -396,7 +396,7 @@ void main() {
       expect(c.read(readerControllerProvider).page, 604);
 
       await openSheet(tester);
-      await tester.enterText(find.byKey(goToPageFieldKey), '١');
+      await tester.enterText(find.byKey(goToPageFieldKey), '\u0661');
       await submit(tester);
       expect(location(c).queryParameters['page'], '1');
       expect(c.read(readerControllerProvider).page, 1);

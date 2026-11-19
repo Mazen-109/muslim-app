@@ -72,7 +72,7 @@ int? parseGoToNumber(String input) {
 }
 
 /// The digits a number field accepts while typing.
-final RegExp _digitPattern = RegExp('[0-9٠-٩۰-۹]');
+final RegExp _digitPattern = RegExp('[0-9\u0660-\u0669\u06F0-\u06F9]');
 
 /// Go to a Mushaf page (1 to 604) or to a surah and ayah number (US1,
 /// scenario 7). Out-of-range numbers are refused with a message under the
