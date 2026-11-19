@@ -79,15 +79,6 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsReciter => 'القارئ الافتراضي';
 
   @override
-  String get reciterStyleMurattal => 'مرتل';
-
-  @override
-  String get reciterStyleMujawwad => 'مجود';
-
-  @override
-  String get reciterStyleMuallim => 'معلم';
-
-  @override
   String reciterWithStyle(String name, String style) {
     return '$name · $style';
   }

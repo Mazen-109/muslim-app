@@ -9,6 +9,7 @@ import 'package:muslim/core/settings/settings_providers.dart';
 import 'package:muslim/core/settings/settings_repository.dart';
 import 'package:muslim/core/theme/app_theme.dart';
 import 'package:muslim/data/reciter_repository.dart';
+import 'package:muslim/features/audio/reciter_picker.dart';
 import 'package:muslim/features/index/index_screen.dart';
 import 'package:muslim/features/mushaf/continuous/text_size_sheet.dart';
 import 'package:muslim/features/settings/reciter_setting.dart';
@@ -245,7 +246,7 @@ void main() {
 
       for (final reciter in reciters) {
         final tile = tester.widget<ListTile>(
-          find.byKey(reciterOptionKey(reciter.id)),
+          find.byKey(ReciterTileKey(reciter.id)),
         );
         expect(
           tile.selected,
@@ -254,10 +255,10 @@ void main() {
         );
       }
 
-      await tester.tap(find.byKey(reciterOptionKey(other.id)));
+      await tester.tap(find.byKey(ReciterTileKey(other.id)));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(reciterOptionKey(other.id)), findsNothing);
+      expect(find.byKey(ReciterTileKey(other.id)), findsNothing);
       expect(container.read(reciterIdProvider), other.id);
       expect((await prefs()).getInt(SettingsRepository.reciterIdKey), other.id);
     });

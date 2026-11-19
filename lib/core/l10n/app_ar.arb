@@ -92,18 +92,6 @@
   "@settingsReciter": {
     "description": "Settings: the default reciter row, and the title of the sheet that chooses it."
   },
-  "reciterStyleMurattal": "مرتل",
-  "@reciterStyleMurattal": {
-    "description": "Recitation style of a reciter: murattal."
-  },
-  "reciterStyleMujawwad": "مجود",
-  "@reciterStyleMujawwad": {
-    "description": "Recitation style of a reciter: mujawwad."
-  },
-  "reciterStyleMuallim": "معلم",
-  "@reciterStyleMuallim": {
-    "description": "Recitation style of a reciter: mu'allim, for teaching."
-  },
   "reciterWithStyle": "{name} · {style}",
   "@reciterWithStyle": {
     "description": "A reciter's name followed by the recitation style.",

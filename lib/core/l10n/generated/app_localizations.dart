@@ -236,24 +236,6 @@ abstract class AppLocalizations {
   /// **'القارئ الافتراضي'**
   String get settingsReciter;
 
-  /// Recitation style of a reciter: murattal.
-  ///
-  /// In ar, this message translates to:
-  /// **'مرتل'**
-  String get reciterStyleMurattal;
-
-  /// Recitation style of a reciter: mujawwad.
-  ///
-  /// In ar, this message translates to:
-  /// **'مجود'**
-  String get reciterStyleMujawwad;
-
-  /// Recitation style of a reciter: mu'allim, for teaching.
-  ///
-  /// In ar, this message translates to:
-  /// **'معلم'**
-  String get reciterStyleMuallim;
-
   /// A reciter's name followed by the recitation style.
   ///
   /// In ar, this message translates to:

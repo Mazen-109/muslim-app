@@ -79,15 +79,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsReciter => 'Default reciter';
 
   @override
-  String get reciterStyleMurattal => 'Murattal';
-
-  @override
-  String get reciterStyleMujawwad => 'Mujawwad';
-
-  @override
-  String get reciterStyleMuallim => 'Mu\'allim (teaching)';
-
-  @override
   String reciterWithStyle(String name, String style) {
     return '$name · $style';
   }
