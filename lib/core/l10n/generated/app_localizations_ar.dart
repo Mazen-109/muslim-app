@@ -232,6 +232,36 @@ class AppLocalizationsAr extends AppLocalizations {
   String get continuousNextSurah => 'السورة التالية';
 
   @override
+  String get readerAutoscroll => 'التمرير التلقائي';
+
+  @override
+  String get autoscrollStop => 'إيقاف التمرير التلقائي';
+
+  @override
+  String get autoscrollSwitchMessage =>
+      'يعمل التمرير التلقائي في العرض المتصل. هل تريد الانتقال إليه؟';
+
+  @override
+  String get autoscrollSwitchConfirm => 'الانتقال إلى العرض المتصل';
+
+  @override
+  String get autoscrollPause => 'إيقاف التمرير مؤقتًا';
+
+  @override
+  String get autoscrollResume => 'متابعة التمرير';
+
+  @override
+  String get autoscrollFollowing => 'يتبع التلاوة';
+
+  @override
+  String get autoscrollSpeed => 'سرعة التمرير';
+
+  @override
+  String autoscrollSpeedValue(int speed) {
+    return '$speed';
+  }
+
+  @override
   String get readerGoTo => 'انتقال إلى';
 
   @override

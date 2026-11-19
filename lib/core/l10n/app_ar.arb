@@ -337,6 +337,48 @@
   "@continuousNextSurah": {
     "description": "Button at the end of the continuous view that opens the next surah."
   },
+  "readerAutoscroll": "التمرير التلقائي",
+  "@readerAutoscroll": {
+    "description": "Item of the reader's overflow menu that turns auto-scroll on, and the title of the dialog that offers to switch to the continuous view for it."
+  },
+  "autoscrollStop": "إيقاف التمرير التلقائي",
+  "@autoscrollStop": {
+    "description": "Tooltip of the auto-scroll bar's close button and the reader menu item that turn auto-scroll off."
+  },
+  "autoscrollSwitchMessage": "يعمل التمرير التلقائي في العرض المتصل. هل تريد الانتقال إليه؟",
+  "@autoscrollSwitchMessage": {
+    "description": "Body of the dialog shown when auto-scroll is asked for in the page view."
+  },
+  "autoscrollSwitchConfirm": "الانتقال إلى العرض المتصل",
+  "@autoscrollSwitchConfirm": {
+    "description": "Button of that dialog that switches to the continuous view and starts auto-scroll."
+  },
+  "autoscrollPause": "إيقاف التمرير مؤقتًا",
+  "@autoscrollPause": {
+    "description": "Tooltip of the auto-scroll bar's button while the text is scrolling."
+  },
+  "autoscrollResume": "متابعة التمرير",
+  "@autoscrollResume": {
+    "description": "Tooltip of the auto-scroll bar's button while auto-scroll is paused."
+  },
+  "autoscrollFollowing": "يتبع التلاوة",
+  "@autoscrollFollowing": {
+    "description": "Shown in the auto-scroll bar while the view follows a playing recitation instead of the timer."
+  },
+  "autoscrollSpeed": "سرعة التمرير",
+  "@autoscrollSpeed": {
+    "description": "Screen reader label of the auto-scroll speed slider."
+  },
+  "autoscrollSpeedValue": "{speed}",
+  "@autoscrollSpeedValue": {
+    "description": "Value of the auto-scroll speed slider, in logical pixels per second, shown while it is dragged and read by screen readers.",
+    "placeholders": {
+      "speed": {
+        "type": "int",
+        "example": "30"
+      }
+    }
+  },
   "readerGoTo": "انتقال إلى",
   "@readerGoTo": {
     "description": "Tooltip of the reader button that opens the go-to sheet, and the title of that sheet, where the reader jumps to a page number or to a surah and ayah number."

@@ -185,6 +185,10 @@ on ayah change; any → `error` on load failure (keeps the ayah, offers retry); 
 **Auto-scroll**: `off` → `running` ⇄ `paused` (tap, or a sheet or menu opening); `running` →
 `following_audio` while playback is `playing`, back to `running` when it stops; any → `off` at
 the end of the surah, on leaving continuous view, or when turned off.
+A pause caused by a sheet or menu ends when the last one closes, unless the reader paused or
+stopped auto-scroll meanwhile. `following_audio` lasts while playback is `playing`, so pausing
+the recitation hands back to the timer; a tap does not pause `following_audio`, where the
+recitation leads.
 
 **Story item**: `planned` → `in_review` → `approved`, changed only in the catalog by the
 content owner. The app never changes a review status.

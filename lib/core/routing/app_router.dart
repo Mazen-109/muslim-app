@@ -12,6 +12,7 @@ import '../../features/mushaf/reader_screen.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../settings/settings_providers.dart';
 import '../widgets/app_scaffold.dart';
+import 'modal_observer.dart';
 import 'placeholder_screens.dart';
 import '../../features/index/index_screen.dart';
 
@@ -130,6 +131,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 
   final router = GoRouter(
     initialLocation: AppRoutes.launch,
+    // Sheets, dialogs and menus on any navigator are counted
+    // (modal_observer.dart). The shell's branch navigators report to the
+    // router's observers too.
+    observers: <NavigatorObserver>[
+      ModalRouteObserver(
+        onOpened: () => ref.read(openModalCountProvider.notifier).opened(),
+        onClosed: () => ref.read(openModalCountProvider.notifier).closed(),
+      ),
+    ],
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>

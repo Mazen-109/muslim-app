@@ -464,6 +464,60 @@ abstract class AppLocalizations {
   /// **'السورة التالية'**
   String get continuousNextSurah;
 
+  /// Item of the reader's overflow menu that turns auto-scroll on, and the title of the dialog that offers to switch to the continuous view for it.
+  ///
+  /// In ar, this message translates to:
+  /// **'التمرير التلقائي'**
+  String get readerAutoscroll;
+
+  /// Tooltip of the auto-scroll bar's close button and the reader menu item that turn auto-scroll off.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف التمرير التلقائي'**
+  String get autoscrollStop;
+
+  /// Body of the dialog shown when auto-scroll is asked for in the page view.
+  ///
+  /// In ar, this message translates to:
+  /// **'يعمل التمرير التلقائي في العرض المتصل. هل تريد الانتقال إليه؟'**
+  String get autoscrollSwitchMessage;
+
+  /// Button of that dialog that switches to the continuous view and starts auto-scroll.
+  ///
+  /// In ar, this message translates to:
+  /// **'الانتقال إلى العرض المتصل'**
+  String get autoscrollSwitchConfirm;
+
+  /// Tooltip of the auto-scroll bar's button while the text is scrolling.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف التمرير مؤقتًا'**
+  String get autoscrollPause;
+
+  /// Tooltip of the auto-scroll bar's button while auto-scroll is paused.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة التمرير'**
+  String get autoscrollResume;
+
+  /// Shown in the auto-scroll bar while the view follows a playing recitation instead of the timer.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتبع التلاوة'**
+  String get autoscrollFollowing;
+
+  /// Screen reader label of the auto-scroll speed slider.
+  ///
+  /// In ar, this message translates to:
+  /// **'سرعة التمرير'**
+  String get autoscrollSpeed;
+
+  /// Value of the auto-scroll speed slider, in logical pixels per second, shown while it is dragged and read by screen readers.
+  ///
+  /// In ar, this message translates to:
+  /// **'{speed}'**
+  String autoscrollSpeedValue(int speed);
+
   /// Tooltip of the reader button that opens the go-to sheet, and the title of that sheet, where the reader jumps to a page number or to a surah and ayah number.
   ///
   /// In ar, this message translates to:
