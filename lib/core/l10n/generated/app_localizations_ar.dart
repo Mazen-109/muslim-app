@@ -301,6 +301,69 @@ class AppLocalizationsAr extends AppLocalizations {
   String get reciterStyleMuallim => 'معلّم';
 
   @override
+  String ayahMenuTitle(String surah, int ayah) {
+    return '$surah، الآية $ayah';
+  }
+
+  @override
+  String get ayahMenuListen => 'استماع';
+
+  @override
+  String get ayahMenuRepeat => 'تكرار';
+
+  @override
+  String ayahMenuRepeatTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count مرة',
+      many: '$count مرة',
+      few: '$count مرات',
+      two: 'مرتان',
+      one: 'مرة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ayahMenuTafsir => 'التفسير';
+
+  @override
+  String get ayahMenuSurahStory => 'قصة السورة';
+
+  @override
+  String get ayahMenuStoryUnavailable => 'غير متاحة بعد';
+
+  @override
+  String get ayahMenuAddBookmark => 'إضافة علامة';
+
+  @override
+  String get ayahMenuRemoveBookmark => 'إزالة العلامة';
+
+  @override
+  String get ayahMenuShare => 'مشاركة';
+
+  @override
+  String get ayahMenuReportError => 'الإبلاغ عن خطأ';
+
+  @override
+  String ayahShareReference(String surah, int ayah) {
+    return '$surah، الآية $ayah';
+  }
+
+  @override
+  String get repeatPickerTitle => 'تكرار الآية';
+
+  @override
+  String get repeatPickerFewer => 'مرات أقل';
+
+  @override
+  String get repeatPickerMore => 'مرات أكثر';
+
+  @override
+  String get repeatPickerStart => 'بدء التكرار';
+
+  @override
   String get readerShowContinuous => 'العرض المتصل';
 
   @override

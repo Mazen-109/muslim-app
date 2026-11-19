@@ -241,3 +241,34 @@ int firstAyahStartingOn(MushafPage page) {
 /// The reader's state and controller.
 final readerControllerProvider =
     NotifierProvider<ReaderController, ReaderState>(ReaderController.new);
+
+/// Highlights [ayahId] in the reader while [body] runs, for a sheet that
+/// works on one ayah (the tafsir sheet, the ayah menu).
+///
+/// [body] gets a callback that moves the highlight to another ayah, for a
+/// sheet that can change its ayah. When [body] completes, the highlight
+/// returns to what it was before, unless something else (such as the audio
+/// follower) has moved it meanwhile. A one-time link highlight counts as
+/// already seen and is not restored.
+Future<T> whileHighlighting<T>(
+  ProviderContainer container,
+  int ayahId,
+  Future<T> Function(void Function(int ayahId) moveTo) body,
+) async {
+  final reader = container.read(readerControllerProvider.notifier);
+  final before = container.read(readerControllerProvider);
+  final restore = before.highlightIsFlash ? null : before.highlightedAyahId;
+
+  var shown = ayahId;
+  reader.highlight(ayahId);
+  try {
+    return await body((id) {
+      shown = id;
+      reader.highlight(id);
+    });
+  } finally {
+    if (container.read(readerControllerProvider).highlightedAyahId == shown) {
+      reader.highlight(restore);
+    }
+  }
+}

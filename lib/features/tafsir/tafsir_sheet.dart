@@ -16,43 +16,28 @@ import '../mushaf/reader_controller.dart';
 /// reader.
 ///
 /// While the sheet is open, the ayah it shows is highlighted in the reader
-/// through [ReaderController.highlight]. The sheet never moves the reader:
-/// it does not change the current ayah or the page, even when previous and
-/// next reach an ayah on another page, so the reader finds the page exactly
-/// as it was on dismissal. When the sheet closes, the highlight returns to
-/// what it was before the sheet opened, unless something else (such as the
-/// audio follower) has moved it meanwhile. A one-time link highlight counts
-/// as already seen and is not restored.
+/// through [whileHighlighting]. The sheet never moves the reader: it does
+/// not change the current ayah or the page, even when previous and next
+/// reach an ayah on another page, so the reader finds the page exactly as it
+/// was on dismissal. When the sheet closes, the highlight returns to what it
+/// was before the sheet opened, unless something else (such as the audio
+/// follower) has moved it meanwhile. A one-time link highlight counts as
+/// already seen and is not restored.
 ///
 /// Needs [quranRepositoryProvider] to have a value, as the reader does.
-Future<void> showTafsirSheet(BuildContext context, int ayahId) async {
-  final container = ProviderScope.containerOf(context, listen: false);
-  final reader = container.read(readerControllerProvider.notifier);
-  final before = container.read(readerControllerProvider);
-  final restore = before.highlightIsFlash ? null : before.highlightedAyahId;
-
-  var shown = ayahId;
-  reader.highlight(ayahId);
-  try {
-    await showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      useSafeArea: true,
-      useRootNavigator: true,
-      builder: (context) => TafsirSheet(
-        initialAyahId: ayahId,
-        onAyahChanged: (id) {
-          shown = id;
-          reader.highlight(id);
-        },
+Future<void> showTafsirSheet(BuildContext context, int ayahId) =>
+    whileHighlighting(
+      ProviderScope.containerOf(context, listen: false),
+      ayahId,
+      (moveTo) => showModalBottomSheet<void>(
+        context: context,
+        isScrollControlled: true,
+        useSafeArea: true,
+        useRootNavigator: true,
+        builder: (context) =>
+            TafsirSheet(initialAyahId: ayahId, onAyahChanged: moveTo),
       ),
     );
-  } finally {
-    if (container.read(readerControllerProvider).highlightedAyahId == shown) {
-      reader.highlight(restore);
-    }
-  }
-}
 
 /// The tafsir work the sheet shows: the first in the content database. The
 /// MVP bundles exactly one (research R6); a reader's choice of tafsir is not

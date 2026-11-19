@@ -11,6 +11,7 @@ import '../../data/quran_repository.dart';
 import '../audio/player_bar.dart';
 import '../autoscroll/autoscroll_controller.dart';
 import '../autoscroll/autoscroll_controls.dart';
+import '../ayah_menu/ayah_menu_sheet.dart';
 import '../tafsir/tafsir_sheet.dart';
 import 'continuous/continuous_view.dart';
 import 'continuous/text_size_sheet.dart';
@@ -41,7 +42,8 @@ class ReaderScreen extends ConsumerStatefulWidget {
   /// tafsir sheet on that ayah.
   final AyahCallback? onAyahTap;
 
-  /// Called with the ayah id of a long-pressed word (the ayah menu, later).
+  /// Called with the ayah id of a long-pressed word. When null, a long
+  /// press opens the ayah menu on that ayah.
   final AyahCallback? onAyahLongPress;
 
   @override
@@ -61,6 +63,8 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
   }
 
   void _openTafsir(int ayahId) => showTafsirSheet(context, ayahId);
+
+  void _openAyahMenu(int ayahId) => showAyahMenu(context, ayahId);
 
   /// Opens the go-to sheet and moves the reader to the place chosen there,
   /// through the `/mushaf` route like any other link.
@@ -120,7 +124,7 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
           ? const LoadingStateView()
           : MushafPageView(
               onAyahTap: widget.onAyahTap ?? _openTafsir,
-              onAyahLongPress: widget.onAyahLongPress,
+              onAyahLongPress: widget.onAyahLongPress ?? _openAyahMenu,
             );
     }
     final opened = body is MushafPageView;

@@ -425,6 +425,91 @@
   "@reciterStyleMuallim": {
     "description": "Recitation style of a reciter: mu'allim, a teaching recitation for learning pronunciation."
   },
+  "ayahMenuTitle": "{surah}، الآية {ayah}",
+  "@ayahMenuTitle": {
+    "description": "Heading of the ayah menu: the surah name (from the content database) and the number of the long-pressed ayah.",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "ayahMenuListen": "استماع",
+  "@ayahMenuListen": {
+    "description": "Ayah menu action that recites only this ayah, once, with the chosen reciter."
+  },
+  "ayahMenuRepeat": "تكرار",
+  "@ayahMenuRepeat": {
+    "description": "Ayah menu action that asks for a count and then recites this ayah that many times."
+  },
+  "ayahMenuRepeatTimes": "{count, plural, =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+  "@ayahMenuRepeatTimes": {
+    "description": "How many times an ayah is repeated: under the Repeat action of the ayah menu and in the repeat picker. count is 2 to 20.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "ayahMenuTafsir": "التفسير",
+  "@ayahMenuTafsir": {
+    "description": "Ayah menu action that opens the tafsir sheet on this ayah."
+  },
+  "ayahMenuSurahStory": "قصة السورة",
+  "@ayahMenuSurahStory": {
+    "description": "Ayah menu action that opens the story video of this ayah's surah."
+  },
+  "ayahMenuStoryUnavailable": "غير متاحة بعد",
+  "@ayahMenuStoryUnavailable": {
+    "description": "Under the disabled Surah story action of the ayah menu, when the surah has no approved story video yet."
+  },
+  "ayahMenuAddBookmark": "إضافة علامة",
+  "@ayahMenuAddBookmark": {
+    "description": "Ayah menu action that bookmarks this ayah."
+  },
+  "ayahMenuRemoveBookmark": "إزالة العلامة",
+  "@ayahMenuRemoveBookmark": {
+    "description": "Ayah menu action that removes the bookmark from this ayah."
+  },
+  "ayahMenuShare": "مشاركة",
+  "@ayahMenuShare": {
+    "description": "Ayah menu action that opens the system share sheet with the ayah's text, its surah name and its number."
+  },
+  "ayahMenuReportError": "الإبلاغ عن خطأ",
+  "@ayahMenuReportError": {
+    "description": "Ayah menu action that reports an error in this ayah."
+  },
+  "ayahShareReference": "{surah}، الآية {ayah}",
+  "@ayahShareReference": {
+    "description": "The reference line under a shared ayah's text: the surah name (from the content database) and the ayah number.",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "repeatPickerTitle": "تكرار الآية",
+  "@repeatPickerTitle": {
+    "description": "Title of the sheet that asks how many times to repeat an ayah."
+  },
+  "repeatPickerFewer": "مرات أقل",
+  "@repeatPickerFewer": {
+    "description": "Tooltip and screen reader label of the repeat picker button that lowers the count by one."
+  },
+  "repeatPickerMore": "مرات أكثر",
+  "@repeatPickerMore": {
+    "description": "Tooltip and screen reader label of the repeat picker button that raises the count by one."
+  },
+  "repeatPickerStart": "بدء التكرار",
+  "@repeatPickerStart": {
+    "description": "The repeat picker's button that starts repeating the ayah the chosen number of times."
+  },
   "readerShowContinuous": "العرض المتصل",
   "@readerShowContinuous": {
     "description": "Tooltip and screen reader label of the reader button that switches from the page view to the continuous view, where the ayahs of a surah flow as text."
