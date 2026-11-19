@@ -342,7 +342,7 @@ three (quickstart scenario 9).
 **Independent Test**: offline, search a common word without diacritics and open a result
 (quickstart scenario 10).
 
-- [ ] T019 [US6] Build search in `lib/features/search/` (`search_screen.dart`,
+- [x] T019 [US6] Build search in `lib/features/search/` (`search_screen.dart`,
   `search_controller.dart`, `query_folding.dart`) and `lib/data/quran_repository.dart` with
   `test/features/search/search_test.dart`
   - `foldQuery` applies the same folding rule as the import tool (research R9); the rule
@@ -365,7 +365,7 @@ three (quickstart scenario 9).
 **Independent Test**: switch through all four themes and check each main screen (quickstart
 scenario 11).
 
-- [ ] T020 [US7] Build the settings screen and theme picker in `lib/features/settings/`
+- [x] T020 [US7] Build the settings screen and theme picker in `lib/features/settings/`
   (`settings_screen.dart`, `theme_picker.dart`) with `test/features/settings/settings_test.dart`
   and goldens under `test/goldens/themes/`
   - Settings: theme (four options with a live preview swatch), interface language (Arabic or

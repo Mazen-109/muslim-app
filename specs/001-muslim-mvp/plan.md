@@ -106,6 +106,10 @@ assets/
 ├── sources.json                   # Sources registry
 └── fonts/                         # KFGQPC Uthmanic Hafs + UI fonts
 
+packages/
+└── search_folding/                # pure Dart: the search folding rule (R9), shared by the
+                                   # import tool and the app's query folding
+
 tool/
 └── quran_import/                  # Dart CLI: fetch, validate, build quran.db
     ├── bin/quran_import.dart
@@ -151,7 +155,9 @@ test/
 **Structure Decision**: a single Flutter project at the repository root, organised
 feature-first under `lib/features/`, with shared data access in `lib/data/` and cross-cutting
 code in `lib/core/`. The import tool is a separate Dart package under `tool/quran_import/` so
-that its HTTP and parsing dependencies never ship in the app. There is no backend.
+that its HTTP and parsing dependencies never ship in the app. The one piece of logic both need,
+the search folding rule, is a dependency-free local package under `packages/search_folding/`
+that each depends on by path. There is no backend.
 
 ## Architecture Notes
 

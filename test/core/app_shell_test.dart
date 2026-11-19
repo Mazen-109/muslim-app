@@ -10,6 +10,7 @@ import 'package:muslim/core/theme/app_theme.dart';
 import 'package:muslim/core/widgets/state_views.dart';
 import 'package:muslim/data/models/ayah_ref.dart';
 import 'package:muslim/data/quran_repository.dart';
+import 'package:muslim/features/settings/settings_screen.dart';
 
 import '../helpers/fonts.dart';
 import '../helpers/pump_app.dart';
@@ -125,7 +126,19 @@ void main() {
 
       await tester.tap(navLabel(ar.navSettings));
       await tester.pumpAndSettle();
-      await tester.tap(find.text(ar.screenSources));
+      // The sources row is at the end of the settings list.
+      final sourcesRow = find.text(ar.screenSources);
+      await tester.scrollUntilVisible(
+        sourcesRow,
+        200,
+        scrollable: find
+            .descendant(
+              of: find.byType(SettingsScreen),
+              matching: find.byType(Scrollable),
+            )
+            .first,
+      );
+      await tester.tap(sourcesRow);
       await tester.pumpAndSettle();
       expect(location(container).path, AppRoutes.sources);
 

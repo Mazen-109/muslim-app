@@ -35,6 +35,7 @@ class EmptyStateView extends StatelessWidget {
     required this.title,
     this.message,
     this.action,
+    this.announce = false,
   });
 
   final IconData icon;
@@ -44,6 +45,11 @@ class EmptyStateView extends StatelessWidget {
   /// An optional way forward, such as a button that opens the index.
   final Widget? action;
 
+  /// Whether a screen reader announces the state when it appears, for a
+  /// state that replaces content in answer to the reader, such as a search
+  /// with no results.
+  final bool announce;
+
   @override
   Widget build(BuildContext context) {
     return _StateLayout(
@@ -51,6 +57,7 @@ class EmptyStateView extends StatelessWidget {
       title: title,
       message: message,
       action: action,
+      announce: announce,
     );
   }
 }

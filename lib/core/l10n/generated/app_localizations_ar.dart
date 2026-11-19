@@ -43,6 +43,63 @@ class AppLocalizationsAr extends AppLocalizations {
   String get screenSources => 'المصادر';
 
   @override
+  String get settingsSectionAppearance => 'المظهر';
+
+  @override
+  String get settingsTheme => 'السمة';
+
+  @override
+  String get themeLight => 'فاتح';
+
+  @override
+  String get themeNight => 'ليلي';
+
+  @override
+  String get themeBlackOnWhite => 'أسود على أبيض';
+
+  @override
+  String get themeWhiteOnBlack => 'أبيض على أسود';
+
+  @override
+  String get settingsLanguage => 'لغة الواجهة';
+
+  @override
+  String get languageArabic => 'العربية';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get settingsSectionReading => 'القراءة والاستماع';
+
+  @override
+  String get settingsTextSize => 'حجم الخط في العرض المتصل';
+
+  @override
+  String get settingsReciter => 'القارئ الافتراضي';
+
+  @override
+  String reciterWithStyle(String name, String style) {
+    return '$name · $style';
+  }
+
+  @override
+  String get settingsSectionVideo => 'الفيديو';
+
+  @override
+  String get settingsVideoGrayscale => 'فيديو بالأبيض والأسود';
+
+  @override
+  String get settingsVideoGrayscaleHint =>
+      'عند إيقافه تبقى ألوان الفيديو كما هي في كل السمات.';
+
+  @override
+  String get settingsSectionAbout => 'عن التطبيق';
+
+  @override
+  String get settingsSourcesHint => 'مصادر النص والتفسير والتلاوات وتراخيصها';
+
+  @override
   String get placeholderMessage => 'هذه الشاشة قيد الإعداد.';
 
   @override
@@ -133,6 +190,44 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String juzStart(String surah, int ayah) {
     return 'من $surah، الآية $ayah';
+  }
+
+  @override
+  String get searchFieldHint => 'اكتب كلمة أو عبارة';
+
+  @override
+  String get searchClear => 'مسح البحث';
+
+  @override
+  String get searchStartTitle => 'ابحث في القرآن الكريم';
+
+  @override
+  String get searchStartMessage =>
+      'اكتب حرفين على الأقل. لا يلزم التشكيل، ولا يؤثر شكل الهمزة أو الألف المقصورة أو التاء المربوطة في النتائج.';
+
+  @override
+  String get searchNoResultsTitle => 'لم يُعثر على نتائج';
+
+  @override
+  String get searchNoResultsMessage => 'تحقّق من الكتابة أو جرّب كلمة أخرى.';
+
+  @override
+  String searchResultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count نتيجة',
+      many: '$count نتيجة',
+      few: '$count نتائج',
+      two: 'نتيجتان',
+      one: 'نتيجة واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchResultPlace(String surah, int ayah) {
+    return '$surah، الآية $ayah';
   }
 
   @override
