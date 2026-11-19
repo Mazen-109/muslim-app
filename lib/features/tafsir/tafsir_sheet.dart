@@ -38,6 +38,7 @@ Future<void> showTafsirSheet(BuildContext context, int ayahId) async {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
+      useRootNavigator: true,
       builder: (context) => TafsirSheet(
         initialAyahId: ayahId,
         onAyahChanged: (id) {
@@ -139,7 +140,9 @@ class TafsirSheetState extends ConsumerState<TafsirSheet> {
             ),
             const Divider(),
             Expanded(
-              child: ListView(
+              // The content is a handful of blocks, so it is built whole
+              // rather than lazily.
+              child: SingleChildScrollView(
                 controller: scrollController,
                 padding: EdgeInsets.fromLTRB(
                   AppSpacing.gutter,
@@ -147,22 +150,25 @@ class TafsirSheetState extends ConsumerState<TafsirSheet> {
                   AppSpacing.gutter,
                   AppSpacing.xxl + MediaQuery.paddingOf(context).bottom,
                 ),
-                children: <Widget>[
-                  _AyahText(text: ayah.textQpcHafs, scale: scale),
-                  const SizedBox(height: AppSpacing.xl),
-                  ...tafsirs.when(
-                    loading: () => const <Widget>[LoadingStateView()],
-                    error: (_, _) => <Widget>[
-                      ErrorStateView(message: l10n.tafsirMissing),
-                    ],
-                    data: (repository) => _tafsirBody(
-                      context,
-                      repository: repository,
-                      quran: quran,
-                      scale: scale,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    _AyahText(text: ayah.textQpcHafs, scale: scale),
+                    const SizedBox(height: AppSpacing.xl),
+                    ...tafsirs.when(
+                      loading: () => const <Widget>[LoadingStateView()],
+                      error: (_, _) => <Widget>[
+                        ErrorStateView(message: l10n.tafsirMissing),
+                      ],
+                      data: (repository) => _tafsirBody(
+                        context,
+                        repository: repository,
+                        quran: quran,
+                        scale: scale,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
@@ -290,9 +296,8 @@ class _AyahText extends StatelessWidget {
         text,
         key: TafsirSheet.ayahKey,
         textAlign: TextAlign.justify,
-        style: AppTheme.quranTextStyle(
-          Theme.of(context),
-        ).copyWith(fontSize: AppTypography.quranFontSize * scale),
+        style: AppTheme.quranTextStyle(Theme.of(context))
+            .copyWith(fontSize: AppTypography.quranFontSize * scale),
       ),
     );
   }
