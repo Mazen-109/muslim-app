@@ -204,6 +204,66 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reciterStyleMuallim => 'Teaching (Mu\'allim)';
 
   @override
+  String ayahMenuTitle(String surah, int ayah) {
+    return '$surah, ayah $ayah';
+  }
+
+  @override
+  String get ayahMenuListen => 'Listen';
+
+  @override
+  String get ayahMenuRepeat => 'Repeat';
+
+  @override
+  String ayahMenuRepeatTimes(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count times',
+      one: 'once',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get ayahMenuTafsir => 'Tafsir';
+
+  @override
+  String get ayahMenuSurahStory => 'Surah story';
+
+  @override
+  String get ayahMenuStoryUnavailable => 'Not available yet';
+
+  @override
+  String get ayahMenuAddBookmark => 'Bookmark';
+
+  @override
+  String get ayahMenuRemoveBookmark => 'Remove bookmark';
+
+  @override
+  String get ayahMenuShare => 'Share';
+
+  @override
+  String get ayahMenuReportError => 'Report an error';
+
+  @override
+  String ayahShareReference(String surah, int ayah) {
+    return '$surah, ayah $ayah';
+  }
+
+  @override
+  String get repeatPickerTitle => 'Repeat this ayah';
+
+  @override
+  String get repeatPickerFewer => 'Fewer times';
+
+  @override
+  String get repeatPickerMore => 'More times';
+
+  @override
+  String get repeatPickerStart => 'Start repeating';
+
+  @override
   String get readerShowContinuous => 'Continuous view';
 
   @override

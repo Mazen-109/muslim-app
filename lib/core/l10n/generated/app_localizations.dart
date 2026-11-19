@@ -416,6 +416,102 @@ abstract class AppLocalizations {
   /// **'معلّم'**
   String get reciterStyleMuallim;
 
+  /// Heading of the ayah menu: the surah name (from the content database) and the number of the long-pressed ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، الآية {ayah}'**
+  String ayahMenuTitle(String surah, int ayah);
+
+  /// Ayah menu action that recites only this ayah, once, with the chosen reciter.
+  ///
+  /// In ar, this message translates to:
+  /// **'استماع'**
+  String get ayahMenuListen;
+
+  /// Ayah menu action that asks for a count and then recites this ayah that many times.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار'**
+  String get ayahMenuRepeat;
+
+  /// How many times an ayah is repeated: under the Repeat action of the ayah menu and in the repeat picker. count is 2 to 20.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{مرة واحدة} =2{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}'**
+  String ayahMenuRepeatTimes(int count);
+
+  /// Ayah menu action that opens the tafsir sheet on this ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'التفسير'**
+  String get ayahMenuTafsir;
+
+  /// Ayah menu action that opens the story video of this ayah's surah.
+  ///
+  /// In ar, this message translates to:
+  /// **'قصة السورة'**
+  String get ayahMenuSurahStory;
+
+  /// Under the disabled Surah story action of the ayah menu, when the surah has no approved story video yet.
+  ///
+  /// In ar, this message translates to:
+  /// **'غير متاحة بعد'**
+  String get ayahMenuStoryUnavailable;
+
+  /// Ayah menu action that bookmarks this ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة علامة'**
+  String get ayahMenuAddBookmark;
+
+  /// Ayah menu action that removes the bookmark from this ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة العلامة'**
+  String get ayahMenuRemoveBookmark;
+
+  /// Ayah menu action that opens the system share sheet with the ayah's text, its surah name and its number.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشاركة'**
+  String get ayahMenuShare;
+
+  /// Ayah menu action that reports an error in this ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإبلاغ عن خطأ'**
+  String get ayahMenuReportError;
+
+  /// The reference line under a shared ayah's text: the surah name (from the content database) and the ayah number.
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، الآية {ayah}'**
+  String ayahShareReference(String surah, int ayah);
+
+  /// Title of the sheet that asks how many times to repeat an ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'تكرار الآية'**
+  String get repeatPickerTitle;
+
+  /// Tooltip and screen reader label of the repeat picker button that lowers the count by one.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرات أقل'**
+  String get repeatPickerFewer;
+
+  /// Tooltip and screen reader label of the repeat picker button that raises the count by one.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرات أكثر'**
+  String get repeatPickerMore;
+
+  /// The repeat picker's button that starts repeating the ayah the chosen number of times.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدء التكرار'**
+  String get repeatPickerStart;
+
   /// Tooltip and screen reader label of the reader button that switches from the page view to the continuous view, where the ayahs of a surah flow as text.
   ///
   /// In ar, this message translates to:

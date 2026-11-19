@@ -291,7 +291,7 @@ boundary, change reciter, pause and resume (quickstart scenarios 6 and 7).
 
 **Independent Test**: long press an ayah and complete each action (quickstart scenario 8).
 
-- [ ] T017 [US4] Build the ayah menu in `lib/features/ayah_menu/` (`ayah_menu_sheet.dart`,
+- [x] T017 [US4] Build the ayah menu in `lib/features/ayah_menu/` (`ayah_menu_sheet.dart`,
   `ayah_actions.dart`, `repeat_picker.dart`) and wire it to long press in
   `lib/features/mushaf/` with `test/features/ayah_menu/ayah_menu_test.dart`
   - The sheet shows the ayah reference and the actions in the order of FR-017, including
