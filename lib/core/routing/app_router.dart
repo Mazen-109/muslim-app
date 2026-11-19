@@ -7,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../data/models/ayah_ref.dart';
 import '../../data/models/mushaf_page.dart';
 import '../../data/quran_repository.dart';
+import '../../features/bookmarks/bookmarks_screen.dart';
 import '../../features/mushaf/reader_controller.dart';
 import '../../features/mushaf/reader_screen.dart';
 import '../../features/search/search_screen.dart';
@@ -222,7 +223,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: <RouteBase>[
               GoRoute(
                 path: AppRoutes.bookmarks,
-                builder: (context, state) => const BookmarksPlaceholder(),
+                builder: (context, state) => const BookmarksScreen(),
               ),
             ],
           ),

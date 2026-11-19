@@ -3,15 +3,23 @@ import 'package:material_ui/material_ui.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../core/l10n/generated/app_localizations.dart';
-import '../../data/bookmark_repository.dart';
 import '../../data/models/ayah.dart';
 import '../../data/models/surah.dart';
 import '../stories/catalog/catalog_models.dart';
 import '../stories/catalog/catalog_repository.dart';
 
-/// The actions of the ayah menu, in the order of FR-017. The menu lists
-/// them in this order.
-enum AyahAction { listen, repeat, tafsir, surahStory, bookmark, share, report }
+/// The actions of the ayah menu, in the order of FR-017, with Mark as
+/// memorised (FR-018) next to Bookmark. The menu lists them in this order.
+enum AyahAction {
+  listen,
+  repeat,
+  tafsir,
+  surahStory,
+  bookmark,
+  memorise,
+  share,
+  report,
+}
 
 /// The text shared for [ayah] of [surah] (FR-019): the ayah's `text_uthmani`
 /// exactly as stored, a blank line, then a reference line with the surah
@@ -56,19 +64,6 @@ final playableSurahStoryProvider = Provider.family<SurahStory?, int>(
   (ref, surah) =>
       ref.watch(catalogProvider).value?.playableStoryForSurah(surah),
 );
-
-/// Whether ayah [ayahId] is bookmarked, following every change made through
-/// [bookmarkRepositoryProvider].
-final isBookmarkedProvider = StreamProvider.autoDispose.family<bool, int>((
-  ref,
-  ayahId,
-) async* {
-  final repository = await ref.watch(bookmarkRepositoryProvider.future);
-  yield repository.isSet(ayahId);
-  yield* repository.changes
-      .where((change) => change.ayahId == ayahId)
-      .map((change) => change.isSet);
-});
 
 /// Reports an error in ayah [ayahId] from the ayah menu.
 typedef AyahErrorReporter = Future<void> Function(

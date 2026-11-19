@@ -319,7 +319,7 @@ boundary, change reciter, pause and resume (quickstart scenarios 6 and 7).
 **Independent Test**: bookmark two ayahs and mark one memorised, restart, find and open all
 three (quickstart scenario 9).
 
-- [ ] T018 [US5] Build bookmarks and memorisation marks in `lib/features/bookmarks/`
+- [x] T018 [US5] Build bookmarks and memorisation marks in `lib/features/bookmarks/`
   (`bookmarks_screen.dart`, `ayah_indicators.dart`), the ayah menu and both reader views with
   `test/features/bookmarks/bookmarks_test.dart`
   - Add "Mark as memorised" to the ayah menu next to Bookmark; both are toggles that show

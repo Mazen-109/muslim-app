@@ -16,12 +16,14 @@ import 'quran_database.dart';
 
 /// The overrides every app test needs: mock preferences holding
 /// [preferences] (keys as in `SettingsRepository`), the bundled content
-/// database, an in-memory user database, and a silent audio player and wake
-/// lock ([audioPlayer] and [wakeLock] when given, fresh fakes otherwise).
+/// database, a user database ([openUserDatabase] when given, in memory
+/// otherwise), and a silent audio player and wake lock ([audioPlayer] and
+/// [wakeLock] when given, fresh fakes otherwise).
 Future<List<Override>> appTestOverrides({
   Map<String, Object> preferences = const <String, Object>{},
   AudioPlayerPort? audioPlayer,
   WakeLock? wakeLock,
+  UserDatabase Function()? openUserDatabase,
 }) async {
   SharedPreferences.setMockInitialValues(preferences);
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -33,7 +35,7 @@ Future<List<Override>> appTestOverrides({
       return database;
     }),
     userDatabaseProvider.overrideWith((ref) async {
-      final database = UserDatabase.inMemory();
+      final database = (openUserDatabase ?? UserDatabase.inMemory)();
       ref.onDispose(database.close);
       return database;
     }),
@@ -43,13 +45,15 @@ Future<List<Override>> appTestOverrides({
 }
 
 /// Pumps [MuslimApp] (or [child]) under a [ProviderScope] with
-/// [appTestOverrides] (with [audioPlayer] and [wakeLock]) plus [overrides],
+/// [appTestOverrides] (with [audioPlayer], [wakeLock] and
+/// [openUserDatabase]) plus [overrides],
 /// at [size] logical pixels when given, and settles. Returns the scope's container.
 Future<ProviderContainer> pumpApp(
   WidgetTester tester, {
   Map<String, Object> preferences = const <String, Object>{},
   AudioPlayerPort? audioPlayer,
   WakeLock? wakeLock,
+  UserDatabase Function()? openUserDatabase,
   List<Override> overrides = const <Override>[],
   Size? size,
   double devicePixelRatio = 2,
@@ -67,6 +71,7 @@ Future<ProviderContainer> pumpApp(
           preferences: preferences,
           audioPlayer: audioPlayer,
           wakeLock: wakeLock,
+          openUserDatabase: openUserDatabase,
         ),
         ...overrides,
       ],

@@ -8,6 +8,7 @@ import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../data/models/mushaf_page.dart';
 import '../../../data/models/surah.dart';
+import '../../bookmarks/ayah_indicators.dart';
 import 'page_line_widgets.dart';
 
 /// The fixed geometry of a Mushaf text block, in reference units (research
@@ -151,6 +152,7 @@ class MushafPageWidget extends StatelessWidget {
     required this.page,
     required this.heading,
     this.highlightedAyahId,
+    this.marks = AyahMarkSets.none,
     this.onAyahTap,
     this.onAyahLongPress,
   });
@@ -158,6 +160,10 @@ class MushafPageWidget extends StatelessWidget {
   final MushafPage page;
   final MushafPageHeading heading;
   final int? highlightedAyahId;
+
+  /// The ayahs whose end markers carry indicators.
+  final AyahMarkSets marks;
+
   final AyahCallback? onAyahTap;
   final AyahCallback? onAyahLongPress;
 
@@ -198,6 +204,7 @@ class MushafPageWidget extends StatelessWidget {
                       height: 1,
                     ),
                     highlightedAyahId: highlightedAyahId,
+                    marks: marks,
                     onAyahTap: onAyahTap,
                     onAyahLongPress: onAyahLongPress,
                   ),
@@ -220,6 +227,7 @@ class _TextBlock extends StatelessWidget {
     required this.quranStyle,
     required this.bannerStyle,
     this.highlightedAyahId,
+    this.marks = AyahMarkSets.none,
     this.onAyahTap,
     this.onAyahLongPress,
   });
@@ -229,6 +237,10 @@ class _TextBlock extends StatelessWidget {
   final TextStyle quranStyle;
   final TextStyle bannerStyle;
   final int? highlightedAyahId;
+
+  /// The ayahs whose end markers carry indicators.
+  final AyahMarkSets marks;
+
   final AyahCallback? onAyahTap;
   final AyahCallback? onAyahLongPress;
 
@@ -256,6 +268,7 @@ class _TextBlock extends StatelessWidget {
                   centreBelow: MushafGeometry.centreBelow,
                   forceCentred: centredPage,
                   highlightedAyahId: highlightedAyahId,
+                  marks: marks,
                   onAyahTap: onAyahTap,
                   onAyahLongPress: onAyahLongPress,
                 ),

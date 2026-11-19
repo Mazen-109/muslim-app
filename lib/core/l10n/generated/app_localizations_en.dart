@@ -135,6 +135,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get mushafIndicatorBookmarked => 'Bookmarked ayah';
+
+  @override
+  String get mushafIndicatorMemorised => 'Memorised ayah';
+
+  @override
   String get mushafFontErrorTitle => 'The Mushaf font could not be loaded';
 
   @override
@@ -226,6 +232,46 @@ class AppLocalizationsEn extends AppLocalizations {
   String searchResultPlace(String surah, int ayah) {
     return '$surah, ayah $ayah';
   }
+
+  @override
+  String get bookmarksSectionBookmarks => 'Bookmarks';
+
+  @override
+  String get bookmarksSectionMemorised => 'Memorised';
+
+  @override
+  String get bookmarksEmptyTitle => 'No bookmarks yet';
+
+  @override
+  String get bookmarksEmptyMessage =>
+      'Long press an ayah in the Mushaf and choose Bookmark.';
+
+  @override
+  String get memorisedEmptyTitle => 'No memorised ayahs yet';
+
+  @override
+  String get memorisedEmptyMessage =>
+      'Long press an ayah in the Mushaf and choose Mark as memorised.';
+
+  @override
+  String bookmarksRowDetails(int ayah, int page) {
+    return 'Ayah $ayah, page $page';
+  }
+
+  @override
+  String get bookmarksRemoveBookmark => 'Remove bookmark';
+
+  @override
+  String get bookmarksRemoveMemorised => 'Remove memorised mark';
+
+  @override
+  String get bookmarksBookmarkRemoved => 'Bookmark removed';
+
+  @override
+  String get bookmarksMemorisedRemoved => 'Memorised mark removed';
+
+  @override
+  String get bookmarksUndo => 'Undo';
 
   @override
   String tafsirSheetTitle(String surah, int ayah) {
@@ -333,6 +379,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ayahMenuRemoveBookmark => 'Remove bookmark';
+
+  @override
+  String get ayahMenuMarkMemorised => 'Mark as memorised';
+
+  @override
+  String get ayahMenuUnmarkMemorised => 'Remove memorised mark';
 
   @override
   String get ayahMenuShare => 'Share';

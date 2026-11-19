@@ -326,6 +326,18 @@ abstract class AppLocalizations {
   /// **'الصفحة {page}'**
   String mushafPageNumber(int page);
 
+  /// Screen reader label of the small bookmark mark drawn by an ayah's end marker in the reader.
+  ///
+  /// In ar, this message translates to:
+  /// **'آية عليها علامة'**
+  String get mushafIndicatorBookmarked;
+
+  /// Screen reader label of the small memorised mark drawn by an ayah's end marker in the reader.
+  ///
+  /// In ar, this message translates to:
+  /// **'آية محفوظة'**
+  String get mushafIndicatorMemorised;
+
   /// Heading of the blocking error shown instead of the Mushaf when its font is missing or altered.
   ///
   /// In ar, this message translates to:
@@ -451,6 +463,78 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'{surah}، الآية {ayah}'**
   String searchResultPlace(String surah, int ayah);
+
+  /// Heading of the bookmarks section of the bookmarks screen.
+  ///
+  /// In ar, this message translates to:
+  /// **'العلامات'**
+  String get bookmarksSectionBookmarks;
+
+  /// Heading of the memorised section of the bookmarks screen: ayahs the reader marked as memorised.
+  ///
+  /// In ar, this message translates to:
+  /// **'المحفوظة'**
+  String get bookmarksSectionMemorised;
+
+  /// Shown in the bookmarks section when no ayah is bookmarked.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا علامات بعد'**
+  String get bookmarksEmptyTitle;
+
+  /// How to add a bookmark, under the empty bookmarks section. Names the ayah menu action ayahMenuAddBookmark.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط مطولًا على آية في المصحف واختر «إضافة علامة».'**
+  String get bookmarksEmptyMessage;
+
+  /// Shown in the memorised section when no ayah is marked as memorised.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا آيات محفوظة بعد'**
+  String get memorisedEmptyTitle;
+
+  /// How to mark an ayah as memorised, under the empty memorised section. Names the ayah menu action ayahMenuMarkMemorised.
+  ///
+  /// In ar, this message translates to:
+  /// **'اضغط مطولًا على آية في المصحف واختر «تحديد كمحفوظة».'**
+  String get memorisedEmptyMessage;
+
+  /// Under the surah name in a row of the bookmarks screen: the ayah number and the Mushaf page of the ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية {ayah}، صفحة {page}'**
+  String bookmarksRowDetails(int ayah, int page);
+
+  /// Tooltip and screen reader label of the button that removes a bookmark from the bookmarks screen.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة العلامة'**
+  String get bookmarksRemoveBookmark;
+
+  /// Tooltip and screen reader label of the button that removes a memorised mark from the bookmarks screen.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة علامة الحفظ'**
+  String get bookmarksRemoveMemorised;
+
+  /// Snackbar after a bookmark is removed from the bookmarks screen; it has an undo action.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُزيلت العلامة'**
+  String get bookmarksBookmarkRemoved;
+
+  /// Snackbar after a memorised mark is removed from the bookmarks screen; it has an undo action.
+  ///
+  /// In ar, this message translates to:
+  /// **'أُزيلت علامة الحفظ'**
+  String get bookmarksMemorisedRemoved;
+
+  /// Snackbar action that puts back the bookmark or memorised mark just removed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تراجع'**
+  String get bookmarksUndo;
 
   /// Heading of the tafsir sheet: the surah name (from the content database) and the number of the ayah shown.
   ///
@@ -625,6 +709,18 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'إزالة العلامة'**
   String get ayahMenuRemoveBookmark;
+
+  /// Ayah menu action that marks this ayah as memorised.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديد كمحفوظة'**
+  String get ayahMenuMarkMemorised;
+
+  /// Ayah menu action that removes the memorised mark from this ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة علامة الحفظ'**
+  String get ayahMenuUnmarkMemorised;
 
   /// Ayah menu action that opens the system share sheet with the ayah's text, its surah name and its number.
   ///

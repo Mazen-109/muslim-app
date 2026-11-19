@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../data/models/ayah.dart';
+import '../../bookmarks/ayah_indicators.dart';
 import '../page_view/page_line_widgets.dart';
 
 /// Ayahs set as one justified, right-to-left paragraph of flowing text.
@@ -13,7 +14,9 @@ import '../page_view/page_line_widgets.dart';
 /// Each ayah is its stored display text, unchanged, end marker included;
 /// one space separates two ayahs. A tap or long press anywhere on the text
 /// reports the id of the ayah under it, as the page view's words do, and
-/// [highlightedAyahId] is drawn on the ayah wash behind its lines.
+/// [highlightedAyahId] is drawn on the ayah wash behind its lines. An ayah
+/// in [marks] gets its [AyahIndicators] above its end marker, at the top of
+/// the marker's line; the text itself is never changed.
 ///
 /// [AyahParagraphState.ayahTops] tells the continuous view where each ayah
 /// starts, which is how it keeps the current ayah on screen.
@@ -23,6 +26,7 @@ class AyahParagraph extends StatefulWidget {
     required this.ayahs,
     required this.style,
     this.highlightedAyahId,
+    this.marks = AyahMarkSets.none,
     this.onAyahTap,
     this.onAyahLongPress,
   });
@@ -33,6 +37,10 @@ class AyahParagraph extends StatefulWidget {
   final TextStyle style;
 
   final int? highlightedAyahId;
+
+  /// The ayahs that carry a bookmark or a memorised mark.
+  final AyahMarkSets marks;
+
   final AyahCallback? onAyahTap;
   final AyahCallback? onAyahLongPress;
 
@@ -87,6 +95,42 @@ class AyahParagraphState extends State<AyahParagraph> {
     extentOffset: _starts[index] + widget.ayahs[index].textQpcHafs.length,
   );
 
+  /// The range of ayah [index]'s end marker: the run of Arabic-Indic digits
+  /// (U+0660 to U+0669) that ends the stored text, which the Hafs font draws
+  /// as the numbered marker. The whole ayah when there is no such run.
+  TextSelection _markerRangeOf(int index) {
+    final text = widget.ayahs[index].textQpcHafs;
+    var start = text.length;
+    while (start > 0 && _isArabicIndicDigit(text.codeUnitAt(start - 1))) {
+      start--;
+    }
+    if (start == text.length) start = 0;
+    return TextSelection(
+      baseOffset: _starts[index] + start,
+      extentOffset: _starts[index] + text.length,
+    );
+  }
+
+  static bool _isArabicIndicDigit(int unit) => unit >= 0x0660 && unit <= 0x0669;
+
+  /// The box of ayah [index]'s end marker, from the top of its line to the
+  /// bottom, in the paragraph's coordinates; null before the first layout.
+  Rect? _markerRect(int index) {
+    final paragraph = _paragraph;
+    if (paragraph == null) return null;
+    final boxes = paragraph.getBoxesForSelection(
+      _markerRangeOf(index),
+      boxHeightStyle: BoxHeightStyle.max,
+    );
+    if (boxes.isEmpty) return null;
+    // A marker never breaks across lines; keep the boxes of its last line.
+    final last = boxes.last.toRect();
+    return boxes
+        .map((b) => b.toRect())
+        .where((r) => (r.center.dy - last.center.dy).abs() < last.height / 2)
+        .reduce((a, b) => a.expandToInclude(b));
+  }
+
   int _ayahAtOffset(int offset) {
     for (var i = _starts.length - 1; i > 0; i--) {
       if (_starts[i] <= offset) return widget.ayahs[i].id;
@@ -137,6 +181,12 @@ class AyahParagraphState extends State<AyahParagraph> {
         : widget.ayahs.indexWhere((a) => a.id == highlight);
     final tap = widget.onAyahTap;
     final longPress = widget.onAyahLongPress;
+    final marks = widget.marks;
+    final marked = <int>[
+      if (!marks.isEmpty)
+        for (var i = 0; i < widget.ayahs.length; i++)
+          if (marks.marks(widget.ayahs[i].id)) i,
+    ];
 
     final text = RichText(
       key: _textKey,
@@ -168,30 +218,91 @@ class AyahParagraphState extends State<AyahParagraph> {
               final id = _ayahAt(details.globalPosition);
               if (id != null) longPress(id);
             },
-      child: highlightIndex < 0
+      child: highlightIndex < 0 && marked.isEmpty
           ? text
           : Stack(
               children: <Widget>[
-                Positioned.fill(
-                  child: CustomPaint(
-                    painter: _HighlightPainter(
-                      boxes: () {
-                        final paragraph = _paragraph;
-                        return paragraph == null
-                            ? const <TextBox>[]
-                            : _boxes(paragraph, highlightIndex);
-                      },
-                      ayahId: highlight!,
-                      style: widget.style,
-                      color: AppColors.of(context).ayahHighlight,
+                if (highlightIndex >= 0)
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: _HighlightPainter(
+                        boxes: () {
+                          final paragraph = _paragraph;
+                          return paragraph == null
+                              ? const <TextBox>[]
+                              : _boxes(paragraph, highlightIndex);
+                        },
+                        ayahId: highlight!,
+                        style: widget.style,
+                        color: AppColors.of(context).ayahHighlight,
+                      ),
                     ),
                   ),
-                ),
                 text,
+                // Laid out after the text, which places them.
+                if (marked.isNotEmpty)
+                  Positioned.fill(
+                    child: CustomMultiChildLayout(
+                      delegate: _MarkDelegate(
+                        marked: marked,
+                        markerRect: _markerRect,
+                      ),
+                      children: <Widget>[
+                        for (final i in marked)
+                          LayoutId(
+                            id: i,
+                            child: AyahIndicators(
+                              key: AyahIndicatorKey(widget.ayahs[i].id),
+                              ayahId: widget.ayahs[i].id,
+                              bookmarked: marks.bookmarked.contains(
+                                widget.ayahs[i].id,
+                              ),
+                              memorised: marks.memorised.contains(
+                                widget.ayahs[i].id,
+                              ),
+                              size:
+                                  MediaQuery.textScalerOf(context)
+                                      .scale(widget.style.fontSize!) *
+                                  AyahIndicators.sizeEm,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
               ],
             ),
     );
   }
+}
+
+/// Centres the indicators of each marked ayah over its end marker, at the
+/// top of the marker's line. The marker boxes are read at layout time,
+/// after the paragraph that the stack lays out first.
+class _MarkDelegate extends MultiChildLayoutDelegate {
+  _MarkDelegate({required this.marked, required this.markerRect});
+
+  /// The indexes of the marked ayahs, which are also the children's ids.
+  final List<int> marked;
+  final Rect? Function(int index) markerRect;
+
+  @override
+  void performLayout(Size size) {
+    for (final i in marked) {
+      final mark = layoutChild(i, BoxConstraints.loose(size));
+      final rect = markerRect(i);
+      positionChild(
+        i,
+        rect == null
+            ? Offset.zero
+            : Offset(rect.center.dx - mark.width / 2, rect.top),
+      );
+    }
+  }
+
+  // The marker boxes depend on the text's layout, which a new delegate
+  // comes with; always place the marks again.
+  @override
+  bool shouldRelayout(_MarkDelegate old) => true;
 }
 
 /// Draws the ayah wash behind the lines of one ayah. The boxes are read at

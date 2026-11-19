@@ -95,6 +95,19 @@ class BookmarkRepository {
     _emitIfChanged(ayahId, isSet: true);
   }
 
+  /// Puts back [mark] with its original time, so an undone removal returns
+  /// to its place in [list]. Does nothing when the ayah is already marked.
+  /// Throws [RangeError] outside 1 to 6236.
+  void restore(AyahMark mark) {
+    _checkAyahId(mark.ayahId);
+    _database.db.execute(
+      'INSERT OR IGNORE INTO ${kind.table} (ayah_id, created_at) '
+      'VALUES (?, ?)',
+      <Object?>[mark.ayahId, mark.createdAt.millisecondsSinceEpoch],
+    );
+    _emitIfChanged(mark.ayahId, isSet: true);
+  }
+
   /// Clears the mark on [ayahId].
   void remove(int ayahId) {
     _database.db.execute(
@@ -168,4 +181,42 @@ final bookmarkRepositoryProvider = _markRepositoryProvider(
 /// The user's memorisation marks.
 final memorisationRepositoryProvider = _markRepositoryProvider(
   AyahMarkKind.memorisation,
+);
+
+/// The repository of [kind]: [bookmarkRepositoryProvider] or
+/// [memorisationRepositoryProvider].
+FutureProvider<BookmarkRepository> markRepositoryProvider(AyahMarkKind kind) =>
+    switch (kind) {
+      AyahMarkKind.bookmark => bookmarkRepositoryProvider,
+      AyahMarkKind.memorisation => memorisationRepositoryProvider,
+    };
+
+/// Every mark of one kind, newest first ([BookmarkRepository.list]), again
+/// after each change made through the repository.
+final ayahMarksProvider = StreamProvider.family<List<AyahMark>, AyahMarkKind>((
+  ref,
+  kind,
+) async* {
+  final repository = await ref.watch(markRepositoryProvider(kind).future);
+  // Listen before the first read, so that no change falls between the two.
+  final updates = StreamController<List<AyahMark>>();
+  final subscription = repository.changes.listen(
+    (_) => updates.add(repository.list()),
+  );
+  ref.onDispose(() {
+    subscription.cancel();
+    updates.close();
+  });
+  updates.add(repository.list());
+  yield* updates.stream;
+});
+
+/// The ids of the ayahs that carry a mark of one kind; empty while the user
+/// database opens. The reader's indicators and the ayah menu follow it.
+final markedAyahIdsProvider = Provider.family<Set<int>, AyahMarkKind>(
+  (ref, kind) => <int>{
+    for (final mark
+        in ref.watch(ayahMarksProvider(kind)).value ?? const <AyahMark>[])
+      mark.ayahId,
+  },
 );

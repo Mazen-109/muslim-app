@@ -27,15 +27,6 @@ class _Placeholder extends StatelessWidget {
   }
 }
 
-/// `/bookmarks`.
-class BookmarksPlaceholder extends StatelessWidget {
-  const BookmarksPlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context) =>
-      _Placeholder(title: (l10n) => l10n.navBookmarks);
-}
-
 /// `/stories`.
 class StoriesPlaceholder extends StatelessWidget {
   const StoriesPlaceholder({super.key});

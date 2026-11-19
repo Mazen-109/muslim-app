@@ -111,6 +111,37 @@ void main() {
         ]);
       });
 
+      test('restore puts a removed mark back with its original time', () async {
+        repository.add(30);
+        clock.advance();
+        repository.add(40);
+        clock.advance();
+        repository.add(50);
+        final before = repository.list();
+        final removed = before[1];
+
+        final events = <AyahMarkChange>[];
+        final subscription = repository.changes.listen(events.add);
+        addTearDown(subscription.cancel);
+        repository.remove(removed.ayahId);
+        clock.advance(500);
+        repository.restore(removed);
+        repository.restore(removed); // no-op
+        await Future<void>.delayed(Duration.zero);
+
+        expect(repository.list(), before);
+        expect(events, const <AyahMarkChange>[
+          AyahMarkChange(ayahId: 40, isSet: false),
+          AyahMarkChange(ayahId: 40, isSet: true),
+        ]);
+        expect(
+          () => repository.restore(
+            AyahMark(ayahId: 0, createdAt: DateTime.utc(2026)),
+          ),
+          throwsRangeError,
+        );
+      });
+
       test('changes is a broadcast stream', () {
         expect(repository.changes.isBroadcast, isTrue);
       });
@@ -156,4 +187,62 @@ void main() {
       AyahMark(ayahId: 9, createdAt: DateTime.fromMillisecondsSinceEpoch(1000)),
     );
   });
+
+  test(
+    'ayahMarksProvider and markedAyahIdsProvider follow every change',
+    () async {
+      final database = UserDatabase.inMemory();
+      addTearDown(database.close);
+      final clock = _FakeClock();
+      final container = ProviderContainer.test(
+        overrides: [
+          userDatabaseProvider.overrideWithValue(AsyncData(database)),
+          clockProvider.overrideWithValue(clock.call),
+        ],
+      );
+      for (final kind in AyahMarkKind.values) {
+        container.listen(ayahMarksProvider(kind), (_, _) {});
+        container.listen(markedAyahIdsProvider(kind), (_, _) {});
+      }
+      expect(
+        markRepositoryProvider(AyahMarkKind.bookmark),
+        bookmarkRepositoryProvider,
+      );
+      expect(
+        markRepositoryProvider(AyahMarkKind.memorisation),
+        memorisationRepositoryProvider,
+      );
+
+      final bookmarks = await container.read(bookmarkRepositoryProvider.future);
+      final marks = await container.read(memorisationRepositoryProvider.future);
+      expect(
+        await container.read(ayahMarksProvider(AyahMarkKind.bookmark).future),
+        isEmpty,
+      );
+
+      bookmarks.add(5);
+      clock.advance();
+      bookmarks.add(7);
+      marks.add(9);
+      await Future<void>.delayed(Duration.zero);
+      expect(
+        container
+            .read(ayahMarksProvider(AyahMarkKind.bookmark))
+            .requireValue
+            .map((m) => m.ayahId),
+        <int>[7, 5],
+      );
+      expect(container.read(markedAyahIdsProvider(AyahMarkKind.bookmark)), {
+        5,
+        7,
+      });
+      expect(container.read(markedAyahIdsProvider(AyahMarkKind.memorisation)), {
+        9,
+      });
+
+      bookmarks.remove(5);
+      await Future<void>.delayed(Duration.zero);
+      expect(container.read(markedAyahIdsProvider(AyahMarkKind.bookmark)), {7});
+    },
+  );
 }

@@ -38,9 +38,11 @@ const ValueKey<String> ayahMenuReciterKey = ValueKey<String>(
 /// Opens the ayah menu (spec US4, FR-017) for ayah [ayahId] over the reader,
 /// and carries out the action chosen there.
 ///
-/// The ayah is highlighted while the menu is open. Bookmark and the reciter
-/// shortcut act inside the menu, which stays open; every other action closes
-/// the menu first and then runs from [context]:
+/// The ayah is highlighted while the menu is open. Bookmark, Mark as
+/// memorised and the reciter shortcut act inside the menu, which stays open;
+/// Bookmark and Mark as memorised are toggles that show the ayah's current
+/// state. Every other action closes the menu first and then runs from
+/// [context]:
 ///
 /// - Listen recites only this ayah, once.
 /// - Repeat asks for a count ([showRepeatPicker]) and recites the ayah that
@@ -104,6 +106,7 @@ Future<void> _run(
     case AyahAction.report:
       await container.read(ayahErrorReporterProvider)?.call(context, ayahId);
     case AyahAction.bookmark:
+    case AyahAction.memorise:
       // Handled inside the menu, which stays open.
       break;
   }
@@ -137,7 +140,15 @@ class AyahMenuSheet extends ConsumerWidget {
     final repeatCount = ref.watch(repeatCountProvider);
     final hasStory =
         ref.watch(playableSurahStoryProvider(ayah.surahId)) != null;
-    final bookmarked = ref.watch(isBookmarkedProvider(ayahId)).value ?? false;
+    bool isMarked(AyahMarkKind kind) =>
+        ref.watch(markedAyahIdsProvider(kind)).contains(ayahId);
+    final bookmarked = isMarked(AyahMarkKind.bookmark);
+    final memorised = isMarked(AyahMarkKind.memorisation);
+
+    Future<void> toggle(AyahMarkKind kind) async {
+      (await ref.read(markRepositoryProvider(kind).future)).toggle(ayahId);
+    }
+
     final reporter = ref.watch(ayahErrorReporterProvider);
 
     void close(AyahAction action) => Navigator.of(context).pop(action);
@@ -209,12 +220,16 @@ class AyahMenuSheet extends ConsumerWidget {
               title: bookmarked
                   ? l10n.ayahMenuRemoveBookmark
                   : l10n.ayahMenuAddBookmark,
-              onTap: () async {
-                final repository = await ref.read(
-                  bookmarkRepositoryProvider.future,
-                );
-                repository.toggle(ayahId);
-              },
+              onTap: () => toggle(AyahMarkKind.bookmark),
+            ),
+            AyahAction.memorise => row(
+              action,
+              icon: memorised ? Icons.check_circle : Icons.check_circle_outline,
+              iconColor: memorised ? scheme.primary : null,
+              title: memorised
+                  ? l10n.ayahMenuUnmarkMemorised
+                  : l10n.ayahMenuMarkMemorised,
+              onTap: () => toggle(AyahMarkKind.memorisation),
             ),
             AyahAction.share => row(
               action,

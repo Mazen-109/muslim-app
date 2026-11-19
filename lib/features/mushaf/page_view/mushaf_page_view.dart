@@ -4,6 +4,7 @@ import 'package:material_ui/material_ui.dart';
 import '../../../core/theme/app_motion.dart';
 import '../../../data/models/mushaf_page.dart';
 import '../../../data/quran_repository.dart';
+import '../../bookmarks/ayah_indicators.dart';
 import '../reader_controller.dart';
 import 'mushaf_page_widget.dart';
 import 'page_line_widgets.dart';
@@ -131,6 +132,7 @@ class _PageSlot extends ConsumerWidget {
       page: data.page,
       heading: data.heading,
       highlightedAyahId: highlighted,
+      marks: ref.watch(ayahMarkSetsProvider),
       onAyahTap: onAyahTap,
       onAyahLongPress: onAyahLongPress,
     );

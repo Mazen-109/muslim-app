@@ -178,6 +178,14 @@
       }
     }
   },
+  "mushafIndicatorBookmarked": "آية عليها علامة",
+  "@mushafIndicatorBookmarked": {
+    "description": "Screen reader label of the small bookmark mark drawn by an ayah's end marker in the reader."
+  },
+  "mushafIndicatorMemorised": "آية محفوظة",
+  "@mushafIndicatorMemorised": {
+    "description": "Screen reader label of the small memorised mark drawn by an ayah's end marker in the reader."
+  },
   "mushafFontErrorTitle": "تعذّر تحميل خط المصحف",
   "@mushafFontErrorTitle": {
     "description": "Heading of the blocking error shown instead of the Mushaf when its font is missing or altered."
@@ -305,6 +313,62 @@
         "type": "int"
       }
     }
+  },
+  "bookmarksSectionBookmarks": "العلامات",
+  "@bookmarksSectionBookmarks": {
+    "description": "Heading of the bookmarks section of the bookmarks screen."
+  },
+  "bookmarksSectionMemorised": "المحفوظة",
+  "@bookmarksSectionMemorised": {
+    "description": "Heading of the memorised section of the bookmarks screen: ayahs the reader marked as memorised."
+  },
+  "bookmarksEmptyTitle": "لا علامات بعد",
+  "@bookmarksEmptyTitle": {
+    "description": "Shown in the bookmarks section when no ayah is bookmarked."
+  },
+  "bookmarksEmptyMessage": "اضغط مطولًا على آية في المصحف واختر «إضافة علامة».",
+  "@bookmarksEmptyMessage": {
+    "description": "How to add a bookmark, under the empty bookmarks section. Names the ayah menu action ayahMenuAddBookmark."
+  },
+  "memorisedEmptyTitle": "لا آيات محفوظة بعد",
+  "@memorisedEmptyTitle": {
+    "description": "Shown in the memorised section when no ayah is marked as memorised."
+  },
+  "memorisedEmptyMessage": "اضغط مطولًا على آية في المصحف واختر «تحديد كمحفوظة».",
+  "@memorisedEmptyMessage": {
+    "description": "How to mark an ayah as memorised, under the empty memorised section. Names the ayah menu action ayahMenuMarkMemorised."
+  },
+  "bookmarksRowDetails": "الآية {ayah}، صفحة {page}",
+  "@bookmarksRowDetails": {
+    "description": "Under the surah name in a row of the bookmarks screen: the ayah number and the Mushaf page of the ayah.",
+    "placeholders": {
+      "ayah": {
+        "type": "int"
+      },
+      "page": {
+        "type": "int"
+      }
+    }
+  },
+  "bookmarksRemoveBookmark": "إزالة العلامة",
+  "@bookmarksRemoveBookmark": {
+    "description": "Tooltip and screen reader label of the button that removes a bookmark from the bookmarks screen."
+  },
+  "bookmarksRemoveMemorised": "إزالة علامة الحفظ",
+  "@bookmarksRemoveMemorised": {
+    "description": "Tooltip and screen reader label of the button that removes a memorised mark from the bookmarks screen."
+  },
+  "bookmarksBookmarkRemoved": "أُزيلت العلامة",
+  "@bookmarksBookmarkRemoved": {
+    "description": "Snackbar after a bookmark is removed from the bookmarks screen; it has an undo action."
+  },
+  "bookmarksMemorisedRemoved": "أُزيلت علامة الحفظ",
+  "@bookmarksMemorisedRemoved": {
+    "description": "Snackbar after a memorised mark is removed from the bookmarks screen; it has an undo action."
+  },
+  "bookmarksUndo": "تراجع",
+  "@bookmarksUndo": {
+    "description": "Snackbar action that puts back the bookmark or memorised mark just removed."
   },
   "tafsirSheetTitle": "{surah}، الآية {ayah}",
   "@tafsirSheetTitle": {
@@ -473,6 +537,14 @@
   "ayahMenuRemoveBookmark": "إزالة العلامة",
   "@ayahMenuRemoveBookmark": {
     "description": "Ayah menu action that removes the bookmark from this ayah."
+  },
+  "ayahMenuMarkMemorised": "تحديد كمحفوظة",
+  "@ayahMenuMarkMemorised": {
+    "description": "Ayah menu action that marks this ayah as memorised."
+  },
+  "ayahMenuUnmarkMemorised": "إزالة علامة الحفظ",
+  "@ayahMenuUnmarkMemorised": {
+    "description": "Ayah menu action that removes the memorised mark from this ayah."
   },
   "ayahMenuShare": "مشاركة",
   "@ayahMenuShare": {

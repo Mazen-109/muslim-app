@@ -12,6 +12,7 @@ import '../../../data/models/surah.dart';
 import '../../../data/models/word.dart';
 import '../../../data/quran_repository.dart';
 import '../../autoscroll/autoscroll_controller.dart';
+import '../../bookmarks/ayah_indicators.dart';
 import '../page_view/page_line_widgets.dart';
 import '../reader_controller.dart';
 import 'ayah_paragraph.dart';
@@ -307,6 +308,7 @@ class _ContinuousViewState extends ConsumerState<ContinuousView>
       readerControllerProvider.select((s) => s.highlightedAyahId),
     );
     final data = ref.watch(continuousSurahProvider(_surahId));
+    final marks = ref.watch(ayahMarkSetsProvider);
     final surah = data.surah;
     final autoscroll = ref.watch(autoscrollControllerProvider);
     final tapPauses =
@@ -346,6 +348,7 @@ class _ContinuousViewState extends ConsumerState<ContinuousView>
             ayahs: data.paragraphs[i],
             style: style,
             highlightedAyahId: highlighted,
+            marks: marks,
             onAyahTap: onAyahTap,
             onAyahLongPress: widget.onAyahLongPress,
           ),

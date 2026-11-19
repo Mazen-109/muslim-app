@@ -363,7 +363,10 @@ indicator's pill. The Mushaf page itself has square corners.
 The page sits on its own Page colour, edge to edge on a phone. A running head (surah name at
 the start, juz at the end) is set in label small, Faded Ink, above a hairline Rule; the page
 number sits centred below the text block in the same style. The ayah being recited or
-selected gets the Ayah Wash behind its words; nothing else on the page is coloured. Chrome
+selected gets the Ayah Wash behind its words. A bookmarked or memorised ayah carries a small
+mark centred above its end marker, in the space the line leaves there, never over the text: a
+bookmark ribbon in Lapis Ink and a check in Faded Ink, side by side when it has both, each
+0.45 em of the Quran font. Nothing else on the page is coloured. Chrome
 (app bar, audio bar) appears over the ground only when the reader taps, and fades in and out.
 
 ### Motion

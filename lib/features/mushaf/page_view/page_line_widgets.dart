@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../data/models/surah.dart';
 import '../../../data/models/word.dart';
+import '../../bookmarks/ayah_indicators.dart';
 
 /// Called with the id of the ayah a word belongs to.
 typedef AyahCallback = void Function(int ayahId);
@@ -32,7 +34,9 @@ enum LineSetting {
 
 /// One line of ayah text. Each word is its own hit target and reports its
 /// ayah id on tap and long press. The words of [highlightedAyahId] sit on
-/// one continuous wash that also covers the space between them.
+/// one continuous wash that also covers the space between them. An ayah
+/// whose end marker is on this line and that the reader bookmarked or
+/// memorised ([marks]) gets its [AyahIndicators] above the marker.
 ///
 /// The line is laid out in the page's reference units: [style] carries the
 /// reference font size, [slotHeight] the height of a line slot. The page
@@ -47,6 +51,7 @@ class AyahLineWidget extends StatelessWidget {
     required this.centreBelow,
     this.forceCentred = false,
     this.highlightedAyahId,
+    this.marks = AyahMarkSets.none,
     this.onAyahTap,
     this.onAyahLongPress,
   });
@@ -66,12 +71,22 @@ class AyahLineWidget extends StatelessWidget {
   final bool forceCentred;
 
   final int? highlightedAyahId;
+
+  /// The ayahs that carry a bookmark or a memorised mark.
+  final AyahMarkSets marks;
+
   final AyahCallback? onAyahTap;
   final AyahCallback? onAyahLongPress;
 
   @override
   Widget build(BuildContext context) {
     final highlight = highlightedAyahId;
+    final marked = <int>[
+      for (var i = 0; i < words.length; i++)
+        if (words[i].charType == WordCharType.end &&
+            marks.marks(words[i].ayahId))
+          i,
+    ];
     final highlighted = <int>[
       for (var i = 0; i < words.length; i++)
         if (highlight != null && words[i].ayahId == highlight) i,
@@ -82,6 +97,7 @@ class AyahLineWidget extends StatelessWidget {
         highlighted: highlighted.isEmpty
             ? null
             : (highlighted.first, highlighted.last),
+        marked: marked,
         slotHeight: slotHeight,
         spaceWidth: spaceWidth,
         centreBelow: centreBelow,
@@ -96,6 +112,18 @@ class AyahLineWidget extends StatelessWidget {
                 color: AppColors.of(context).ayahHighlight,
                 borderRadius: AppRadii.smAll,
               ),
+            ),
+          ),
+        // Before the words, so that a mark never paints over the text.
+        for (final i in marked)
+          LayoutId(
+            id: _MarkId(i),
+            child: AyahIndicators(
+              key: AyahIndicatorKey(words[i].ayahId),
+              ayahId: words[i].ayahId,
+              bookmarked: marks.bookmarked.contains(words[i].ayahId),
+              memorised: marks.memorised.contains(words[i].ayahId),
+              size: style.fontSize! * AyahIndicators.sizeEm,
             ),
           ),
         for (var i = 0; i < words.length; i++)
@@ -244,15 +272,33 @@ class _WordTarget extends StatelessWidget {
 
 const Object _highlightId = #highlight;
 
+/// The layout id of the indicators above the end marker at word index
+/// [index].
+@immutable
+class _MarkId {
+  const _MarkId(this.index);
+
+  final int index;
+
+  @override
+  bool operator ==(Object other) => other is _MarkId && other.index == index;
+
+  @override
+  int get hashCode => index.hashCode;
+}
+
 /// Places the words of one line right to left inside the line's slot.
 ///
 /// Every word is laid out at the slot height. A justified line shares the
 /// remaining width equally between its gaps; a centred line uses the
 /// natural space. Each word's hit area is its box, the full slot high. The
 /// highlight wash spans the highlighted words and the gaps between them.
+/// The indicators of a marked end marker are centred over it, at the top of
+/// the slot.
 class _LineDelegate extends MultiChildLayoutDelegate {
   _LineDelegate({
     required this.wordCount,
+    this.marked = const <int>[],
     required this.slotHeight,
     required this.spaceWidth,
     required this.centreBelow,
@@ -268,6 +314,9 @@ class _LineDelegate extends MultiChildLayoutDelegate {
 
   /// The first and last index of the highlighted words, or null.
   final (int, int)? highlighted;
+
+  /// The indexes of the end markers that carry indicators.
+  final List<int> marked;
 
   @override
   void performLayout(Size size) {
@@ -311,6 +360,14 @@ class _LineDelegate extends MultiChildLayoutDelegate {
       );
       positionChild(_highlightId, Offset(hlLeft, top));
     }
+
+    for (final i in marked) {
+      final mark = layoutChild(_MarkId(i), BoxConstraints.loose(size));
+      positionChild(
+        _MarkId(i),
+        Offset(lefts[i] + (widths[i] - mark.width) / 2, top),
+      );
+    }
   }
 
   @override
@@ -320,5 +377,6 @@ class _LineDelegate extends MultiChildLayoutDelegate {
       old.spaceWidth != spaceWidth ||
       old.centreBelow != centreBelow ||
       old.forceCentred != forceCentred ||
-      old.highlighted != highlighted;
+      old.highlighted != highlighted ||
+      !listEquals(old.marked, marked);
 }

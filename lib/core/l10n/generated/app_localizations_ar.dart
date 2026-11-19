@@ -134,6 +134,12 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get mushafIndicatorBookmarked => 'آية عليها علامة';
+
+  @override
+  String get mushafIndicatorMemorised => 'آية محفوظة';
+
+  @override
   String get mushafFontErrorTitle => 'تعذّر تحميل خط المصحف';
 
   @override
@@ -229,6 +235,46 @@ class AppLocalizationsAr extends AppLocalizations {
   String searchResultPlace(String surah, int ayah) {
     return '$surah، الآية $ayah';
   }
+
+  @override
+  String get bookmarksSectionBookmarks => 'العلامات';
+
+  @override
+  String get bookmarksSectionMemorised => 'المحفوظة';
+
+  @override
+  String get bookmarksEmptyTitle => 'لا علامات بعد';
+
+  @override
+  String get bookmarksEmptyMessage =>
+      'اضغط مطولًا على آية في المصحف واختر «إضافة علامة».';
+
+  @override
+  String get memorisedEmptyTitle => 'لا آيات محفوظة بعد';
+
+  @override
+  String get memorisedEmptyMessage =>
+      'اضغط مطولًا على آية في المصحف واختر «تحديد كمحفوظة».';
+
+  @override
+  String bookmarksRowDetails(int ayah, int page) {
+    return 'الآية $ayah، صفحة $page';
+  }
+
+  @override
+  String get bookmarksRemoveBookmark => 'إزالة العلامة';
+
+  @override
+  String get bookmarksRemoveMemorised => 'إزالة علامة الحفظ';
+
+  @override
+  String get bookmarksBookmarkRemoved => 'أُزيلت العلامة';
+
+  @override
+  String get bookmarksMemorisedRemoved => 'أُزيلت علامة الحفظ';
+
+  @override
+  String get bookmarksUndo => 'تراجع';
 
   @override
   String tafsirSheetTitle(String surah, int ayah) {
@@ -339,6 +385,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get ayahMenuRemoveBookmark => 'إزالة العلامة';
+
+  @override
+  String get ayahMenuMarkMemorised => 'تحديد كمحفوظة';
+
+  @override
+  String get ayahMenuUnmarkMemorised => 'إزالة علامة الحفظ';
 
   @override
   String get ayahMenuShare => 'مشاركة';
