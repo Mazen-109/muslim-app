@@ -183,11 +183,22 @@ class _ContinuousViewState extends ConsumerState<ContinuousView> {
     return across;
   }
 
+  bool _reportScheduled = false;
+
+  /// Reports the ayah at the top once the frame that the scroll caused has
+  /// been laid out: a scroll notification arrives before the list moves.
   void _report() {
-    final id = _topAyah();
-    if (id == null) return;
-    _reported = id;
-    ref.read(readerControllerProvider.notifier).setCurrentAyah(id);
+    if (_reportScheduled) return;
+    _reportScheduled = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _reportScheduled = false;
+      if (!mounted) return;
+      final id = _topAyah();
+      if (id == null) return;
+      _reported = id;
+      ref.read(readerControllerProvider.notifier).setCurrentAyah(id);
+    });
+    WidgetsBinding.instance.ensureVisualUpdate();
   }
 
   bool _onScroll(ScrollNotification notification) {

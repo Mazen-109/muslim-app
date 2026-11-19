@@ -8,12 +8,6 @@ import '../../../core/theme/app_spacing.dart';
 import '../../../data/models/ayah.dart';
 import '../page_view/page_line_widgets.dart';
 
-/// The key of the paragraph whose first ayah is [value]. Tests find
-/// paragraphs by it.
-class AyahParagraphKey extends ValueKey<int> {
-  const AyahParagraphKey(super.value);
-}
-
 /// Ayahs set as one justified, right-to-left paragraph of flowing text.
 ///
 /// Each ayah is its stored display text, unchanged, end marker included;
@@ -217,13 +211,24 @@ class _HighlightPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()..color = color;
+    // The text gives one box per run; the boxes of one line are joined so
+    // that the wash under a line is one shape, as in the page view.
+    final lines = <Rect>[];
     for (final box in boxes()) {
+      final rect = box.toRect();
+      final i = lines.indexWhere(
+        (line) => (line.center.dy - rect.center.dy).abs() < rect.height / 2,
+      );
+      if (i < 0) {
+        lines.add(rect);
+      } else {
+        lines[i] = lines[i].expandToInclude(rect);
+      }
+    }
+    final paint = Paint()..color = color;
+    for (final line in lines) {
       canvas.drawRRect(
-        RRect.fromRectAndRadius(
-          box.toRect(),
-          const Radius.circular(AppRadii.sm),
-        ),
+        RRect.fromRectAndRadius(line, const Radius.circular(AppRadii.sm)),
         paint,
       );
     }
