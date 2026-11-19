@@ -30,6 +30,9 @@ class SettingNotifier<T> extends Notifier<T> {
   Future<void> set(T value) async {
     final repository = ref.read(settingsRepositoryProvider);
     await _write(repository, value);
+    // The value is stored; the provider may be gone by now, as when the
+    // last position is saved while the app shuts down.
+    if (!ref.mounted) return;
     state = _read(repository);
   }
 }

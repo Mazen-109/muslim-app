@@ -198,6 +198,52 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tafsirMissing => 'لا يتوفر تفسير لهذه الآية.';
 
   @override
+  String get playerPlayFromHere => 'الاستماع من هذه الآية';
+
+  @override
+  String get playerPlay => 'تشغيل';
+
+  @override
+  String get playerPause => 'إيقاف مؤقت';
+
+  @override
+  String get playerPreviousAyah => 'الآية السابقة';
+
+  @override
+  String get playerNextAyah => 'الآية التالية';
+
+  @override
+  String get playerStop => 'إيقاف التلاوة';
+
+  @override
+  String playerPosition(String surah, int ayah) {
+    return '$surah، الآية $ayah';
+  }
+
+  @override
+  String playerRepeatsLeft(int count) {
+    return 'المتبقي $count';
+  }
+
+  @override
+  String get playerOfflineMessage => 'تحتاج التلاوة إلى اتصال بالإنترنت.';
+
+  @override
+  String get playerChooseReciter => 'اختيار القارئ';
+
+  @override
+  String get reciterPickerTitle => 'القارئ';
+
+  @override
+  String get reciterStyleMurattal => 'مرتّل';
+
+  @override
+  String get reciterStyleMujawwad => 'مجوّد';
+
+  @override
+  String get reciterStyleMuallim => 'معلّم';
+
+  @override
   String get readerShowContinuous => 'العرض المتصل';
 
   @override
@@ -222,4 +268,48 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get continuousNextSurah => 'السورة التالية';
+
+  @override
+  String get readerGoTo => 'انتقال إلى';
+
+  @override
+  String get goToByPage => 'صفحة';
+
+  @override
+  String get goToBySurah => 'سورة وآية';
+
+  @override
+  String get goToPageLabel => 'رقم الصفحة';
+
+  @override
+  String get goToSurahLabel => 'السورة';
+
+  @override
+  String get goToAyahLabel => 'رقم الآية';
+
+  @override
+  String goToRange(int max) {
+    return 'من 1 إلى $max';
+  }
+
+  @override
+  String goToPageOutOfRange(int max) {
+    return 'أدخل رقم صفحة من 1 إلى $max.';
+  }
+
+  @override
+  String goToAyahOutOfRange(int max) {
+    return 'أدخل رقم آية من 1 إلى $max، فهذا عدد آيات السورة.';
+  }
+
+  @override
+  String get goToSurahMissing => 'اختر سورة من القائمة.';
+
+  @override
+  String goToSurahOption(int number, String name) {
+    return '$number. $name';
+  }
+
+  @override
+  String get goToSubmit => 'انتقال';
 }

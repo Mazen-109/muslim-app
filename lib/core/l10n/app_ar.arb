@@ -276,6 +276,75 @@
   "@tafsirMissing": {
     "description": "Shown in the tafsir sheet when the content database has no tafsir text for the ayah."
   },
+  "playerPlayFromHere": "الاستماع من هذه الآية",
+  "@playerPlayFromHere": {
+    "description": "Tooltip and screen reader label of the reader's app bar button that starts a recitation from the current ayah."
+  },
+  "playerPlay": "تشغيل",
+  "@playerPlay": {
+    "description": "Tooltip of the player bar button that resumes a paused recitation."
+  },
+  "playerPause": "إيقاف مؤقت",
+  "@playerPause": {
+    "description": "Tooltip of the player bar button that pauses the recitation."
+  },
+  "playerPreviousAyah": "الآية السابقة",
+  "@playerPreviousAyah": {
+    "description": "Tooltip of the player bar button that moves the recitation to the previous ayah."
+  },
+  "playerNextAyah": "الآية التالية",
+  "@playerNextAyah": {
+    "description": "Tooltip of the player bar button that moves the recitation to the next ayah."
+  },
+  "playerStop": "إيقاف التلاوة",
+  "@playerStop": {
+    "description": "Tooltip of the player bar button that ends the recitation and closes the bar."
+  },
+  "playerPosition": "{surah}، الآية {ayah}",
+  "@playerPosition": {
+    "description": "The player bar's position line: the surah name (from the content database) and the number of the ayah being recited.",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "playerRepeatsLeft": "المتبقي {count}",
+  "@playerRepeatsLeft": {
+    "description": "In the player bar while one ayah is repeated: how many recitations of it are left, counting the current one.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "playerOfflineMessage": "تحتاج التلاوة إلى اتصال بالإنترنت.",
+  "@playerOfflineMessage": {
+    "description": "Shown in the player bar when the recitation could not be loaded or played, beside the retry button. Reading is not affected."
+  },
+  "playerChooseReciter": "اختيار القارئ",
+  "@playerChooseReciter": {
+    "description": "Screen reader hint of the player bar's reciter name, which opens the reciter list."
+  },
+  "reciterPickerTitle": "القارئ",
+  "@reciterPickerTitle": {
+    "description": "Title of the sheet that lists the reciters."
+  },
+  "reciterStyleMurattal": "مرتّل",
+  "@reciterStyleMurattal": {
+    "description": "Recitation style of a reciter: murattal (measured recitation)."
+  },
+  "reciterStyleMujawwad": "مجوّد",
+  "@reciterStyleMujawwad": {
+    "description": "Recitation style of a reciter: mujawwad (melodic recitation)."
+  },
+  "reciterStyleMuallim": "معلّم",
+  "@reciterStyleMuallim": {
+    "description": "Recitation style of a reciter: mu'allim, a teaching recitation for learning pronunciation."
+  },
   "readerShowContinuous": "العرض المتصل",
   "@readerShowContinuous": {
     "description": "Tooltip and screen reader label of the reader button that switches from the page view to the continuous view, where the ayahs of a surah flow as text."
@@ -312,5 +381,76 @@
   "continuousNextSurah": "السورة التالية",
   "@continuousNextSurah": {
     "description": "Button at the end of the continuous view that opens the next surah."
+  },
+  "readerGoTo": "انتقال إلى",
+  "@readerGoTo": {
+    "description": "Tooltip of the reader button that opens the go-to sheet, and the title of that sheet, where the reader jumps to a page number or to a surah and ayah number."
+  },
+  "goToByPage": "صفحة",
+  "@goToByPage": {
+    "description": "Segment of the go-to sheet that chooses going to a Mushaf page number."
+  },
+  "goToBySurah": "سورة وآية",
+  "@goToBySurah": {
+    "description": "Segment of the go-to sheet that chooses going to an ayah by surah and ayah number."
+  },
+  "goToPageLabel": "رقم الصفحة",
+  "@goToPageLabel": {
+    "description": "Label of the page number field in the go-to sheet."
+  },
+  "goToSurahLabel": "السورة",
+  "@goToSurahLabel": {
+    "description": "Label of the surah picker in the go-to sheet. The list shows each surah's number and name from the content database."
+  },
+  "goToAyahLabel": "رقم الآية",
+  "@goToAyahLabel": {
+    "description": "Label of the ayah number field in the go-to sheet."
+  },
+  "goToRange": "من 1 إلى {max}",
+  "@goToRange": {
+    "description": "Helper text under a number field of the go-to sheet: the numbers it accepts. max is the last page (604) or the surah's ayah count.",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "goToPageOutOfRange": "أدخل رقم صفحة من 1 إلى {max}.",
+  "@goToPageOutOfRange": {
+    "description": "Error under the page number field when it is empty or outside the Mushaf's pages. max is 604.",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "goToAyahOutOfRange": "أدخل رقم آية من 1 إلى {max}، فهذا عدد آيات السورة.",
+  "@goToAyahOutOfRange": {
+    "description": "Error under the ayah number field when it is empty or outside the chosen surah. max is that surah's ayah count.",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "goToSurahMissing": "اختر سورة من القائمة.",
+  "@goToSurahMissing": {
+    "description": "Error under the surah picker when the typed text does not match a surah."
+  },
+  "goToSurahOption": "{number}. {name}",
+  "@goToSurahOption": {
+    "description": "One surah in the go-to sheet's surah picker. number is the surah number; name is the surah name from the content database.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goToSubmit": "انتقال",
+  "@goToSubmit": {
+    "description": "The go-to sheet's button that opens the Mushaf at the chosen page or ayah."
   }
 }

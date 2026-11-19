@@ -380,6 +380,90 @@ abstract class AppLocalizations {
   /// **'لا يتوفر تفسير لهذه الآية.'**
   String get tafsirMissing;
 
+  /// Tooltip and screen reader label of the reader's app bar button that starts a recitation from the current ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاستماع من هذه الآية'**
+  String get playerPlayFromHere;
+
+  /// Tooltip of the player bar button that resumes a paused recitation.
+  ///
+  /// In ar, this message translates to:
+  /// **'تشغيل'**
+  String get playerPlay;
+
+  /// Tooltip of the player bar button that pauses the recitation.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف مؤقت'**
+  String get playerPause;
+
+  /// Tooltip of the player bar button that moves the recitation to the previous ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية السابقة'**
+  String get playerPreviousAyah;
+
+  /// Tooltip of the player bar button that moves the recitation to the next ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية التالية'**
+  String get playerNextAyah;
+
+  /// Tooltip of the player bar button that ends the recitation and closes the bar.
+  ///
+  /// In ar, this message translates to:
+  /// **'إيقاف التلاوة'**
+  String get playerStop;
+
+  /// The player bar's position line: the surah name (from the content database) and the number of the ayah being recited.
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، الآية {ayah}'**
+  String playerPosition(String surah, int ayah);
+
+  /// In the player bar while one ayah is repeated: how many recitations of it are left, counting the current one.
+  ///
+  /// In ar, this message translates to:
+  /// **'المتبقي {count}'**
+  String playerRepeatsLeft(int count);
+
+  /// Shown in the player bar when the recitation could not be loaded or played, beside the retry button. Reading is not affected.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحتاج التلاوة إلى اتصال بالإنترنت.'**
+  String get playerOfflineMessage;
+
+  /// Screen reader hint of the player bar's reciter name, which opens the reciter list.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختيار القارئ'**
+  String get playerChooseReciter;
+
+  /// Title of the sheet that lists the reciters.
+  ///
+  /// In ar, this message translates to:
+  /// **'القارئ'**
+  String get reciterPickerTitle;
+
+  /// Recitation style of a reciter: murattal (measured recitation).
+  ///
+  /// In ar, this message translates to:
+  /// **'مرتّل'**
+  String get reciterStyleMurattal;
+
+  /// Recitation style of a reciter: mujawwad (melodic recitation).
+  ///
+  /// In ar, this message translates to:
+  /// **'مجوّد'**
+  String get reciterStyleMujawwad;
+
+  /// Recitation style of a reciter: mu'allim, a teaching recitation for learning pronunciation.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلّم'**
+  String get reciterStyleMuallim;
+
   /// Tooltip and screen reader label of the reader button that switches from the page view to the continuous view, where the ayahs of a surah flow as text.
   ///
   /// In ar, this message translates to:
@@ -427,6 +511,78 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'السورة التالية'**
   String get continuousNextSurah;
+
+  /// Tooltip of the reader button that opens the go-to sheet, and the title of that sheet, where the reader jumps to a page number or to a surah and ayah number.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقال إلى'**
+  String get readerGoTo;
+
+  /// Segment of the go-to sheet that chooses going to a Mushaf page number.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة'**
+  String get goToByPage;
+
+  /// Segment of the go-to sheet that chooses going to an ayah by surah and ayah number.
+  ///
+  /// In ar, this message translates to:
+  /// **'سورة وآية'**
+  String get goToBySurah;
+
+  /// Label of the page number field in the go-to sheet.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الصفحة'**
+  String get goToPageLabel;
+
+  /// Label of the surah picker in the go-to sheet. The list shows each surah's number and name from the content database.
+  ///
+  /// In ar, this message translates to:
+  /// **'السورة'**
+  String get goToSurahLabel;
+
+  /// Label of the ayah number field in the go-to sheet.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الآية'**
+  String get goToAyahLabel;
+
+  /// Helper text under a number field of the go-to sheet: the numbers it accepts. max is the last page (604) or the surah's ayah count.
+  ///
+  /// In ar, this message translates to:
+  /// **'من 1 إلى {max}'**
+  String goToRange(int max);
+
+  /// Error under the page number field when it is empty or outside the Mushaf's pages. max is 604.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رقم صفحة من 1 إلى {max}.'**
+  String goToPageOutOfRange(int max);
+
+  /// Error under the ayah number field when it is empty or outside the chosen surah. max is that surah's ayah count.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رقم آية من 1 إلى {max}، فهذا عدد آيات السورة.'**
+  String goToAyahOutOfRange(int max);
+
+  /// Error under the surah picker when the typed text does not match a surah.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر سورة من القائمة.'**
+  String get goToSurahMissing;
+
+  /// One surah in the go-to sheet's surah picker. number is the surah number; name is the surah name from the content database.
+  ///
+  /// In ar, this message translates to:
+  /// **'{number}. {name}'**
+  String goToSurahOption(int number, String name);
+
+  /// The go-to sheet's button that opens the Mushaf at the chosen page or ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقال'**
+  String get goToSubmit;
 }
 
 class _AppLocalizationsDelegate
