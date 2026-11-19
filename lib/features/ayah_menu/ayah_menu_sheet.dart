@@ -55,7 +55,6 @@ const ValueKey<String> ayahMenuReciterKey = ValueKey<String>(
 /// Needs [quranRepositoryProvider] to have a value, as the reader does.
 Future<void> showAyahMenu(BuildContext context, int ayahId) async {
   final container = ProviderScope.containerOf(context, listen: false);
-  container.read(ayahMenuOpeningProvider)();
   final action = await whileHighlighting(
     container,
     ayahId,

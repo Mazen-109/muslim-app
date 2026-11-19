@@ -75,8 +75,3 @@ typedef AyahErrorReporter = Future<void> Function(
 /// The ayah menu's error report (T025). While it is null the Report an
 /// error action is hidden.
 final ayahErrorReporterProvider = Provider<AyahErrorReporter?>((ref) => null);
-
-/// Called when the ayah menu is about to open, so that whatever moves the
-/// text can stop first. Auto-scroll (T021) overrides it to pause itself;
-/// until then it does nothing.
-final ayahMenuOpeningProvider = Provider<VoidCallback>((ref) => () {});

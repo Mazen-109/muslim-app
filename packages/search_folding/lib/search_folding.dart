@@ -1,12 +1,21 @@
-/// The search folding rule of research R9.
+/// The search folding rule of research R9, in one place for both sides of
+/// the match.
+///
+/// `tool/quran_import` applies [foldArabic] to `ayahs.text_search` to derive
+/// `ayahs.text_search_folded`; the app applies the same function to the
+/// reader's query (`foldQuery` in `lib/features/search/query_folding.dart`).
+/// Changing the rule changes the bundled dataset, so it needs a new import
+/// in its own pull request (constitution, Principle I). Both sides test it
+/// with the same vectors: `tool/quran_import/test/folding_test.dart` and
+/// `test/features/search/search_test.dart`.
 library;
 
 /// Folds Arabic text for search matching (research R9).
 ///
 /// Used at import time to derive `ayahs.text_search_folded` from
-/// `ayahs.text_search`, and meant to be applied unchanged to the user's query
-/// in the app, so both sides match. The result is a search key only and is
-/// never displayed.
+/// `ayahs.text_search`, and applied unchanged to the user's query in the app,
+/// so both sides match. The result is a search key only and is never
+/// displayed.
 ///
 /// The rule works one Unicode code point at a time and applies exactly these
 /// mappings; every other code point, including spaces and punctuation, is

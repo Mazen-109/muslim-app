@@ -9,11 +9,14 @@ import '../../data/models/mushaf_page.dart';
 import '../../data/quran_repository.dart';
 import '../../features/mushaf/reader_controller.dart';
 import '../../features/mushaf/reader_screen.dart';
+import '../../features/search/search_screen.dart';
 import '../l10n/generated/app_localizations.dart';
 import '../settings/settings_providers.dart';
 import '../widgets/app_scaffold.dart';
+import 'modal_observer.dart';
 import 'placeholder_screens.dart';
 import '../../features/index/index_screen.dart';
+import '../../features/settings/settings_screen.dart';
 
 /// Paths and builders of the routes in `contracts/routes.md`.
 abstract final class AppRoutes {
@@ -130,6 +133,15 @@ final appRouterProvider = Provider<GoRouter>((ref) {
 
   final router = GoRouter(
     initialLocation: AppRoutes.launch,
+    // Sheets, dialogs and menus on any navigator are counted
+    // (modal_observer.dart). The shell's branch navigators report to the
+    // router's observers too.
+    observers: <NavigatorObserver>[
+      ModalRouteObserver(
+        onOpened: () => ref.read(openModalCountProvider.notifier).opened(),
+        onClosed: () => ref.read(openModalCountProvider.notifier).closed(),
+      ),
+    ],
     routes: <RouteBase>[
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) =>
@@ -171,7 +183,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               ),
               GoRoute(
                 path: AppRoutes.search,
-                builder: (context, state) => const SearchPlaceholder(),
+                builder: (context, state) =>
+                    SearchScreen(initialQuery: state.uri.queryParameters['q']),
               ),
             ],
           ),
@@ -217,7 +230,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             routes: <RouteBase>[
               GoRoute(
                 path: AppRoutes.settings,
-                builder: (context, state) => const SettingsPlaceholder(),
+                builder: (context, state) => const SettingsScreen(),
                 routes: <RouteBase>[
                   GoRoute(
                     path: 'sources',

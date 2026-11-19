@@ -43,6 +43,64 @@ class AppLocalizationsEn extends AppLocalizations {
   String get screenSources => 'Sources';
 
   @override
+  String get settingsSectionAppearance => 'Appearance';
+
+  @override
+  String get settingsTheme => 'Theme';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeNight => 'Night';
+
+  @override
+  String get themeBlackOnWhite => 'Black on white';
+
+  @override
+  String get themeWhiteOnBlack => 'White on black';
+
+  @override
+  String get settingsLanguage => 'Interface language';
+
+  @override
+  String get languageArabic => 'العربية';
+
+  @override
+  String get languageEnglish => 'English';
+
+  @override
+  String get settingsSectionReading => 'Reading and listening';
+
+  @override
+  String get settingsTextSize => 'Continuous view text size';
+
+  @override
+  String get settingsReciter => 'Default reciter';
+
+  @override
+  String reciterWithStyle(String name, String style) {
+    return '$name · $style';
+  }
+
+  @override
+  String get settingsSectionVideo => 'Video';
+
+  @override
+  String get settingsVideoGrayscale => 'Black and white videos';
+
+  @override
+  String get settingsVideoGrayscaleHint =>
+      'When this is off, videos keep their colours in every theme.';
+
+  @override
+  String get settingsSectionAbout => 'About';
+
+  @override
+  String get settingsSourcesHint =>
+      'Where the text, tafsir and recitations come from, and their licences';
+
+  @override
   String get placeholderMessage => 'This screen is not ready yet.';
 
   @override
@@ -131,6 +189,42 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String juzStart(String surah, int ayah) {
     return 'From $surah, ayah $ayah';
+  }
+
+  @override
+  String get searchFieldHint => 'Type a word or phrase';
+
+  @override
+  String get searchClear => 'Clear search';
+
+  @override
+  String get searchStartTitle => 'Search the Quran';
+
+  @override
+  String get searchStartMessage =>
+      'Type at least two letters. Diacritics are optional, and the forms of hamza, alef maqsura and taa marbuta do not change the results.';
+
+  @override
+  String get searchNoResultsTitle => 'Nothing found';
+
+  @override
+  String get searchNoResultsMessage =>
+      'Check the spelling or try another word.';
+
+  @override
+  String searchResultCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results',
+      one: '1 result',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String searchResultPlace(String surah, int ayah) {
+    return '$surah, ayah $ayah';
   }
 
   @override
@@ -288,6 +382,36 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continuousNextSurah => 'Next surah';
+
+  @override
+  String get readerAutoscroll => 'Auto-scroll';
+
+  @override
+  String get autoscrollStop => 'Stop auto-scroll';
+
+  @override
+  String get autoscrollSwitchMessage =>
+      'Auto-scroll works in continuous view. Switch to continuous view?';
+
+  @override
+  String get autoscrollSwitchConfirm => 'Switch to continuous view';
+
+  @override
+  String get autoscrollPause => 'Pause auto-scroll';
+
+  @override
+  String get autoscrollResume => 'Resume auto-scroll';
+
+  @override
+  String get autoscrollFollowing => 'Following the recitation';
+
+  @override
+  String get autoscrollSpeed => 'Scroll speed';
+
+  @override
+  String autoscrollSpeedValue(int speed) {
+    return '$speed';
+  }
 
   @override
   String get readerGoTo => 'Go to';

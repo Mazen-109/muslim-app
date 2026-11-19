@@ -44,6 +44,86 @@
   "@screenSources": {
     "description": "Screen title of the sources page, and the settings row that opens it."
   },
+  "settingsSectionAppearance": "المظهر",
+  "@settingsSectionAppearance": {
+    "description": "Settings section head: theme and interface language."
+  },
+  "settingsTheme": "السمة",
+  "@settingsTheme": {
+    "description": "Settings: label of the theme picker."
+  },
+  "themeLight": "فاتح",
+  "@themeLight": {
+    "description": "Theme name: the light theme."
+  },
+  "themeNight": "ليلي",
+  "@themeNight": {
+    "description": "Theme name: the night theme, for reading in the dark."
+  },
+  "themeBlackOnWhite": "أسود على أبيض",
+  "@themeBlackOnWhite": {
+    "description": "Theme name: black text on white, with no colour."
+  },
+  "themeWhiteOnBlack": "أبيض على أسود",
+  "@themeWhiteOnBlack": {
+    "description": "Theme name: white text on true black, with no colour."
+  },
+  "settingsLanguage": "لغة الواجهة",
+  "@settingsLanguage": {
+    "description": "Settings: label of the interface language choice."
+  },
+  "languageArabic": "العربية",
+  "@languageArabic": {
+    "description": "The Arabic language, written in Arabic in every locale."
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "The English language, written in English in every locale."
+  },
+  "settingsSectionReading": "القراءة والاستماع",
+  "@settingsSectionReading": {
+    "description": "Settings section head: text size and the default reciter."
+  },
+  "settingsTextSize": "حجم الخط في العرض المتصل",
+  "@settingsTextSize": {
+    "description": "Settings: title of the continuous view text size control."
+  },
+  "settingsReciter": "القارئ الافتراضي",
+  "@settingsReciter": {
+    "description": "Settings: the default reciter row, and the title of the sheet that chooses it."
+  },
+  "reciterWithStyle": "{name} · {style}",
+  "@reciterWithStyle": {
+    "description": "A reciter's name followed by the recitation style.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "style": {
+        "type": "String"
+      }
+    }
+  },
+  "settingsSectionVideo": "الفيديو",
+  "@settingsSectionVideo": {
+    "description": "Settings section head: story video options."
+  },
+  "settingsVideoGrayscale": "فيديو بالأبيض والأسود",
+  "@settingsVideoGrayscale": {
+    "description": "Settings switch: show story videos in greys."
+  },
+  "settingsVideoGrayscaleHint": "عند إيقافه تبقى ألوان الفيديو كما هي في كل السمات.",
+  "@settingsVideoGrayscaleHint": {
+    "description": "Explains the black and white video switch."
+  },
+  "settingsSectionAbout": "عن التطبيق",
+  "@settingsSectionAbout": {
+    "description": "Settings section head: the sources page."
+  },
+  "settingsSourcesHint": "مصادر النص والتفسير والتلاوات وتراخيصها",
+  "@settingsSourcesHint": {
+    "description": "Subtitle of the settings row that opens the sources page."
+  },
   "placeholderMessage": "هذه الشاشة قيد الإعداد.",
   "@placeholderMessage": {
     "description": "Shown on a screen that a later version fills in."
@@ -172,6 +252,51 @@
   "juzStart": "من {surah}، الآية {ayah}",
   "@juzStart": {
     "description": "Second line of a juz row: the surah name (from the content database) and the ayah number where the juz starts.",
+    "placeholders": {
+      "surah": {
+        "type": "String"
+      },
+      "ayah": {
+        "type": "int"
+      }
+    }
+  },
+  "searchFieldHint": "اكتب كلمة أو عبارة",
+  "@searchFieldHint": {
+    "description": "Hint inside the empty search field."
+  },
+  "searchClear": "مسح البحث",
+  "@searchClear": {
+    "description": "Tooltip and screen reader label of the button that empties the search field."
+  },
+  "searchStartTitle": "ابحث في القرآن الكريم",
+  "@searchStartTitle": {
+    "description": "Heading of the search screen before the reader has typed at least two letters."
+  },
+  "searchStartMessage": "اكتب حرفين على الأقل. لا يلزم التشكيل، ولا يؤثر شكل الهمزة أو الألف المقصورة أو التاء المربوطة في النتائج.",
+  "@searchStartMessage": {
+    "description": "Body of the search screen's starting state: at least two letters are needed, and diacritics and the forms of hamza, alef maqsura and taa marbuta do not change the results."
+  },
+  "searchNoResultsTitle": "لم يُعثر على نتائج",
+  "@searchNoResultsTitle": {
+    "description": "Heading shown when no ayah matches the query."
+  },
+  "searchNoResultsMessage": "تحقّق من الكتابة أو جرّب كلمة أخرى.",
+  "@searchNoResultsMessage": {
+    "description": "Body shown when no ayah matches the query."
+  },
+  "searchResultCount": "{count, plural, =1{نتيجة واحدة} =2{نتيجتان} few{{count} نتائج} many{{count} نتيجة} other{{count} نتيجة}}",
+  "@searchResultCount": {
+    "description": "The number of ayahs that match the query, above the results.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchResultPlace": "{surah}، الآية {ayah}",
+  "@searchResultPlace": {
+    "description": "Heading of one search result: the surah name (from the content database) and the ayah number.",
     "placeholders": {
       "surah": {
         "type": "String"
@@ -421,6 +546,48 @@
   "continuousNextSurah": "السورة التالية",
   "@continuousNextSurah": {
     "description": "Button at the end of the continuous view that opens the next surah."
+  },
+  "readerAutoscroll": "التمرير التلقائي",
+  "@readerAutoscroll": {
+    "description": "Item of the reader's overflow menu that turns auto-scroll on, and the title of the dialog that offers to switch to the continuous view for it."
+  },
+  "autoscrollStop": "إيقاف التمرير التلقائي",
+  "@autoscrollStop": {
+    "description": "Tooltip of the auto-scroll bar's close button and the reader menu item that turn auto-scroll off."
+  },
+  "autoscrollSwitchMessage": "يعمل التمرير التلقائي في العرض المتصل. هل تريد الانتقال إليه؟",
+  "@autoscrollSwitchMessage": {
+    "description": "Body of the dialog shown when auto-scroll is asked for in the page view."
+  },
+  "autoscrollSwitchConfirm": "الانتقال إلى العرض المتصل",
+  "@autoscrollSwitchConfirm": {
+    "description": "Button of that dialog that switches to the continuous view and starts auto-scroll."
+  },
+  "autoscrollPause": "إيقاف التمرير مؤقتًا",
+  "@autoscrollPause": {
+    "description": "Tooltip of the auto-scroll bar's button while the text is scrolling."
+  },
+  "autoscrollResume": "متابعة التمرير",
+  "@autoscrollResume": {
+    "description": "Tooltip of the auto-scroll bar's button while auto-scroll is paused."
+  },
+  "autoscrollFollowing": "يتبع التلاوة",
+  "@autoscrollFollowing": {
+    "description": "Shown in the auto-scroll bar while the view follows a playing recitation instead of the timer."
+  },
+  "autoscrollSpeed": "سرعة التمرير",
+  "@autoscrollSpeed": {
+    "description": "Screen reader label of the auto-scroll speed slider."
+  },
+  "autoscrollSpeedValue": "{speed}",
+  "@autoscrollSpeedValue": {
+    "description": "Value of the auto-scroll speed slider, in logical pixels per second, shown while it is dragged and read by screen readers.",
+    "placeholders": {
+      "speed": {
+        "type": "int",
+        "example": "30"
+      }
+    }
   },
   "readerGoTo": "انتقال إلى",
   "@readerGoTo": {

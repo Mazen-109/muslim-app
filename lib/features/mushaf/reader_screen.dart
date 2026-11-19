@@ -9,6 +9,8 @@ import '../../core/widgets/app_scaffold.dart';
 import '../../core/widgets/state_views.dart';
 import '../../data/quran_repository.dart';
 import '../audio/player_bar.dart';
+import '../autoscroll/autoscroll_controller.dart';
+import '../autoscroll/autoscroll_controls.dart';
 import '../ayah_menu/ayah_menu_sheet.dart';
 import '../tafsir/tafsir_sheet.dart';
 import 'continuous/continuous_view.dart';
@@ -131,11 +133,21 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
     final mode = ref.watch(readerControllerProvider.select((s) => s.mode));
     final continuous = mode == ReadingMode.continuous;
     if (continuous && body is MushafPageView) {
-      body = ContinuousView(
-        onAyahTap: body.onAyahTap,
-        onAyahLongPress: body.onAyahLongPress,
+      body = Column(
+        children: <Widget>[
+          Expanded(
+            child: ContinuousView(
+              onAyahTap: body.onAyahTap,
+              onAyahLongPress: body.onAyahLongPress,
+            ),
+          ),
+          const AutoscrollControls(),
+        ],
       );
     }
+    final autoscrollOn = ref.watch(
+      autoscrollControllerProvider.select((s) => s != AutoscrollStatus.off),
+    );
 
     return AppScaffold(
       title: l10n.navMushaf,
@@ -169,6 +181,10 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
           onSelected: (action) => switch (action) {
             _ReaderMenuAction.goTo => _goTo(),
             _ReaderMenuAction.textSize => showTextSizeSheet(context),
+            _ReaderMenuAction.autoscroll =>
+              autoscrollOn
+                  ? ref.read(autoscrollControllerProvider.notifier).stop()
+                  : startAutoscroll(context, ref),
           },
           itemBuilder: (context) => <PopupMenuEntry<_ReaderMenuAction>>[
             PopupMenuItem<_ReaderMenuAction>(
@@ -178,6 +194,19 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
               child: ListTile(
                 leading: const Icon(Icons.find_in_page_outlined),
                 title: Text(l10n.readerGoTo),
+              ),
+            ),
+            PopupMenuItem<_ReaderMenuAction>(
+              key: readerAutoscrollKey,
+              value: _ReaderMenuAction.autoscroll,
+              enabled: opened,
+              child: ListTile(
+                leading: Icon(
+                  autoscrollOn ? Icons.close : Icons.swipe_vertical,
+                ),
+                title: Text(
+                  autoscrollOn ? l10n.autoscrollStop : l10n.readerAutoscroll,
+                ),
               ),
             ),
             if (continuous)
@@ -208,13 +237,20 @@ const ValueKey<String> readerModeToggleKey = ValueKey<String>(
 );
 
 /// The actions in the reader's overflow menu.
-enum _ReaderMenuAction { goTo, textSize }
+enum _ReaderMenuAction { goTo, autoscroll, textSize }
 
 /// The key of the reader's overflow menu button.
 const ValueKey<String> readerMoreKey = ValueKey<String>('reader-more');
 
 /// The key of the go-to item in the reader's overflow menu.
 const ValueKey<String> readerGoToKey = ValueKey<String>('reader-go-to');
+
+/// The key of the auto-scroll item in the reader's overflow menu: it turns
+/// auto-scroll on (in the page view, after offering the continuous view) or
+/// off.
+const ValueKey<String> readerAutoscrollKey = ValueKey<String>(
+  'reader-autoscroll',
+);
 
 /// The key of the text size item in the reader's overflow menu
 /// (continuous view only).

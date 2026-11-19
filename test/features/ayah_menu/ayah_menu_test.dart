@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:muslim/core/l10n/generated/app_localizations.dart';
 import 'package:muslim/core/routing/app_router.dart';
+import 'package:muslim/core/routing/modal_observer.dart';
 import 'package:muslim/core/settings/settings_providers.dart';
 import 'package:muslim/core/settings/settings_repository.dart';
 import 'package:muslim/data/bookmark_repository.dart';
@@ -212,18 +213,11 @@ void main() {
       expect(action(AyahAction.report), findsNothing);
     });
 
-    testWidgets('opening the menu calls the opening hook first', (
+    testWidgets('the open menu counts as a modal, which pauses auto-scroll', (
       tester,
     ) async {
-      var calls = 0;
-      await openMenu(
-        tester,
-        '2:6',
-        overrides: <Override>[
-          ayahMenuOpeningProvider.overrideWithValue(() => calls++),
-        ],
-      );
-      expect(calls, 1);
+      final container = await openMenu(tester, '2:6');
+      expect(container.read(openModalCountProvider), 1);
     });
   });
 

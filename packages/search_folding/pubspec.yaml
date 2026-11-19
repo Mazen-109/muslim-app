@@ -1,0 +1,10 @@
+name: search_folding
+description: >-
+  The Arabic search folding rule of research R9, shared by the app (to fold
+  the reader's query) and tool/quran_import (to derive
+  ayahs.text_search_folded), so both sides apply the same function.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.10.0

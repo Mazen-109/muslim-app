@@ -1,52 +1,30 @@
-import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 
 import '../l10n/generated/app_localizations.dart';
 import '../widgets/app_scaffold.dart';
 import '../widgets/state_views.dart';
-import 'app_router.dart';
 
 // Stand-ins for the screens that later tasks build. Each one is a titled
-// scaffold and a neutral "not ready yet" state, with the links the contract
-// asks for (settings reach the sources page). They hold no Quran text and no other religious content.
+// scaffold and a neutral "not ready yet" state. They hold no Quran text and
+// no other religious content.
 // A task that builds a screen replaces its placeholder in the router.
 
 class _Placeholder extends StatelessWidget {
-  const _Placeholder({required this.title, this.links = const <Widget>[]});
+  const _Placeholder({required this.title});
 
   final String Function(AppLocalizations l10n) title;
-  final List<Widget> links;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final notReady = EmptyStateView(
-      icon: Icons.hourglass_empty,
-      title: l10n.placeholderMessage,
-    );
     return AppScaffold(
       title: title(l10n),
-      body: links.isEmpty
-          ? notReady
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                ...links,
-                const Divider(),
-                Expanded(child: notReady),
-              ],
-            ),
+      body: EmptyStateView(
+        icon: Icons.hourglass_empty,
+        title: l10n.placeholderMessage,
+      ),
     );
   }
-}
-
-/// `/search`.
-class SearchPlaceholder extends StatelessWidget {
-  const SearchPlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context) =>
-      _Placeholder(title: (l10n) => l10n.screenSearch);
 }
 
 /// `/bookmarks`.
@@ -92,26 +70,6 @@ class EpisodePlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       _Placeholder(title: (l10n) => l10n.screenEpisode);
-}
-
-/// `/settings`.
-class SettingsPlaceholder extends StatelessWidget {
-  const SettingsPlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return _Placeholder(
-      title: (l10n) => l10n.navSettings,
-      links: <Widget>[
-        ListTile(
-          leading: const Icon(Icons.info_outline),
-          title: Text(l10n.screenSources),
-          onTap: () => context.go(AppRoutes.sources),
-        ),
-      ],
-    );
-  }
 }
 
 /// `/settings/sources`.
