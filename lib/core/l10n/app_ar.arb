@@ -267,5 +267,76 @@
   "continuousNextSurah": "السورة التالية",
   "@continuousNextSurah": {
     "description": "Button at the end of the continuous view that opens the next surah."
+  },
+  "readerGoTo": "انتقال إلى",
+  "@readerGoTo": {
+    "description": "Tooltip of the reader button that opens the go-to sheet, and the title of that sheet, where the reader jumps to a page number or to a surah and ayah number."
+  },
+  "goToByPage": "صفحة",
+  "@goToByPage": {
+    "description": "Segment of the go-to sheet that chooses going to a Mushaf page number."
+  },
+  "goToBySurah": "سورة وآية",
+  "@goToBySurah": {
+    "description": "Segment of the go-to sheet that chooses going to an ayah by surah and ayah number."
+  },
+  "goToPageLabel": "رقم الصفحة",
+  "@goToPageLabel": {
+    "description": "Label of the page number field in the go-to sheet."
+  },
+  "goToSurahLabel": "السورة",
+  "@goToSurahLabel": {
+    "description": "Label of the surah picker in the go-to sheet. The list shows each surah's number and name from the content database."
+  },
+  "goToAyahLabel": "رقم الآية",
+  "@goToAyahLabel": {
+    "description": "Label of the ayah number field in the go-to sheet."
+  },
+  "goToRange": "من 1 إلى {max}",
+  "@goToRange": {
+    "description": "Helper text under a number field of the go-to sheet: the numbers it accepts. max is the last page (604) or the surah's ayah count.",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "goToPageOutOfRange": "أدخل رقم صفحة من 1 إلى {max}.",
+  "@goToPageOutOfRange": {
+    "description": "Error under the page number field when it is empty or outside the Mushaf's pages. max is 604.",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "goToAyahOutOfRange": "أدخل رقم آية من 1 إلى {max}، فهذا عدد آيات السورة.",
+  "@goToAyahOutOfRange": {
+    "description": "Error under the ayah number field when it is empty or outside the chosen surah. max is that surah's ayah count.",
+    "placeholders": {
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "goToSurahMissing": "اختر سورة من القائمة.",
+  "@goToSurahMissing": {
+    "description": "Error under the surah picker when the typed text does not match a surah."
+  },
+  "goToSurahOption": "{number}. {name}",
+  "@goToSurahOption": {
+    "description": "One surah in the go-to sheet's surah picker. number is the surah number; name is the surah name from the content database.",
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "goToSubmit": "انتقال",
+  "@goToSubmit": {
+    "description": "The go-to sheet's button that opens the Mushaf at the chosen page or ayah."
   }
 }
