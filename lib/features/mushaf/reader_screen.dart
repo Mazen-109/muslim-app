@@ -8,6 +8,7 @@ import '../../core/settings/settings_repository.dart';
 import '../../core/widgets/app_scaffold.dart';
 import '../../core/widgets/state_views.dart';
 import '../../data/quran_repository.dart';
+import '../tafsir/tafsir_sheet.dart';
 import 'continuous/continuous_view.dart';
 import 'continuous/text_size_sheet.dart';
 import 'page_view/mushaf_page_view.dart';
@@ -31,7 +32,8 @@ class ReaderScreen extends ConsumerStatefulWidget {
 
   final ReaderTarget target;
 
-  /// Called with the ayah id of a tapped word (the tafsir sheet, later).
+  /// Called with the ayah id of a tapped word. When null, a tap opens the
+  /// tafsir sheet on that ayah.
   final AyahCallback? onAyahTap;
 
   /// Called with the ayah id of a long-pressed word (the ayah menu, later).
@@ -52,6 +54,8 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
     _opened = widget.target;
     ref.read(readerControllerProvider.notifier).open(widget.target);
   }
+
+  void _openTafsir(int ayahId) => showTafsirSheet(context, ayahId);
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +90,7 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
       body = _opened == null
           ? const LoadingStateView()
           : MushafPageView(
-              onAyahTap: widget.onAyahTap,
+              onAyahTap: widget.onAyahTap ?? _openTafsir,
               onAyahLongPress: widget.onAyahLongPress,
             );
     }

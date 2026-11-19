@@ -134,6 +134,30 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String tafsirSheetTitle(String surah, int ayah) {
+    return '$surah, ayah $ayah';
+  }
+
+  @override
+  String get tafsirPreviousAyah => 'Previous ayah';
+
+  @override
+  String get tafsirNextAyah => 'Next ayah';
+
+  @override
+  String tafsirSource(String name, String author) {
+    return '$name · $author';
+  }
+
+  @override
+  String tafsirCoversRange(String from, String to) {
+    return 'This passage explains ayahs $from to $to together';
+  }
+
+  @override
+  String get tafsirMissing => 'No tafsir is available for this ayah.';
+
+  @override
   String get readerShowContinuous => 'Continuous view';
 
   @override
