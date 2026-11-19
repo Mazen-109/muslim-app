@@ -81,6 +81,10 @@ class QuranRepository {
       'SELECT id, ayah_id, position, char_type, text_qpc_hafs, page, line '
       "FROM words WHERE ayah_id = 1 AND char_type = 'word' ORDER BY position";
 
+  /// The words of the basmala that opens every surah but 1 and 9: the words
+  /// of ayah 1:1 without its end marker, as stored.
+  List<Word> basmalaWords() => _basmalaWords;
+
   /// All 114 surahs in order.
   List<Surah> surahs() => _surahs;
 

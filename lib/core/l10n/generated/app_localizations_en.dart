@@ -132,4 +132,30 @@ class AppLocalizationsEn extends AppLocalizations {
   String juzStart(String surah, int ayah) {
     return 'From $surah, ayah $ayah';
   }
+
+  @override
+  String get readerShowContinuous => 'Continuous view';
+
+  @override
+  String get readerShowPages => 'Page view';
+
+  @override
+  String get readerTextSize => 'Text size';
+
+  @override
+  String get readerTextSmaller => 'Smaller text';
+
+  @override
+  String get readerTextLarger => 'Larger text';
+
+  @override
+  String readerTextSizeValue(int percent) {
+    return '$percent%';
+  }
+
+  @override
+  String get continuousPreviousSurah => 'Previous surah';
+
+  @override
+  String get continuousNextSurah => 'Next surah';
 }

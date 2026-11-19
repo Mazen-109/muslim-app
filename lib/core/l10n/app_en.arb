@@ -32,5 +32,13 @@
   "surahDetails": "{place} · {ayahs}",
   "pageNumber": "Page {page}",
   "juzTitle": "Juz {number}",
-  "juzStart": "From {surah}, ayah {ayah}"
+  "juzStart": "From {surah}, ayah {ayah}",
+  "readerShowContinuous": "Continuous view",
+  "readerShowPages": "Page view",
+  "readerTextSize": "Text size",
+  "readerTextSmaller": "Smaller text",
+  "readerTextLarger": "Larger text",
+  "readerTextSizeValue": "{percent}%",
+  "continuousPreviousSurah": "Previous surah",
+  "continuousNextSurah": "Next surah"
 }
