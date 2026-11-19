@@ -234,7 +234,7 @@ reopen the app, and land on the same ayah (quickstart scenarios 1 to 4).
 **Independent Test**: offline, tap any ayah in either view, read its tafsir and see its source
 (quickstart scenario 5).
 
-- [ ] T014 [US2] Build the tafsir sheet in `lib/features/tafsir/tafsir_sheet.dart` and wire it
+- [x] T014 [US2] Build the tafsir sheet in `lib/features/tafsir/tafsir_sheet.dart` and wire it
   to ayah taps in `lib/features/mushaf/` with `test/features/tafsir/tafsir_sheet_test.dart`
   - A draggable bottom sheet showing the ayah (canonical text, Quran font), the tafsir text
     unaltered, and the tafsir's name and author.

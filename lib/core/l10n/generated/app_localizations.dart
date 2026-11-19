@@ -295,6 +295,42 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'من {surah}، الآية {ayah}'**
   String juzStart(String surah, int ayah);
+
+  /// Heading of the tafsir sheet: the surah name (from the content database) and the number of the ayah shown.
+  ///
+  /// In ar, this message translates to:
+  /// **'{surah}، الآية {ayah}'**
+  String tafsirSheetTitle(String surah, int ayah);
+
+  /// Tooltip and screen reader label of the tafsir sheet button that shows the previous ayah's tafsir.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية السابقة'**
+  String get tafsirPreviousAyah;
+
+  /// Tooltip and screen reader label of the tafsir sheet button that shows the next ayah's tafsir.
+  ///
+  /// In ar, this message translates to:
+  /// **'الآية التالية'**
+  String get tafsirNextAyah;
+
+  /// Attribution line of the tafsir sheet: the tafsir's name and its author, both from the content database.
+  ///
+  /// In ar, this message translates to:
+  /// **'{name} · {author}'**
+  String tafsirSource(String name, String author);
+
+  /// Shown when one tafsir entry explains several consecutive ayahs together. from and to are ayah keys such as 4:66 and 4:68.
+  ///
+  /// In ar, this message translates to:
+  /// **'يشرح هذا الموضع الآيات من {from} إلى {to} معًا'**
+  String tafsirCoversRange(String from, String to);
+
+  /// Shown in the tafsir sheet when the content database has no tafsir text for the ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا يتوفر تفسير لهذه الآية.'**
+  String get tafsirMissing;
 }
 
 class _AppLocalizationsDelegate
