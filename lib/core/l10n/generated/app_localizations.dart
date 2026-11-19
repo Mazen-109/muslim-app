@@ -463,6 +463,78 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'السورة التالية'**
   String get continuousNextSurah;
+
+  /// Tooltip of the reader button that opens the go-to sheet, and the title of that sheet, where the reader jumps to a page number or to a surah and ayah number.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقال إلى'**
+  String get readerGoTo;
+
+  /// Segment of the go-to sheet that chooses going to a Mushaf page number.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة'**
+  String get goToByPage;
+
+  /// Segment of the go-to sheet that chooses going to an ayah by surah and ayah number.
+  ///
+  /// In ar, this message translates to:
+  /// **'سورة وآية'**
+  String get goToBySurah;
+
+  /// Label of the page number field in the go-to sheet.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الصفحة'**
+  String get goToPageLabel;
+
+  /// Label of the surah picker in the go-to sheet. The list shows each surah's number and name from the content database.
+  ///
+  /// In ar, this message translates to:
+  /// **'السورة'**
+  String get goToSurahLabel;
+
+  /// Label of the ayah number field in the go-to sheet.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الآية'**
+  String get goToAyahLabel;
+
+  /// Helper text under a number field of the go-to sheet: the numbers it accepts. max is the last page (604) or the surah's ayah count.
+  ///
+  /// In ar, this message translates to:
+  /// **'من 1 إلى {max}'**
+  String goToRange(int max);
+
+  /// Error under the page number field when it is empty or outside the Mushaf's pages. max is 604.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رقم صفحة من 1 إلى {max}.'**
+  String goToPageOutOfRange(int max);
+
+  /// Error under the ayah number field when it is empty or outside the chosen surah. max is that surah's ayah count.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل رقم آية من 1 إلى {max}، فهذا عدد آيات السورة.'**
+  String goToAyahOutOfRange(int max);
+
+  /// Error under the surah picker when the typed text does not match a surah.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر سورة من القائمة.'**
+  String get goToSurahMissing;
+
+  /// One surah in the go-to sheet's surah picker. number is the surah number; name is the surah name from the content database.
+  ///
+  /// In ar, this message translates to:
+  /// **'{number}. {name}'**
+  String goToSurahOption(int number, String name);
+
+  /// The go-to sheet's button that opens the Mushaf at the chosen page or ayah.
+  ///
+  /// In ar, this message translates to:
+  /// **'انتقال'**
+  String get goToSubmit;
 }
 
 class _AppLocalizationsDelegate

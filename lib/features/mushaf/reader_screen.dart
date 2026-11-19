@@ -12,10 +12,12 @@ import '../audio/player_bar.dart';
 import '../tafsir/tafsir_sheet.dart';
 import 'continuous/continuous_view.dart';
 import 'continuous/text_size_sheet.dart';
+import 'go_to_sheet.dart';
 import 'page_view/mushaf_page_view.dart';
 import 'page_view/page_line_widgets.dart';
 import 'quran_font_check.dart';
 import 'reader_controller.dart';
+import 'resume.dart';
 
 /// The Mushaf reader at `/mushaf` (contracts/routes.md).
 ///
@@ -58,6 +60,30 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
 
   void _openTafsir(int ayahId) => showTafsirSheet(context, ayahId);
 
+  /// Opens the go-to sheet and moves the reader to the place chosen there,
+  /// through the `/mushaf` route like any other link.
+  Future<void> _goTo() async {
+    final target = await showGoToSheet(
+      context,
+      initialAyahId: ref.read(readerControllerProvider).currentAyahId,
+    );
+    if (target == null || !mounted) return;
+    final location = switch (target) {
+      AyahTarget(:final ref, :final highlight) => AppRoutes.mushafAyah(
+        ref,
+        highlight: highlight,
+      ),
+      PageTarget(:final page) => AppRoutes.mushafPage(page),
+    };
+    if (target == widget.target) {
+      // The route does not change, so the screen is not rebuilt with a new
+      // target: apply it here.
+      ref.read(readerControllerProvider.notifier).open(target);
+    } else {
+      context.go(location);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -95,6 +121,7 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
               onAyahLongPress: widget.onAyahLongPress,
             );
     }
+    final opened = body is MushafPageView;
 
     // The continuous view takes the page view's place, with its callbacks.
     final mode = ref.watch(readerControllerProvider.select((s) => s.mode));
@@ -119,13 +146,6 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
           icon: const Icon(Icons.search),
           onPressed: () => context.go(AppRoutes.search),
         ),
-        if (continuous)
-          IconButton(
-            key: readerTextSizeKey,
-            tooltip: l10n.readerTextSize,
-            icon: const Icon(Icons.format_size),
-            onPressed: () => showTextSizeSheet(context),
-          ),
         IconButton(
           key: readerModeToggleKey,
           tooltip: continuous
@@ -137,8 +157,42 @@ class _ReaderScreenState extends ConsumerState<ReaderScreen> {
               .setMode(continuous ? ReadingMode.pages : ReadingMode.continuous),
         ),
         const PlayFromHereButton(),
+        // Less frequent actions wait in a menu, so the title keeps its
+        // room on a phone.
+        PopupMenuButton<_ReaderMenuAction>(
+          key: readerMoreKey,
+          tooltip: MaterialLocalizations.of(context).moreButtonTooltip,
+          onSelected: (action) => switch (action) {
+            _ReaderMenuAction.goTo => _goTo(),
+            _ReaderMenuAction.textSize => showTextSizeSheet(context),
+          },
+          itemBuilder: (context) => <PopupMenuEntry<_ReaderMenuAction>>[
+            PopupMenuItem<_ReaderMenuAction>(
+              key: readerGoToKey,
+              value: _ReaderMenuAction.goTo,
+              enabled: opened,
+              child: ListTile(
+                leading: const Icon(Icons.find_in_page_outlined),
+                title: Text(l10n.readerGoTo),
+              ),
+            ),
+            if (continuous)
+              PopupMenuItem<_ReaderMenuAction>(
+                key: readerTextSizeKey,
+                value: _ReaderMenuAction.textSize,
+                child: ListTile(
+                  leading: const Icon(Icons.format_size),
+                  title: Text(l10n.readerTextSize),
+                ),
+              ),
+          ],
+        ),
       ],
-      body: ReaderPlayback(child: body),
+      // The last ayah is recorded only once the reader has opened its
+      // target, so the controller's starting position is never saved.
+      body: ReaderPlayback(
+        child: opened ? ResumeRecorderScope(child: body) : body,
+      ),
     );
   }
 }
@@ -149,5 +203,15 @@ const ValueKey<String> readerModeToggleKey = ValueKey<String>(
   'reader-mode-toggle',
 );
 
-/// The key of the reader's text size button (continuous view only).
+/// The actions in the reader's overflow menu.
+enum _ReaderMenuAction { goTo, textSize }
+
+/// The key of the reader's overflow menu button.
+const ValueKey<String> readerMoreKey = ValueKey<String>('reader-more');
+
+/// The key of the go-to item in the reader's overflow menu.
+const ValueKey<String> readerGoToKey = ValueKey<String>('reader-go-to');
+
+/// The key of the text size item in the reader's overflow menu
+/// (continuous view only).
 const ValueKey<String> readerTextSizeKey = ValueKey<String>('reader-text-size');

@@ -215,6 +215,8 @@ void main() {
       expect(paragraphFontSize(tester), AppTypography.quranFontSize);
       final heightBefore = paragraphHeight(tester);
 
+      await tester.tap(find.byKey(readerMoreKey));
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(readerTextSizeKey));
       await tester.pumpAndSettle();
       expect(find.byType(TextSizeSheet), findsOneWidget);
@@ -252,9 +254,20 @@ void main() {
     testWidgets('the size control is shown only in the continuous view', (
       tester,
     ) async {
+      Future<void> openMenu() async {
+        await tester.tap(find.byKey(readerMoreKey));
+        await tester.pumpAndSettle();
+      }
+
       await openReader(tester, AppRoutes.mushafPage(3));
+      await openMenu();
+      expect(find.byKey(readerGoToKey), findsOneWidget);
       expect(find.byKey(readerTextSizeKey), findsNothing);
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
+
       await toggleMode(tester);
+      await openMenu();
       expect(find.byKey(readerTextSizeKey), findsOneWidget);
     });
   });

@@ -228,4 +228,48 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get continuousNextSurah => 'Next surah';
+
+  @override
+  String get readerGoTo => 'Go to';
+
+  @override
+  String get goToByPage => 'Page';
+
+  @override
+  String get goToBySurah => 'Surah and ayah';
+
+  @override
+  String get goToPageLabel => 'Page number';
+
+  @override
+  String get goToSurahLabel => 'Surah';
+
+  @override
+  String get goToAyahLabel => 'Ayah number';
+
+  @override
+  String goToRange(int max) {
+    return '1 to $max';
+  }
+
+  @override
+  String goToPageOutOfRange(int max) {
+    return 'Enter a page number from 1 to $max.';
+  }
+
+  @override
+  String goToAyahOutOfRange(int max) {
+    return 'Enter an ayah number from 1 to $max, the number of ayahs in this surah.';
+  }
+
+  @override
+  String get goToSurahMissing => 'Choose a surah from the list.';
+
+  @override
+  String goToSurahOption(int number, String name) {
+    return '$number. $name';
+  }
+
+  @override
+  String get goToSubmit => 'Go';
 }
