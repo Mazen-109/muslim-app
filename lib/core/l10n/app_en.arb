@@ -23,5 +23,14 @@
   "mushafFontErrorTitle": "The Mushaf font could not be loaded",
   "mushafFontErrorMessage": "The Mushaf is never shown in a substitute font. Reinstall the app to fix this.",
   "mushafDataErrorMessage": "The Mushaf data could not be opened.",
-  "invalidLink": "That place in the Mushaf could not be opened, so the index is shown."
+  "invalidLink": "That place in the Mushaf could not be opened, so the index is shown.",
+  "indexTabSurahs": "Surahs",
+  "indexTabJuz": "Juz",
+  "surahMakki": "Makki",
+  "surahMadani": "Madani",
+  "ayahCount": "{count, plural, =1{1 ayah} other{{count} ayahs}}",
+  "surahDetails": "{place} · {ayahs}",
+  "pageNumber": "Page {page}",
+  "juzTitle": "Juz {number}",
+  "juzStart": "From {surah}, ayah {ayah}"
 }

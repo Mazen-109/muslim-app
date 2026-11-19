@@ -13,6 +13,7 @@ import '../l10n/generated/app_localizations.dart';
 import '../settings/settings_providers.dart';
 import '../widgets/app_scaffold.dart';
 import 'placeholder_screens.dart';
+import '../../features/index/index_screen.dart';
 
 /// Paths and builders of the routes in `contracts/routes.md`.
 abstract final class AppRoutes {
@@ -147,7 +148,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               ),
               GoRoute(
                 path: AppRoutes.index,
-                builder: (context, state) => const IndexPlaceholder(),
+                builder: (context, state) => IndexScreen(
+                  initialTab: IndexTab.fromQuery(
+                    state.uri.queryParameters['tab'],
+                  ),
+                ),
               ),
               GoRoute(
                 path: AppRoutes.mushaf,

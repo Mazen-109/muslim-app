@@ -88,4 +88,50 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get invalidLink => 'تعذّر فتح هذا الموضع، فعُرض الفهرس.';
+
+  @override
+  String get indexTabSurahs => 'السور';
+
+  @override
+  String get indexTabJuz => 'الأجزاء';
+
+  @override
+  String get surahMakki => 'مكية';
+
+  @override
+  String get surahMadani => 'مدنية';
+
+  @override
+  String ayahCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count آية',
+      many: '$count آية',
+      few: '$count آيات',
+      two: 'آيتان',
+      one: 'آية واحدة',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String surahDetails(String place, String ayahs) {
+    return '$place · $ayahs';
+  }
+
+  @override
+  String pageNumber(int page) {
+    return 'صفحة $page';
+  }
+
+  @override
+  String juzTitle(int number) {
+    return 'الجزء $number';
+  }
+
+  @override
+  String juzStart(String surah, int ayah) {
+    return 'من $surah، الآية $ayah';
+  }
 }

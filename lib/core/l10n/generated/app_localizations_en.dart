@@ -89,4 +89,47 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get invalidLink =>
       'That place in the Mushaf could not be opened, so the index is shown.';
+
+  @override
+  String get indexTabSurahs => 'Surahs';
+
+  @override
+  String get indexTabJuz => 'Juz';
+
+  @override
+  String get surahMakki => 'Makki';
+
+  @override
+  String get surahMadani => 'Madani';
+
+  @override
+  String ayahCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count ayahs',
+      one: '1 ayah',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String surahDetails(String place, String ayahs) {
+    return '$place · $ayahs';
+  }
+
+  @override
+  String pageNumber(int page) {
+    return 'Page $page';
+  }
+
+  @override
+  String juzTitle(int number) {
+    return 'Juz $number';
+  }
+
+  @override
+  String juzStart(String surah, int ayah) {
+    return 'From $surah, ayah $ayah';
+  }
 }

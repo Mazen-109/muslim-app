@@ -241,6 +241,60 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'تعذّر فتح هذا الموضع، فعُرض الفهرس.'**
   String get invalidLink;
+
+  /// Index tab that lists the 114 surahs.
+  ///
+  /// In ar, this message translates to:
+  /// **'السور'**
+  String get indexTabSurahs;
+
+  /// Index tab that lists the 30 juz.
+  ///
+  /// In ar, this message translates to:
+  /// **'الأجزاء'**
+  String get indexTabJuz;
+
+  /// Index row label: the surah was revealed in Makkah.
+  ///
+  /// In ar, this message translates to:
+  /// **'مكية'**
+  String get surahMakki;
+
+  /// Index row label: the surah was revealed in Madinah.
+  ///
+  /// In ar, this message translates to:
+  /// **'مدنية'**
+  String get surahMadani;
+
+  /// The number of ayahs in a surah, on its index row.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count, plural, =1{آية واحدة} =2{آيتان} few{{count} آيات} many{{count} آية} other{{count} آية}}'**
+  String ayahCount(int count);
+
+  /// Second line of a surah row in the index: the Makki or Madani label, then the ayah count.
+  ///
+  /// In ar, this message translates to:
+  /// **'{place} · {ayahs}'**
+  String surahDetails(String place, String ayahs);
+
+  /// The Mushaf page where a surah or juz starts, at the end of its index row.
+  ///
+  /// In ar, this message translates to:
+  /// **'صفحة {page}'**
+  String pageNumber(int page);
+
+  /// Title of a juz row in the index.
+  ///
+  /// In ar, this message translates to:
+  /// **'الجزء {number}'**
+  String juzTitle(int number);
+
+  /// Second line of a juz row: the surah name (from the content database) and the ayah number where the juz starts.
+  ///
+  /// In ar, this message translates to:
+  /// **'من {surah}، الآية {ayah}'**
+  String juzStart(String surah, int ayah);
 }
 
 class _AppLocalizationsDelegate

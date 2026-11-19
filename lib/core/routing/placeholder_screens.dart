@@ -8,19 +8,13 @@ import 'app_router.dart';
 
 // Stand-ins for the screens that later tasks build. Each one is a titled
 // scaffold and a neutral "not ready yet" state, with the links the contract
-// asks for (the Mushaf app bar reaches the index and search; settings reach
-// the sources page). They hold no Quran text and no other religious content.
+// asks for (settings reach the sources page). They hold no Quran text and no other religious content.
 // A task that builds a screen replaces its placeholder in the router.
 
 class _Placeholder extends StatelessWidget {
-  const _Placeholder({
-    required this.title,
-    this.actions = const <Widget>[],
-    this.links = const <Widget>[],
-  });
+  const _Placeholder({required this.title, this.links = const <Widget>[]});
 
   final String Function(AppLocalizations l10n) title;
-  final List<Widget> actions;
   final List<Widget> links;
 
   @override
@@ -32,7 +26,6 @@ class _Placeholder extends StatelessWidget {
     );
     return AppScaffold(
       title: title(l10n),
-      actions: actions,
       body: links.isEmpty
           ? notReady
           : Column(
@@ -43,40 +36,6 @@ class _Placeholder extends StatelessWidget {
                 Expanded(child: notReady),
               ],
             ),
-    );
-  }
-}
-
-/// `/index`.
-class IndexPlaceholder extends StatelessWidget {
-  const IndexPlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context) =>
-      _Placeholder(title: (l10n) => l10n.screenIndex);
-}
-
-/// `/mushaf`.
-class MushafPlaceholder extends StatelessWidget {
-  const MushafPlaceholder({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return _Placeholder(
-      title: (l10n) => l10n.navMushaf,
-      actions: <Widget>[
-        IconButton(
-          tooltip: l10n.screenIndex,
-          icon: const Icon(Icons.format_list_bulleted),
-          onPressed: () => context.go(AppRoutes.index),
-        ),
-        IconButton(
-          tooltip: l10n.screenSearch,
-          icon: const Icon(Icons.search),
-          onPressed: () => context.go(AppRoutes.search),
-        ),
-      ],
     );
   }
 }

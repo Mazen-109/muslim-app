@@ -173,7 +173,7 @@ in the user stories can start before this phase is complete.
 **Independent Test**: offline, open any surah from the index, read in both views, close and
 reopen the app, and land on the same ayah (quickstart scenarios 1 to 4).
 
-- [ ] T010 [US1] Build the surah and juz index in `lib/features/index/` with
+- [x] T010 [US1] Build the surah and juz index in `lib/features/index/` with
   `test/features/index/index_screen_test.dart`
   - Two tabs. Surahs: number, Arabic name, ayah count, Makki or Madani, start page. Juz:
     number, the surah and ayah where it starts, start page.
