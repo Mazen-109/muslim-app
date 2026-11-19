@@ -283,12 +283,18 @@ void main() {
   });
 
   group('app bar', () {
-    testWidgets('the index, search and go-to are one tap away', (tester) async {
+    testWidgets('the index and search are one tap away, go-to is in the menu', (
+      tester,
+    ) async {
       final c = await launch(tester);
       await go(tester, c, AppRoutes.mushafPage(1));
       expect(find.byTooltip(ar.screenIndex), findsOneWidget);
       expect(find.byTooltip(ar.screenSearch), findsOneWidget);
-      expect(find.byTooltip(ar.readerGoTo), findsOneWidget);
+      await tester.tap(find.byKey(readerMoreKey));
+      await tester.pumpAndSettle();
+      expect(find.byKey(readerGoToKey), findsOneWidget);
+      await tester.tapAt(Offset.zero);
+      await tester.pumpAndSettle();
 
       await tester.tap(find.byTooltip(ar.screenIndex));
       await tester.pumpAndSettle();
@@ -298,6 +304,8 @@ void main() {
 
   group('go-to', () {
     Future<void> openSheet(WidgetTester tester) async {
+      await tester.tap(find.byKey(readerMoreKey));
+      await tester.pumpAndSettle();
       await tester.tap(find.byKey(readerGoToKey));
       await tester.pumpAndSettle();
       expect(find.byType(GoToSheet), findsOneWidget);

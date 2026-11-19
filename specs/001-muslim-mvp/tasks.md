@@ -270,7 +270,7 @@ boundary, change reciter, pause and resume (quickstart scenarios 6 and 7).
   - The wake lock is held while state is `playing` and released otherwise.
   - Tests with a fake `AudioPlayerPort`: every state transition, end of surah, reciter
     change, repeat counting, error then retry, wake lock acquire and release.
-- [ ] T016 [US3] Build the player UI in `lib/features/audio/player_bar.dart`,
+- [x] T016 [US3] Build the player UI in `lib/features/audio/player_bar.dart`,
   `lib/features/audio/reciter_picker.dart` and the reader with
   `test/features/audio/player_ui_test.dart`
   - A play control in the reader that starts from the current ayah, and a compact player bar
